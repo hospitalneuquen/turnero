@@ -1,0 +1,46 @@
+<ng-container *ngIf="turnero">
+    <div [ngClass]="turnero.color">
+
+        <div class=" box-turno borde inactivo ">
+
+            <div class="cabezal fondo ">
+                <template *ngIf="disponibles <= 10">{{disponibles}} turnos disponibles</template>
+
+            </div>
+
+            <div class="cuerpo " *ngIf="disponibles">
+                <div class="tipo-turno ">
+
+                    <span *ngIf="turnero.tipo === 'prioritario'">prioritario</span>
+                    <span *ngIf="turnero.tipo === 'no-prioritario'">no prioritario</span>
+                </div>
+
+                <button type="button" class="btn" (click)="anterior()">
+                  <i class="flecha back material-icons md-48 ">play_circle_outline</i>
+                </button>
+
+                <div class="d-inline numero " *ngIf="turno && turno.numeros">
+                    {{turno.numeros.letra}} {{turno.numeros.numero}}
+                </div>
+
+                <button type="button" class="btn" (click)="siguiente()">
+                  <i class="flecha next material-icons md-48 ">play_circle_outline</i>
+                </button>
+
+                <br>
+                <button class="btn btn-llamar " (click)="llamar(turno)" *ngIf="turno && turno.numeros">
+                    <i class=" material-icons md-48">bell_ring</i>
+                    Rellamar ({{turno.numeros.llamado}})
+                </button>
+            </div>
+
+            <div class="cuerpo " *ngIf="!disponibles">
+                <div class="tipo-turno ">No quedan turnos disponibles, por favor carge un nuevo turnero
+                    <b *ngIf="turnero.tipo === 'prioritario'">prioritario</b>
+                    <b *ngIf="turnero.tipo === 'no-prioritario'">no prioritario</b> .
+                </div>
+            </div>
+
+        </div>
+    </div>
+</ng-container>
