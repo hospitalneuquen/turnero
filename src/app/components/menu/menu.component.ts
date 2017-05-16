@@ -7,9 +7,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MenuComponent implements OnInit {
 
+  public ventanillActual: String = '';
   constructor() { }
 
   ngOnInit() {
+    // this.ventanillActual = JSON.parse(localStorage.getItem('ventanillaActual'));
+
   }
 
 }

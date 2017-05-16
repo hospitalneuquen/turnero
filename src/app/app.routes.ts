@@ -10,7 +10,8 @@ export const routes: Routes = [
   { path: '', redirectTo: 'turnos', pathMatch: 'full' },
   { path: 'turnos', component: TurnosComponent },
   { path: 'monitor', component: MonitorComponent },
-  { path: 'ventanilla/:slug', component: VentanillaComponent }
+  { path: 'ventanilla/:slug', component: VentanillaComponent },
+  // { path: 'ventanilla', component: VentanillaComponent }
 ];
 
 export const routing: ModuleWithProviders = RouterModule.forRoot(routes);

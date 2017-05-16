@@ -30,8 +30,12 @@ export class VentanillaComponent implements OnInit {
       this.slug = params['slug'];
 
       this.inicializarVentanilla();
-
     });
+
+    // TODO: si no se paso el id nombre de la ventanilla, entonces lo 
+    // levantamos de la session e inicializamos la ventanilla
+    // var ventanillaActual = JSON.parse(localStorage.getItem('ventanillaActual'));
+    // console.log(ventanillaActual);
   }
 
   inicializarVentanilla() {
@@ -39,6 +43,8 @@ export class VentanillaComponent implements OnInit {
 
       if (ventanilla[0]) {
         this.ventanilla = ventanilla[0];
+
+        localStorage.setItem('ventanillaActual', this.ventanilla.nombre);
 
         this.inicializarTurneros();
 

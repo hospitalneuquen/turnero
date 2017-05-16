@@ -78,13 +78,13 @@
  */
     
     #menu {
+        height: 100vh;
         position: absolute;
         width: 600px;
         margin: -80px 0 0 -50px;
         padding: 50px;
         padding-top: 125px;
         background: #fff;
-        list-style-type: none;
         -webkit-font-smoothing: antialiased;
         /* to stop flickering of text in safari */
         transform-origin: 0% 0%;
@@ -92,6 +92,10 @@
         transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1.0);
         color: black;
         border-right: 1px solid black;
+    }
+    
+    #menu ul {
+        list-style-type: none;
     }
     
     #menu li {
