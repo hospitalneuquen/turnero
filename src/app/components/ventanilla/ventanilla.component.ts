@@ -29,6 +29,8 @@ export class VentanillaComponent implements OnInit {
       // obtenemos el parametro del nombre de la ventanilla enviado
       this.slug = params['slug'];
 
+      // TODO: si no tenemos slug redireccionamos a la seleccion de ventanilla
+
       this.inicializarVentanilla();
     });
 
@@ -88,7 +90,7 @@ export class VentanillaComponent implements OnInit {
 
   /* Pausar ventanilla */
   pausar() {
-    const params = { disponible: false };
+    const params = { pausa: true };
 
     this.updateVentanilla(params);
 
@@ -97,7 +99,7 @@ export class VentanillaComponent implements OnInit {
 
   /* Reanudar ventanilla */
   reanudar() {
-    const params = { disponible: true };
+    const params = { pausa: false };
 
     this.updateVentanilla(params);
   }

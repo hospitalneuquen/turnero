@@ -17,26 +17,27 @@ import { VentanillasService } from './services/ventanillas.service';
 
 // Componentes Front
 import { AppComponent } from './app.component';
-import { TurnosComponent } from './components/turnos/turnos.component';
 import { MonitorComponent } from './components/monitor/monitor.component';
 import { VentanillaComponent } from './components/ventanilla/ventanilla.component';
+import { SeleccionarVentanillaComponent } from './components/ventanilla/seleccionarVentanilla.component';
 import { NumeroComponent } from './components/numero/numero.component';
 import { RelojComponent } from './components/reloj/reloj.component';
 import { MenuComponent } from './components/menu/menu.component';
 
-
 // Compontentes Back
 import { ListaVentanillasComponent } from './components/config/ventanillas.component';
 import { PanelVentanillaComponent } from './components/config/panel-ventanilla.component';
+import { TurnosComponent } from './components/config/turnos/turnos.component';
 
 
 // Define the routes
 const ROUTES = [
-  { path: '', redirectTo: 'turnos', pathMatch: 'full' },
-  { path: 'config/turnos', component: TurnosComponent },
+  { path: '', redirectTo: 'ventanilla', pathMatch: 'full' },
   { path: 'monitor', component: MonitorComponent },
+  { path: 'ventanilla', component: SeleccionarVentanillaComponent },
   { path: 'ventanilla/:slug', component: VentanillaComponent },
-  { path: 'config/ventanillas', component: ListaVentanillasComponent }
+  { path: 'config/ventanillas', component: ListaVentanillasComponent },
+  { path: 'config/turnos', component: TurnosComponent }
 ];
 
 @NgModule({
@@ -45,6 +46,7 @@ const ROUTES = [
     TurnosComponent,
     MonitorComponent,
     VentanillaComponent,
+    SeleccionarVentanillaComponent,
     NumeroComponent,
     RelojComponent,
     MenuComponent,
