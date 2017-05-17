@@ -33,7 +33,7 @@ import { PanelVentanillaComponent } from './components/config/panel-ventanilla.c
 // Define the routes
 const ROUTES = [
   { path: '', redirectTo: 'turnos', pathMatch: 'full' },
-  { path: 'turnos', component: TurnosComponent },
+  { path: 'config/turnos', component: TurnosComponent },
   { path: 'monitor', component: MonitorComponent },
   { path: 'ventanilla/:slug', component: VentanillaComponent },
   { path: 'config/ventanillas', component: ListaVentanillasComponent }

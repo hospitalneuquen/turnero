@@ -13,11 +13,11 @@ export class MenuComponent implements OnInit {
   constructor(private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.ventanillaActual = localStorage.getItem('ventanillaActual');
-    // this.ventanillaActual = 'ventanilla-1';
+    // this.ventanillaActual = localStorage.getItem('ventanillaActual');
+    this.ventanillaActual = 'ventanilla-1';
   }
 
-  menu (url) {
+  menu(url) {
     this.router.navigate([url]);
   }
 }
