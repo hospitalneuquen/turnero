@@ -10,7 +10,7 @@ import { environment } from '../../environments/environment';
 
 @Injectable()
 export class VentanillasService {
-    constructor (private http: Http) {  }
+    constructor(private http: Http) { }
 
     extractData(res: Response) {
         return res.json();
@@ -57,6 +57,20 @@ export class VentanillasService {
         //     .map((res: Response) => this.extractData(res));
     }
 
+
+
+    /**
+     * Metodo put. Actualiza un objeto ventanilla.
+     * @param {IVentanilla} problema Recibe IVentanilla
+     */
+    post(ventanilla: any, params: any = null): Observable<any> {
+        const url = '/ventanillas';
+
+        const options = this.getDefaultOptions(params);
+
+        return this.http.post(environment.API + url, JSON.stringify(ventanilla), options).map(this.extractData);
+    }
+
     /**
      * Metodo put. Actualiza un objeto ventanilla.
      * @param {IVentanilla} problema Recibe IVentanilla
@@ -68,4 +82,12 @@ export class VentanillasService {
 
         return this.http.put(environment.API + url, JSON.stringify(ventanilla), options).map(this.extractData);
     }
+
+    patch(id: String, params: any): Observable<IVentanillas> {
+        const url = '/ventanillas/' + id;
+        const options = this.getDefaultOptions(params);
+
+        return this.http.patch(environment.API + url, options).map(this.extractData);
+    }
+
 }

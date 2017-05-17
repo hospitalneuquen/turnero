@@ -1,0 +1,49 @@
+<ng-container *ngIf="ventanillas">
+
+  <div class="container-fluid">
+
+    <div class="row">
+      <div class="col-6">
+        <h2>Ventanillas</h2>
+      </div>
+      <div class="col-6">
+        <button class="btn btn-sm btn-primary" (click)="agregarVentanilla()">Agregar Ventanilla</button>
+      </div>
+    </div>
+
+    <div class="row">
+
+      <div class="col-8">
+
+        <ng-container *ngIf="ventanillas.length">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <td><strong>Ventanilla</strong></td>
+                <td><strong>Disponible</strong></td>
+                <td><strong>Prioritaria</strong></td>
+              </tr>
+            </thead>
+            <ng-container *ngFor="let ventanilla of ventanillas">
+              <tbody>
+                <tr>
+                  <td (click)="seleccionarVentanilla(ventanilla)">{{ ventanilla.nombre }}</td>
+                  <td (click)="seleccionarVentanilla(ventanilla)"><input type="checkbox" name="disponible" [(ngModel)]="ventanilla.disponible" (click)="actualizarVentanilla(ventanilla, 'disponible', !ventanilla.disponible)"></td>
+                  <td (click)="seleccionarVentanilla(ventanilla)"><input type="checkbox" name="prioritaria" [(ngModel)]="ventanilla.prioritaria" (click)="actualizarVentanilla(ventanilla, 'prioritaria', !ventanilla.prioritaria)"></td>
+                </tr>
+              </tbody>
+            </ng-container>
+          </table>
+        </ng-container>
+
+      </div>
+
+      <div class="col-4">
+        <!--<app-panel-ventanilla *ngIf="showEditarVentanillaPanel && ventanillaSeleccionada?.length > 0" [editarVentanilla]="ventanillaSeleccionada"></app-panel-ventanilla>-->
+        <app-panel-ventanilla *ngIf="showEditarVentanillaPanel" (cerrarPanelEmit)="cerrarPanelEmit($event)"></app-panel-ventanilla>
+      </div>
+    </div>
+
+  </div>
+
+</ng-container>
