@@ -4,48 +4,44 @@
 <nav role="navigation">
     <div id="menuToggle">
         <!--
-    A fake / hidden checkbox is used as click reciever,
-    so you can use the :checked selector on it.
-    -->
+        A fake / hidden checkbox is used as click reciever,
+        so you can use the :checked selector on it.
+        -->
         <input type="checkbox" class="check" />
 
         <!--
-    Some spans to act as a hamburger.
-    
-    They are acting like a real hamburger,
-    not that McDonalds stuff.
-    -->
+        Some spans to act as a hamburger.
+        
+        They are acting like a real hamburger,
+        not that McDonalds stuff.
+        -->
         <span class="hamburguer-menu"></span>
         <span class="hamburguer-menu"></span>
         <span class="hamburguer-menu"></span>
 
         <!--
-    Too bad the menu has to be inside of the button
-    but hey, it's pure CSS magic.
-    -->
-        <!--<ul id="menu">
-            <a href="#">
-                <li>Home</li>
-            </a>
-            <a href="#">
-                <li>About</li>
-            </a>
-            <a href="#">
-                <li>Info</li>
-            </a>
-            <a href="#">
-                <li>Contact</li>
-            </a>
-            <a href="https://erikterwan.com/" target="_blank">
-                <li>Show me more</li>
-            </a>
-        </ul>-->
-
-
-
+        Too bad the menu has to be inside of the button
+        but hey, it's pure CSS magic.
+        -->
         <div id="menu">
-            <app-turnos></app-turnos>
-
+            <ul>
+                <li>
+                    <a [routerLink]="['/ventanilla/', ventanillaActual]">
+                        Mi ventanilla
+                    </a>
+                </li>
+                <li>
+                    <a [routerLink]="['/config/ventanillas']">
+                        Ventanillas
+                    </a>
+                </li>
+                <li>
+                    <a [routerLink]="['/config/turnos']">
+                        <!--<a [routerLink]="['/#']" (click)="menu('/turnos')">-->
+                        Turnos
+                    </a>
+                </li>
+            </ul>
         </div>
 
     </div>

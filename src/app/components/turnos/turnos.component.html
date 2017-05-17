@@ -44,67 +44,93 @@
         transition: background-color 0.4s linear;
     }
 </style>
-<form #f="ngForm" novalidate (ngSubmit)="save(f.value, f.valid)">
-    <pre>
-        {{turnos | json}}
-    </pre>
-    <h2 class="border-bottom">Configuracion</h2>
 
-    <h5 class="border-bottom"><strong>Prioridad</strong></h5>
+<div class="container">
     <div class="row">
-        <div class="col-6">
-            <select class="form-control" [(ngModel)]="turnos.tipo" name="tipo" #tipo="ngModel" required>
-                <option value="prioritario">Prioritario</option>
-                <option value="no-prioritario">No Prioritario</option>
-            </select>
-            <span [hidden]="tipo.valid || (tipo.pristine && !f.submitted)" class="badge badge-danger">Debe ingresar un valor</span>
+        <div class="col">
+            <form #f="ngForm" novalidate (ngSubmit)="save(f.value, f.valid)">
+
+                <h2 class="border-bottom">Configuracion</h2>
+
+                <div class="row">
+                    <div class="col-6">
+                        <h5 class="border-bottom"><strong>Prioridad</strong></h5>
+
+                        <select class="form-control" [(ngModel)]="turnos.tipo" name="tipo" #tipo="ngModel" required>
+                            <option value="prioritario">Prioritario</option>
+                            <option value="no-prioritario">No Prioritario</option>
+                        </select>
+                        <span [hidden]="tipo.valid || (tipo.pristine && !f.submitted)" class="badge badge-danger">Debe ingresar un valor</span>
+                    </div>
+                    <div class="col-6">
+                        <h5 class="border-bottom"><strong>Seleccione el color</strong></h5>
+                        <div class="inline-block">
+                            <ng-container *ngFor="let _color of colors">
+                                <input name="color" id="color-{{_color}}" value="{{_color}}" type="radio" class="btn cuadradito violeta" [(ngModel)]="turnos.color" #color="ngModel" />
+                                <label for="color-{{_color}}" class="cuadradito {{_color}}"><span></span></label>
+                            </ng-container>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <h5 class="border-bottom"><strong>Numeración</strong></h5>
+                        <h5>Numeros desde / hasta</h5>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-6">
+
+                        <h6>Número de inicio</h6>
+                        <input type="number" class="form-control" placeholder="Desde el 00" name="numeroInicio" #numeroInicio="ngModel" [(ngModel)]="turnos.numeroInicio" required />
+                        <span [hidden]="numeroInicio.valid || (numeroInicio.pristine && !f.submitted)" class="badge badge-danger">Debe ingresar un valor</span>
+                    </div>
+
+                    <div class="col-6">
+                        <h6>Número de finalización</h6>
+                        <input type="number" class="form-control" placeholder="Hasta el 999" name="numeroFin" #numeroFin="ngModel" [(ngModel)]="turnos.numeroFin" required />
+                        <span [hidden]="numeroFin.valid || (numeroFin.pristine && !f.submitted)" class="badge badge-danger">Debe ingresar un valor</span>
+                    </div>
+
+
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <h5 class="">Letras desde / hasta</h5>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-4">
+                        <h6>Letra de inicio</h6>
+                        <input type="text" class="form-control" placeholder="Desde la A" name="letraInicio" #letraInicio="ngModel" [(ngModel)]="turnos.letraInicio" />
+                    </div>
+                    <br>
+                    <div class="col-4">
+                        <h6>Letra de finalización</h6>
+                        <input type="text" class="form-control" placeholder="Hasta la E" name="letraFin" #letraFin="ngModel" [(ngModel)]="turnos.letraFin" />
+                    </div>
+
+                    <div class="col-4">
+                        <h6>Cantidad de numeros por letra</h6>
+                        <input type="number" class="form-control" placeholder="100" name="step" #step="ngModel" [(ngModel)]="turnos.step" [required]="turnos.letraInicio != '' && turnos.letraFin != ''" />
+                        <span [hidden]="step.valid || (step.pristine && !f.submitted)" class="badge badge-danger">Debe ingresar un valor</span>
+                    </div>
+                </div>
+
+                <br>
+
+
+                <div class="row">
+                    <button type="submit" class="btn btn-confirmar">confirmar</button>
+                </div>
+
+            </form>
         </div>
     </div>
-
-    <h5 class="border-bottom"><strong>Seleccione el color</strong></h5>
-    <div class="inline-block">
-        <ng-container *ngFor="let _color of colors">
-            <input name="color" id="color-{{_color}}" value="{{_color}}" type="radio" class="btn cuadradito violeta" [(ngModel)]="turnos.color" #color="ngModel" />
-            <label for="color-{{_color}}" class="cuadradito {{_color}}"><span></span></label>
-        </ng-container>
-    </div>
-
-    <br>
-
-    <h5 class="border-bottom"><strong>Numeración</strong></h5>
-    <h5>Numeros desde / hasta</h5>
-    <div class="row">
-        <div class="col-6">
-            <h6>Número de inicio</h6>
-            <input type="number" class="form-control" placeholder="Desde el 00" name="numeroInicio" #numeroInicio="ngModel" [(ngModel)]="turnos.numeroInicio" required />
-            <span [hidden]="numeroInicio.valid || (numeroInicio.pristine && !f.submitted)" class="badge badge-danger">Debe ingresar un valor</span>
-        </div>
-        <br>
-        <div class="col-6">
-            <h6>Número de finalización</h6>
-            <input type="number" class="form-control" placeholder="Hasta el 99" name="numeroFin" #numeroFin="ngModel" [(ngModel)]="turnos.numeroFin" required />
-            <span [hidden]="numeroFin.valid || (numeroFin.pristine && !f.submitted)" class="badge badge-danger">Debe ingresar un valor</span>
-        </div>
-    </div>
-
-    <h5 class="">Letras desde / hasta</h5>
-    <div class="row">
-        <div class="col-6">
-            <h6>Letra de inicio</h6>
-            <input type="text" class="form-control" placeholder="Desde la A" name="letraInicio" #letraInicio="ngModel" [(ngModel)]="turnos.letraInicio" />
-        </div>
-        <br>
-        <div class="col-6">
-            <h6>Letra de finalización</h6>
-            <input type="text" class="form-control" placeholder="Hasta la E" name="letraFin" #letraFin="ngModel" [(ngModel)]="turnos.letraFin" />
-        </div>
-    </div>
-
-    <br>
-
-
-    <div class="row">
-        <button type="submit" class="btn btn-confirmar">confirmar</button>
-    </div>
-
-</form>
+</div>

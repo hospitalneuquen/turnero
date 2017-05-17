@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 
 @Component({
   selector: 'app-menu',
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MenuComponent implements OnInit {
 
-  constructor() { }
+  public ventanillaActual: String = '';
+
+  constructor(private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.ventanillaActual = localStorage.getItem('ventanillaActual');
+    // this.ventanillaActual = 'ventanilla-1';
   }
 
+  menu (url) {
+    this.router.navigate([url]);
+  }
 }
