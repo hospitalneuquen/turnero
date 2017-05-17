@@ -57,10 +57,10 @@ export class VentanillaComponent implements OnInit {
 
   inicializarTurneros() {
     // obtenemos prioritario
-      this.TurnosService.get({ 'tipo': 'prioritario' }).subscribe(turnos => {
-
-        if (turnos[0]) {
-          this.prioritario = turnos[0];
+      this.TurnosService.get({ 'tipo': 'prioritario', 'ultimoEstado': 'uso' }).subscribe(turnos => {
+        // TODO: Revisar de enviar limit : 1
+        if (turnos[turnos.length-1]) {
+          this.prioritario = turnos[turnos.length-1];
 
           this.TurnosService.getActual(this.prioritario._id, this.ventanilla._id).subscribe(actual => {
             console.log(actual);
@@ -74,9 +74,9 @@ export class VentanillaComponent implements OnInit {
       });
 
       // obtenemos no prioritario
-      this.TurnosService.get({ 'tipo': 'no-prioritario' }).subscribe(turnos => {
-        if (turnos[0]) {
-          this.noPrioritario = turnos[0];
+      this.TurnosService.get({ 'tipo': 'no-prioritario', 'ultimoEstado': 'uso' }).subscribe(turnos => {
+        if (turnos[turnos.length-1]) {
+          this.noPrioritario = turnos[turnos.length-1];
 
           this.TurnosService.getActual(this.noPrioritario._id, this.ventanilla._id).subscribe(actual => {
             this.turnoActualNoPrioritario = actual[0];

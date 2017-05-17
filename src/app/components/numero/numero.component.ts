@@ -15,19 +15,20 @@ export class NumeroComponent implements OnInit {
   @Input() ventanilla: any;
 
   disponibles: Number;
+  existeSiguiente: Boolean = true;
   // @Output() evtOutput: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(private TurnosService: TurnosService) { }
 
   ngOnInit() {
-    console.log(this.turno);
-    console.log(this.turnero);
     this.count();
   }
 
   count() {
     this.TurnosService.getCount(this.turnero._id).subscribe(turnos => {
         this.disponibles = turnos.count;
+
+        // return this.disponibles;
     });
   }
 
@@ -51,6 +52,7 @@ export class NumeroComponent implements OnInit {
 
   siguiente() {
     this.TurnosService.getNext(this.turnero._id).subscribe(turno => {
+
       if (turno[0]) {
 
         // asignamos el proximo turno como turno actual
@@ -83,7 +85,28 @@ export class NumeroComponent implements OnInit {
 
           this.TurnosService.patch(this.turnero._id, dto).subscribe(turno => {
             // actualizamos la cantidad disponibles
-            this.count();
+            // this.count();
+            this.TurnosService.getCount(this.turnero._id).subscribe(turnos => {
+                this.disponibles = turnos.count;
+                // return this.disponibles;
+
+                if (!this.disponibles) {
+                  const dto = {
+                    accion: 'turnero_finalizado',
+                    valores: {
+                      estado : {
+                        fecha: new Date(),
+                        valor: 'finalizado'
+                      },
+                      ultimoEstado: 'finalizado'
+                    }
+                  };
+
+                  this.TurnosService.patch(this.turnero._id, dto).subscribe(turno => {
+                  });
+
+                }
+            });
           });
         });
 
