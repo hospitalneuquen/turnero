@@ -83,11 +83,10 @@ export class VentanillasService {
         return this.http.put(environment.API + url, JSON.stringify(ventanilla), options).map(this.extractData);
     }
 
-    patch(id: String, params: any): Observable<IVentanillas> {
+    patch(id: String, patch: any): Observable<IVentanillas> {
         const url = '/ventanillas/' + id;
-        const options = this.getDefaultOptions(params);
 
-        return this.http.patch(environment.API + url, options).map(this.extractData);
+        return this.http.patch(environment.API + url, patch).map(this.extractData);
     }
 
 }

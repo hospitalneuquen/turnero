@@ -24,10 +24,8 @@ export class PanelVentanillaComponent implements OnInit {
         return this._editarVentanilla;
     }
 
-    // @Output() editarVentanillaEmit = new EventEmitter<IVentanillas>();
-    @Output() editarVentanillaEmit = new EventEmitter<Boolean>();
-    @Output() cerrarPanelEmit = new EventEmitter<Boolean>();
-    // @Output() actualizarEstadoEmit = new EventEmitter<boolean>();
+    @Output() onEditEmit = new EventEmitter<Boolean>();
+    @Output() onCloseEmit = new EventEmitter<Boolean>();
 
     showEditarVentanillaPanel: Boolean = true;
 
@@ -40,8 +38,9 @@ export class PanelVentanillaComponent implements OnInit {
 
     ngOnInit() {
         this.ventanillaActual = {
-            nombre: '',
+            nombre: 'Ventanilla-',
             disponible: false,
+            pausa: false,
             prioritaria: false
         };
     }
@@ -56,7 +55,7 @@ export class PanelVentanillaComponent implements OnInit {
                 this.showEditarVentanilla = false;
 
                 alert('La Ventanilla se guardó correctamente');
-                this.editarVentanillaEmit.emit(true);
+                this.onEditEmit.emit(true);
             });
         }
     }
@@ -64,7 +63,7 @@ export class PanelVentanillaComponent implements OnInit {
 
     cancelar() {
         this.showEditarVentanillaPanel = false;
-        this.cerrarPanelEmit.emit(true);
+        this.onCloseEmit.emit(true);
     }
 
 }

@@ -19,10 +19,7 @@ export class ListaVentanillasComponent implements OnInit {
         private router: Router, private route: ActivatedRoute) { }
 
     ngOnInit() {
-
-        this.route.params.subscribe(params => {
-            this.inicializarVentanillas();
-        });
+        this.inicializarVentanillas();
     }
 
     inicializarVentanillas() {
@@ -44,7 +41,6 @@ export class ListaVentanillasComponent implements OnInit {
     seleccionarVentanilla(ventanilla) {
         let index;
         if (this.estaSeleccionada(ventanilla)) {
-            ventanilla.Color = 'success';
             index = this.ventanillasSeleccionadas.indexOf(ventanilla);
             this.ventanillasSeleccionadas.splice(index, 1);
             this.ventanillasSeleccionadas = [...this.ventanillasSeleccionadas];
@@ -55,10 +51,17 @@ export class ListaVentanillasComponent implements OnInit {
 
     agregarVentanilla() {
         this.showEditarVentanillaPanel = true;
+        this.inicializarVentanillas();
     }
 
-    cerrarPanelEmit() {
+    onCloseEmit() {
         this.showEditarVentanillaPanel = false;
+        this.inicializarVentanillas();
+    }
+
+    onEditEmit() {
+        this.showEditarVentanillaPanel = false;
+        this.inicializarVentanillas();
     }
 
     /* Actualizar estados de la ventanilla */
@@ -66,9 +69,8 @@ export class ListaVentanillasComponent implements OnInit {
         const patch = {
             key: key,
             value: value
-        }
+        };
         this.VentanillasService.patch(ventanilla._id, patch).subscribe(v => {
-            ventanilla = v;
             this.inicializarVentanillas();
         });
     }
