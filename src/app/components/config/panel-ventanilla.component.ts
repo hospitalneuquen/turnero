@@ -37,27 +37,48 @@ export class PanelVentanillaComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.ventanillaActual = {
-            nombre: 'Ventanilla-',
-            disponible: false,
-            pausa: false,
-            prioritaria: false
-        };
+        if (!this.ventanillaActual && !this.ventanillaActual.nombre) {
+            this.ventanillaActual = {
+                nombre: 'Ventanilla ',
+                disponible: false,
+                pausa: false,
+                prioritaria: false
+            };
+        } else {
+            if (!this.ventanillaActual.disponible) {
+                this.ventanillaActual.disponible = false;
+            }
+            if (!this.ventanillaActual.disponible) {
+                this.ventanillaActual.pausa = false;
+            }
+            if (!this.ventanillaActual.disponible) {
+                this.ventanillaActual.prioritaria = false;
+            }
+        }
     }
 
     guardarVentanilla() {
 
-        if (this.alertas.length === 0) {
+        this.ventanillaActual.nombre = this.ventanillaActual.nombre.replace(' ', '-').toLowerCase();
 
+        if (!this.ventanillaActual._id) {
             this.serviceVentanillas.post(this.ventanillaActual).subscribe(resultado => {
                 this.ventanillaActual = resultado;
-
-                this.showEditarVentanilla = false;
 
                 alert('La Ventanilla se guardó correctamente');
                 this.onEditEmit.emit(true);
             });
+        } else {
+            this.serviceVentanillas.put(this.ventanillaActual._id, this.ventanillaActual).subscribe(resultado => {
+                this.ventanillaActual = resultado;
+
+                alert('La Ventanilla se actualizó correctamente');
+                this.onEditEmit.emit(true);
+            });
+
         }
+
+
     }
 
 

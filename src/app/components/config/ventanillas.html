@@ -4,10 +4,9 @@
 
     <div class="row">
       <div class="col-6">
-        <h2>Ventanillas</h2>
+        <h2>Configuración de Ventanillas</h2>
       </div>
       <div class="col-6">
-        <button class="btn btn-sm btn-primary" (click)="agregarVentanilla()">Agregar Ventanilla</button>
       </div>
     </div>
 
@@ -18,31 +17,40 @@
         <ng-container *ngIf="ventanillas.length">
           <table class="table table-striped">
             <thead>
-              <tr>
+              <tr class="text-center">
                 <td><strong>Ventanilla</strong></td>
                 <td><strong>Disponible</strong></td>
-                <td><strong>En pausa</strong></td>
                 <td><strong>Prioritaria</strong></td>
+                <td><strong>Pausada</strong></td>
+                <td><strong>Eliminar</strong></td>
               </tr>
             </thead>
             <ng-container *ngFor="let ventanilla of ventanillas">
               <tbody>
-                <tr>
+                <tr class="text-center" [ngClass]="{'bg-primary': ventanilla._id === ventanillaSeleccionada._id}">
                   <td (click)="seleccionarVentanilla(ventanilla)">{{ ventanilla.nombre }}</td>
                   <td (click)="seleccionarVentanilla(ventanilla)"><input type="checkbox" name="disponible" [(ngModel)]="ventanilla.disponible" (click)="actualizarVentanilla(ventanilla, 'disponible', !ventanilla.disponible)"></td>
-                  <td><span class="mdi mdi-clock"></span><input type="checkbox" name="pausa" [(ngModel)]="ventanilla.pausa" (click)="actualizarVentanilla(ventanilla, 'pausa', !ventanilla.pausa)"></td>
                   <td (click)="seleccionarVentanilla(ventanilla)"><input type="checkbox" name="prioritaria" [(ngModel)]="ventanilla.prioritaria" (click)="actualizarVentanilla(ventanilla, 'prioritaria', !ventanilla.prioritaria)"></td>
+                  <td (click)="seleccionarVentanilla(ventanilla)"><input type="checkbox" name="pausa" [(ngModel)]="ventanilla.pausa" (click)="actualizarVentanilla(ventanilla, 'pausa', !ventanilla.pausa)"></td>
+                  <td><button class="hover" (click)="eliminarVentanilla(ventanilla)"><i class="fa fa-trash"></i></button></td>
                 </tr>
               </tbody>
             </ng-container>
           </table>
         </ng-container>
 
+        <ng-container *ngIf="!ventanillas.length">
+          <h4 *ngIf="!ventanillas.length">No hay ventanillas configuradas. <span class="text-danger" *ngIf="servidorCaido">(Servidor caído)</span></h4>
+        </ng-container>
+        <button class="btn btn-sm btn-primary" (click)="agregarVentanilla()" [disabled]="servidorCaido">Agregar Ventanilla</button>
+
+
       </div>
 
       <div class="col-4">
-        <app-panel-ventanilla *ngIf="showEditarVentanillaPanel && ventanillaSeleccionada?.length === 0" [editarVentanilla]="ventanillaSeleccionada"></app-panel-ventanilla>
-        <app-panel-ventanilla *ngIf="showEditarVentanillaPanel" (onCloseEmit)="onCloseEmit($event)" (onEditEmit)="onEditEmit($event)"></app-panel-ventanilla>
+        <app-panel-ventanilla *ngIf="showEditarVentanillaPanel" [editarVentanilla]="ventanillaSeleccionada" (onCloseEmit)="onCloseEmit($event)"
+          (onEditEmit)="onEditEmit($event)"></app-panel-ventanilla>
+        <!--<app-panel-ventanilla *ngIf="showEditarVentanillaPanel" (onCloseEmit)="onCloseEmit($event)" (onEditEmit)="onEditEmit($event)"></app-panel-ventanilla>-->
       </div>
     </div>
 

@@ -12,8 +12,11 @@ import { IVentanillas } from './../../interfaces/IVentanillas';
 export class ListaVentanillasComponent implements OnInit {
 
     private ventanillasSeleccionadas: any = [];
+    private ventanillaSeleccionada: any = [];
     private ventanillas: any;
     private showEditarVentanillaPanel = false;
+
+    private servidorCaido = false;
 
     constructor(private VentanillasService: VentanillasService, private TurnosService: TurnosService,
         private router: Router, private route: ActivatedRoute) { }
@@ -28,8 +31,13 @@ export class ListaVentanillasComponent implements OnInit {
             if (ventanillas.length) {
                 this.ventanillas = ventanillas;
             } else {
-                alert('ventanilla no encontrada');
+                this.ventanillas = [];
             }
+
+        }, error => {
+
+            this.ventanillas = [];
+            this.servidorCaido = true;
 
         });
     }
@@ -47,9 +55,13 @@ export class ListaVentanillasComponent implements OnInit {
         } else {
             this.ventanillasSeleccionadas = [...this.ventanillasSeleccionadas, ventanilla];
         }
+
+        this.ventanillaSeleccionada = ventanilla;
+        this.showEditarVentanillaPanel = true;
     }
 
     agregarVentanilla() {
+        this.ventanillaSeleccionada = {};
         this.showEditarVentanillaPanel = true;
         this.inicializarVentanillas();
     }
@@ -75,6 +87,13 @@ export class ListaVentanillasComponent implements OnInit {
         });
     }
 
+    eliminarVentanilla(ventanilla: any) {
+        if (confirm('¿Eliminar Ventanilla?')) {
+            this.VentanillasService.delete(ventanilla._id).subscribe(v => {
+                this.inicializarVentanillas();
+            });
+        }
+    }
 
 
 }
