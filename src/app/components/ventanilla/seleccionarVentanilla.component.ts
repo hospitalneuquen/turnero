@@ -18,15 +18,23 @@ export class SeleccionarVentanillaComponent implements OnInit {
 
     ngOnInit() {
 
+        const ventanillaActual = localStorage.getItem('ventanillaActual');
+
+        if (ventanillaActual) {
+            this.router.navigate(['ventanilla/', ventanillaActual]);
+        }
+
         this.VentanillasService.get({}).subscribe(ventanillas => {
             this.ventanillas = ventanillas;
         });
+
 
     }
 
     seleccionar(ventanilla) {
         const patch = {
-            disponible: false
+            key: 'disponible',
+            value: false
         };
 
         this.VentanillasService.patch(ventanilla._id, patch).subscribe(ventanilla => {

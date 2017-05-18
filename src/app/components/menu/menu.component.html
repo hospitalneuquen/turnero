@@ -7,7 +7,7 @@
         A fake / hidden checkbox is used as click reciever,
         so you can use the :checked selector on it.
         -->
-        <input type="checkbox" class="check" />
+        <input type="checkbox" class="check" [checked]="checked" (click)="wasChecked($event.target.checked)" />
 
         <!--
         Some spans to act as a hamburger.
@@ -25,8 +25,17 @@
         -->
         <div id="menu">
             <ul>
-                <li *ngIf="ventanillaActual">
-                    <a [routerLink]="['/ventanilla/', ventanillaActual]">
+                <li>
+                    <!--<a [routerLink]="['/ventanilla/', ventanillaActual]" *ngIf="ventanillaActual">-->
+                    <!--<a href="javascript:void(0);" (click)="menu('/ventanilla/')" *ngIf="ventanillaActual">
+                        > Mi ventanilla
+                    </a>
+
+                    <a href="javascript:void(0);" (click)="menu('/ventanilla')" *ngIf="!ventanillaActual">
+                        > Mi ventanilla
+                    </a>-->
+
+                    <a href="javascript:void(0);" (click)="menu('/ventanilla')">
                         > Mi ventanilla
                     </a>
                 </li>
@@ -36,13 +45,13 @@
                     </i>
                 </li>
                 <li>
-                    <a [routerLink]="['/config/ventanillas']">
+                    <a href="javascript:void(0);" (click)="menu('/config/ventanillas')">
                         > Ventanillas
                     </a>
                 </li>
                 <li>
-                    <a [routerLink]="['/config/turnos']">
-                        <!--<a [routerLink]="['/#']" (click)="menu('/turnos')">-->
+                    <!--<a [routerLink]="['/config/turnos']">-->
+                    <a href="javascript:void(0);" (click)="menu('/config/turnos')">
                         > Turnos
                     </a>
                 </li>

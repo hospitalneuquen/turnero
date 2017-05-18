@@ -113,7 +113,8 @@
                     <br>
                     <div class="col-4">
                         <h6>Letra de finalización</h6>
-                        <input type="text" class="form-control" placeholder="Hasta la E" name="letraFin" #letraFin="ngModel" [(ngModel)]="turnos.letraFin" />
+                        <input type="text" class="form-control" placeholder="Hasta la E" name="letraFin" #letraFin="ngModel" [(ngModel)]="turnos.letraFin" [required]="turnos.letraInicio != ''" />
+                        <span [hidden]="letraFin.valid || (letraFin.pristine && !f.submitted)" class="badge badge-danger">Debe ingresar una letra de finalización, o por lo menos la letra <b>{{turnos.letraInicio}}</b></span>
                     </div>
 
                     <div class="col-4">
@@ -127,7 +128,9 @@
 
 
                 <div class="row">
-                    <button type="submit" class="btn btn-confirmar">confirmar</button>
+                    <div class="col">
+                        <button type="submit" class="btn btn-primary float-sm-right">guardar</button>
+                    </div>
                 </div>
 
             </form>
