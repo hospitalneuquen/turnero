@@ -59,7 +59,7 @@ export class PanelVentanillaComponent implements OnInit {
 
     guardarVentanilla() {
 
-        this.ventanillaActual.nombre = this.ventanillaActual.nombre.replace(' ', '-').toLowerCase();
+        this.ventanillaActual.nombre = this.ventanillaActual.nombre.replace(/ /g, '-').toLowerCase();
 
         if (!this.ventanillaActual._id) {
             this.serviceVentanillas.post(this.ventanillaActual).subscribe(resultado => {
