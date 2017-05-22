@@ -2,13 +2,45 @@
 
 </style>
 
-<h1>Monitor </h1>
+<!--<pre>
+    {{ventanillas | json}}
+</pre>-->
 
-<div class="container">
-    <div class="row">
-        <div class="col-md-6">
-        </div>
-        <div class="col-md-6">
+<div class="content">
+    <div class="container-fluid">
+        <div class="row" *ngIf="ventanillas && ventanillas.length">
+            <ng-container *ngFor="let ventanilla of ventanillas">
+                <ng-container *ngIf="ventanilla?.turno?._id">
+
+                    <div class="col " [ngClass]="ventanilla.turno.color">
+                        <div class="box fondo  nuevo-turno">
+                            <div class="cabezal">
+
+                                <div class="texto-cabezal">
+                                    vent.
+                                    <span class="numero-cabezal">
+                                        {{ventanilla.numero}} 1
+                                    </span>
+                                </div>
+
+                                <div class="cuerpo">
+                                    <div class="tipo-turno">
+                                        <b *ngIf="ventanilla.turno.tipo === 'prioritario'">prioridad</b>
+                                        <b *ngIf="ventanilla.turno.tipo === 'no-prioritario'">comun/especial</b>
+                                    </div>
+                                    <div class="numero">
+                                        {{ventanilla.turno.numeros.letra}} {{ventanilla.turno.numeros.numero}}
+                                    </div>
+                                    <div class="llamado success">Llamado {{ventanilla.turno.numeros.llamado}}</div>
+                                    {{ventanilla.nombre}}
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </ng-container>
+            </ng-container>
         </div>
     </div>
 </div>

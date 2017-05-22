@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-menu',
@@ -13,7 +14,18 @@ export class MenuComponent implements OnInit {
 
   public ventanillaActual: String = '';
 
-  constructor(private router: Router, private route: ActivatedRoute) { }
+   activeRoute: string;
+
+  constructor(private router: Router, private route: ActivatedRoute,
+    location: Location) { 
+
+    router.events.subscribe((val) => {
+        if (location.path() !== ''){
+          this.activeRoute = location.path();
+        }
+      });
+
+  }
 
   ngOnInit() {
     this.ventanillaActual = localStorage.getItem('ventanillaActual');
