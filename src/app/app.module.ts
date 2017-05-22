@@ -35,7 +35,7 @@ const ROUTES = [
   { path: '', redirectTo: 'ventanilla', pathMatch: 'full' },
   { path: 'monitor', component: MonitorComponent },
   { path: 'ventanilla', component: SeleccionarVentanillaComponent },
-  { path: 'ventanilla/:slug', component: VentanillaComponent },
+  { path: 'ventanilla/:numero', component: VentanillaComponent },
   { path: 'config/ventanillas', component: ListaVentanillasComponent },
   { path: 'config/turnos', component: TurnosComponent }
 ];

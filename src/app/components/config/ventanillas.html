@@ -27,7 +27,7 @@
             <ng-container *ngFor="let ventanilla of ventanillas">
               <tbody>
                 <tr class="text-center" [ngClass]="{'bg-primary': ventanilla._id === ventanillaSeleccionada._id}">
-                  <td (click)="seleccionarVentanilla(ventanilla)">{{ ventanilla.nombre }}</td>
+                  <td (click)="seleccionarVentanilla(ventanilla)">{{ ventanilla.numero }}</td>
                   <td (click)="seleccionarVentanilla(ventanilla)"><input type="checkbox" name="disponible" [(ngModel)]="ventanilla.disponible" (click)="actualizarVentanilla(ventanilla, 'disponible', !ventanilla.disponible)"></td>
                   <td (click)="seleccionarVentanilla(ventanilla)"><input type="checkbox" name="prioritaria" [(ngModel)]="ventanilla.prioritaria" (click)="actualizarVentanilla(ventanilla, 'prioritaria', !ventanilla.prioritaria)"></td>
                   <td (click)="seleccionarVentanilla(ventanilla)"><input type="checkbox" name="pausa" [(ngModel)]="ventanilla.pausa" (click)="actualizarVentanilla(ventanilla, 'pausa', !ventanilla.pausa)"></td>
@@ -47,8 +47,8 @@
       </div>
 
       <div class="col-4">
-        <app-panel-ventanilla *ngIf="showEditarVentanillaPanel" [editarVentanilla]="ventanillaSeleccionada" (onCloseEmit)="onCloseEmit($event)"
-          (onEditEmit)="onEditEmit($event)"></app-panel-ventanilla>
+        <app-panel-ventanilla *ngIf="showEditarVentanillaPanel" [editarVentanilla]="ventanillaSeleccionada" [ventanillasCount]="ventanillas.length"
+          (onCloseEmit)="onCloseEmit($event)" (onEditEmit)="onEditEmit($event)"></app-panel-ventanilla>
         <!--<app-panel-ventanilla *ngIf="showEditarVentanillaPanel" (onCloseEmit)="onCloseEmit($event)" (onEditEmit)="onEditEmit($event)"></app-panel-ventanilla>-->
       </div>
     </div>

@@ -27,6 +27,8 @@ export class PanelVentanillaComponent implements OnInit {
     @Output() onEditEmit = new EventEmitter<Boolean>();
     @Output() onCloseEmit = new EventEmitter<Boolean>();
 
+    @Input() ventanillasCount: any;
+
     showEditarVentanillaPanel: Boolean = true;
 
     public ventanillaActual: any = {};
@@ -37,29 +39,23 @@ export class PanelVentanillaComponent implements OnInit {
     }
 
     ngOnInit() {
-        if (!this.ventanillaActual && !this.ventanillaActual.nombre) {
-            this.ventanillaActual = {
-                nombre: 'Ventanilla ',
-                disponible: false,
-                pausa: false,
-                prioritaria: false
-            };
-        } else {
-            if (!this.ventanillaActual.disponible) {
-                this.ventanillaActual.disponible = false;
-            }
-            if (!this.ventanillaActual.disponible) {
-                this.ventanillaActual.pausa = false;
-            }
-            if (!this.ventanillaActual.disponible) {
-                this.ventanillaActual.prioritaria = false;
-            }
+
+        if (!this.ventanillaActual.disponible) {
+            this.ventanillaActual.disponible = false;
         }
+        if (!this.ventanillaActual.pausa) {
+            this.ventanillaActual.pausa = false;
+        }
+        if (!this.ventanillaActual.prioritaria) {
+            this.ventanillaActual.prioritaria = false;
+        }
+        if (!this.ventanillaActual.numero) {
+            this.ventanillaActual.numero = this.ventanillasCount + 1;
+        }
+
     }
 
     guardarVentanilla() {
-
-        this.ventanillaActual.nombre = this.ventanillaActual.nombre.replace(/ /g, '-').toLowerCase();
 
         if (!this.ventanillaActual._id) {
             this.serviceVentanillas.post(this.ventanillaActual).subscribe(resultado => {
