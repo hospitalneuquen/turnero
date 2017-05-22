@@ -1,26 +1,27 @@
 <ng-container *ngIf="ventanilla && !ventanilla.pausa">
 
-    <div class="row no-gutters">
+  <div class="row no-gutters">
 
-        <div class="col-12">
-            <div class="row no-gutters">
-                <app-numero [turnero]="prioritario" [turno]="turnoActualPrioritario" [ventanilla]="ventanilla" *ngIf="prioritario && prioritario._id" class="col-6 "></app-numero>
+    <div class="col-12">
+      <div class="row no-gutters">
+        <app-numero [turnero]="prioritario" [turno]="turnoActualPrioritario" [ventanilla]="ventanilla" *ngIf="prioritario && prioritario._id"
+          class="col-6 "></app-numero>
 
-                <app-numero [turnero]="noPrioritario" [turno]="turnoActualNoPrioritario" [ventanilla]="ventanilla" *ngIf="noPrioritario && noPrioritario._id" class="col-6 "></app-numero>
-            </div>
+        <app-numero [turnero]="noPrioritario" [turno]="turnoActualNoPrioritario" [ventanilla]="ventanilla" *ngIf="noPrioritario && noPrioritario._id"
+          class="col-6 "></app-numero>
+      </div>
 
-            <div class="zocalo ">
-                <button type="button" class="btn btn-pausar" (click)="pausar()" *ngIf="!ventanilla.pausa">Pausar ventanilla</button>
-            </div>
+      <div class="zocalo">
+        <button type="button" class="btn btn-pausar" (click)="pausar()" *ngIf="!ventanilla.pausa">Pausar ventanilla</button>
+      </div>
 
-        </div>
     </div>
-
+  </div>
 </ng-container>
 
 
 <ng-container *ngIf="ventanilla && ventanilla.pausa">
-    <div class="zocalo ">
-        <button type="button" class="btn btn-success" (click)="reanudar()" *ngIf="ventanilla.pausa">Reanudar</button>
-    </div>
+  <div class="zocalo">
+    <button type="button" class="btn btn-success" (click)="reanudar()" *ngIf="ventanilla.pausa">Reanudar</button>
+  </div>
 </ng-container>
