@@ -1,4 +1,3 @@
-@charset "UTF-8";
 @import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic);
 
 /* TURNEROS */
@@ -48,70 +47,81 @@ h3 {
 
 /* Variables cromáticas sass */
 
+$amarillo: #FFFECF;
+$rosado: #FBDED6;
+$rosado-dark: #EAA496;
+$celeste: #B9E5EF;
+$verde: #BEEDCC;
+$violeta: #B5BFF4;
+$warning:#ff8d22;
+$danger: #dd4b39;
+$info:#00A8E0;
+$success: #8CC63F;
 
 /* Cromaticidad (pasteles)  */
 
 
 /* medidas */
 
-div.amarillo div.borde {
-    border: solid 8px #FFFECF;
+$hFriso: 100px;
+div.amarillo {
+    div.borde {
+        border: solid 8px $amarillo;
+    }
+    div.fondo {
+        background: $amarillo;
+    }
+    div.texto {
+        color: $amarillo;
+    }
 }
 
-div.amarillo div.fondo {
-    background: #FFFECF;
+div.rosado {
+    div.borde {
+        border: solid 8px #FBDED6;
+    }
+    div.fondo {
+        background: #FBDED6;
+    }
+    div.texto {
+        color: #FBDED6;
+    }
 }
 
-div.amarillo div.texto {
-    color: #FFFECF;
+div.celeste {
+    div.borde {
+        border: solid 8px $celeste;
+    }
+    div.fondo {
+        background: $celeste;
+    }
+    div.texto {
+        color: $celeste;
+    }
 }
 
-div.rosado div.borde {
-    border: solid 8px #FBDED6;
+div.verde {
+    div.borde {
+        border: solid 8px $verde;
+    }
+    div.fondo {
+        background: $verde;
+    }
+    div.texto {
+        color: $verde;
+    }
 }
 
-div.rosado div.fondo {
-    background: #FBDED6;
-}
-
-div.rosado div.texto {
-    color: #FBDED6;
-}
-
-div.celeste div.borde {
-    border: solid 8px #B9E5EF;
-}
-
-div.celeste div.fondo {
-    background: #B9E5EF;
-}
-
-div.celeste div.texto {
-    color: #B9E5EF;
-}
-
-div.verde div.borde {
-    border: solid 8px #BEEDCC;
-}
-
-div.verde div.fondo {
-    background: #BEEDCC;
-}
-
-div.verde div.texto {
-    color: #BEEDCC;
-}
-
-div.violeta div.borde {
-    border: solid 8px #B5BFF4;
-}
-
-div.violeta div.fondo {
-    background: #B5BFF4;
-}
-
-div.violeta div.texto {
-    color: #B5BFF4;
+div.violeta {
+    div.borde {
+        border: solid 8px $violeta;
+    }
+    div.fondo {
+        background: $violeta;
+    }
+    div.texto {
+        color: $violeta;
+    }
 }
 
 
@@ -134,18 +144,17 @@ div.violeta div.texto {
 .no-gutters {
     margin-right: 0px;
     margin-left: 0px;
-}
-
-.no-gutters>.col,
-.no-gutters>[class*="col-"] {
-    padding-right: 0px;
-    padding-left: 0px;
+    >.col,
+    >[class*="col-"] {
+        padding-right: 0px;
+        padding-left: 0px;
+    }
 }
 
 .friso {
     background-color: black;
     color: white;
-    height: 100px;
+    height: $hFriso;
     padding: 20px;
     width: 100%;
 }
@@ -162,7 +171,8 @@ div.violeta div.texto {
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
     color: #444;
     display: block;
-    min-height: calc(100vh - 100px);
+    // min-height: 925px;
+    min-height: calc(100vh - #{$hFriso});
     position: relative;
     width: 100%;
 }
@@ -310,18 +320,15 @@ span.numero-cabezal {
     padding: 15px;
     vertical-align: middle;
     white-space: nowrap;
-}
-
-.cuerpo>.llamado.success {
-    background-color: #8CC63F;
-}
-
-.cuerpo>.llamado.warning {
-    background-color: #ff8d22;
-}
-
-.cuerpo>.llamado.danger {
-    background-color: #dd4b39;
+    &.success {
+        background-color: $success;
+    }
+    &.warning {
+        background-color: $warning;
+    }
+    &.danger {
+        background-color: $danger;
+    }
 }
 
 
@@ -366,34 +373,29 @@ h2.zocaloNumero {
     margin: 0 20px 5px 0;
     height: 60px;
     width: 60px;
-}
-
-.cuadradito.amarillo {
-    background-color: #FFFECF;
-}
-
-.cuadradito.verde {
-    background-color: #BEEDCC;
-}
-
-.cuadradito.rosado {
-    background-color: #FBDED6;
-}
-
-.cuadradito.celeste {
-    background-color: #B9E5EF;
-}
-
-.cuadradito.violeta {
-    background-color: #B5BFF4;
+    &.amarillo {
+        background-color: $amarillo;
+    }
+    &.verde {
+        background-color: $verde;
+    }
+    &.rosado {
+        background-color: $rosado;
+    }
+    &.celeste {
+        background-color: $celeste;
+    }
+    &.violeta {
+        background-color: $violeta;
+    }
 }
 
 .cuadradito:hover {
-    border: solid 2px #00A8E0;
+    border: solid 2px $info;
 }
 
 .cuadradito:focus {
-    outline: solid 2px #00A8E0;
+    outline: solid 2px $info;
 }
 
 
@@ -429,7 +431,7 @@ h2.zocaloNumero {
 }
 
 .btn-confirmar {
-    background-color: #8CC63F;
+    background-color: $success;
     bottom: 0px;
     color: white;
     font-size: 1.15rem;
@@ -444,7 +446,7 @@ h2.zocaloNumero {
 }
 
 .btn-pausar {
-    background-color: #dd4b39;
+    background-color: $danger;
     color: white;
     font-size: 1.15rem;
     margin: 20px;
@@ -457,7 +459,7 @@ h2.zocaloNumero {
 }
 
 .btn-llamar {
-    background-color: #8CC63F;
+    background-color: $success;
     color: white;
     display: inline-block;
     font-size: 1.5rem;
@@ -531,7 +533,7 @@ a:active,
 a:focus {
     outline: 5px;
     text-decoration: none;
-    color: #00A8E0;
+    color: $info;
 }
 
 
@@ -546,24 +548,20 @@ a:focus {
     font-weight: 500;
     margin: 0px 10px 10px 0px;
     width: 100%;
-}
-
-.badge.badge-danger {
-    border-color: #dd4b39;
-    color: #dd4b39;
-}
-
-.badge.badge-success {
-    border-color: #8CC63F;
-    color: #8CC63F;
-}
-
-.badge.badge-warning {
-    border-color: #ff8d22;
-    color: #ff8d22;
-}
-
-.badge.badge-info {
-    border-color: #00A8E0;
-    color: #00A8E0;
+    &.badge-danger {
+        border-color: $danger;
+        color: $danger;
+    }
+    &.badge-success {
+        border-color: $success;
+        color: $success;
+    }
+    &.badge-warning {
+        border-color: $warning;
+        color: $warning;
+    }
+    &.badge-info {
+        border-color: $info;
+        color: $info;
+    }
 }

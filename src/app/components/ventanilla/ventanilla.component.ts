@@ -7,8 +7,7 @@ import { IVentanillas } from './../../interfaces/IVentanillas';
 declare var EventSource: any;
 @Component({
   selector: 'app-ventanilla',
-  templateUrl: './ventanilla.component.html',
-  styleUrls: ['./ventanilla.component.css']
+  templateUrl: './ventanilla.component.html'
 })
 export class VentanillaComponent implements OnInit {
 
