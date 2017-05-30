@@ -1,19 +1,21 @@
 <div class="content">
   <div class="container-fluid">
-    <div class="row" *ngIf="ventanillas && ventanillas.length">
+    <div class="row" *ngIf="ventanillas?.length">
       <ng-container *ngFor="let ventanilla of ventanillas">
         <ng-container *ngIf="ventanilla?.turno?._id">
-          <div class="col " [ngClass]="ventanilla.turno.color">
-            <div class="box fondo nuevo-turno" [ngClass]="{'blink-5': ventanillaBlinkId.split('|')[0] === ventanilla._id}">
+          <div class="col" [ngClass]="ventanilla.turno.color">
+            <div class="box fondo nuevo-turno" [ngClass]="{'blink-5': ventanillaBlinkId?.split('|')[0] === ventanilla._id}">
+
               <div class="cabezal">
-                <div class="texto-cabezal"> vent.
+
+                <div class="texto-cabezal">ventanilla
                   <span class="numero-cabezal">{{ventanilla.numero}}</span>
                 </div>
 
                 <div class="cuerpo">
                   <div class="tipo-turno">
                     <b *ngIf="ventanilla.turno.tipo === 'prioritario'">prioridad</b>
-                    <b *ngIf="ventanilla.turno.tipo === 'no-prioritario'">comun/especial</b>
+                    <b *ngIf="ventanilla.turno.tipo === 'no-prioritario'">común/especial</b>
                   </div>
                   <div class="numero">
                     {{ventanilla.turno.numeros.letra}} {{ventanilla.turno.numeros.numero}}

@@ -31,7 +31,7 @@
                   <td (click)="seleccionarVentanilla(ventanilla)"><input type="checkbox" name="disponible" [(ngModel)]="ventanilla.disponible" (click)="actualizarVentanilla(ventanilla, 'disponible', !ventanilla.disponible)"></td>
                   <td (click)="seleccionarVentanilla(ventanilla)"><input type="checkbox" name="prioritaria" [(ngModel)]="ventanilla.prioritaria" (click)="actualizarVentanilla(ventanilla, 'prioritaria', !ventanilla.prioritaria)"></td>
                   <td (click)="seleccionarVentanilla(ventanilla)"><input type="checkbox" name="pausa" [(ngModel)]="ventanilla.pausa" (click)="actualizarVentanilla(ventanilla, 'pausa', !ventanilla.pausa)"></td>
-                  <td><button class="hover" (click)="eliminarVentanilla(ventanilla)"><i class="fa fa-trash"></i></button></td>
+                  <td><button class="hover btn btn-sm" (click)="eliminarVentanilla(ventanilla)"><i class="mdi mdi-delete"></i></button></td>
                 </tr>
               </tbody>
             </ng-container>

@@ -295,7 +295,7 @@ span.numero-cabezal {
 }
 
 .cuerpo {
-  background-color: #fff;
+  background-color: transparent;
   padding-top: 100px;
   width: 100%;
   height: 600px
@@ -421,6 +421,25 @@ h2.zocaloNumero {
   border: 2px solid #00A8E0
 }
 
+.btn-primary {
+  background-color: #3382c7;
+  font-size: 10px;
+  font-weight: bold;
+  text-transform: uppercase;
+  display: inline-grid !important;
+}
+
+.btn-primary span {
+  padding-left: 25px;
+  padding-right: 25px;
+}
+
+.btn-primary i {
+  font-size: 20px;
+  background-color: #306fa5;
+  padding: 15px 20px;
+}
+
 .btn,
 .btn-danger {
   box-shadow: none;
@@ -437,9 +456,9 @@ h2.zocaloNumero {
 }
 
 .btn {
-  font-size: .85rem;
+  /*font-size: .85rem;*/
   text-transform: uppercase;
-  padding: 20px
+  /*padding: 20px*/
 }
 
 .btn-confirmar,

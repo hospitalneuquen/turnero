@@ -17,7 +17,7 @@ export class MonitorComponent implements OnInit {
     private eventSource: any;
     private mensajePrevio: String = '';
     private EVENT_URL = 'http://localhost:1337/api/update';
-    private ventanillaBlinkId: String = '';
+    private ventanillaBlinkId: String = '|';
 
     constructor(
         private VentanillasService: VentanillasService,
@@ -77,10 +77,8 @@ export class MonitorComponent implements OnInit {
             // Se actualiza el mensaje de servidor
             this.mensajesServidor = JSON.parse(evt.data);
 
-            console.log('mensajesServidor.result', this.mensajesServidor.result.split('|')[0]);
-            console.log('ventanillaBlinkId', this.ventanillaBlinkId);
-
-
+            // console.log('mensajesServidor.result', this.mensajesServidor.result.split('|')[0]);
+            // console.log('ventanillaBlinkId', this.ventanillaBlinkId);
 
             // Detector de cambios: El último mensaje de la API es diferente al previo?
             if (this.ventanillaBlinkId && this.mensajesServidor.result !== this.ventanillaBlinkId) {

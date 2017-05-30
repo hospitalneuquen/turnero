@@ -1,55 +1,56 @@
 <ng-container *ngIf="turnero">
   <div [ngClass]="turnero.color">
 
-    <div class=" box-turno borde inactivo ">
+    <div class=" box-turno borde inactivo">
 
-      <div class="cabezal fondo  text-center">
-        <b *ngIf="disponibles <= 10">Atención:</b>
-        <span *ngIf="disponibles > 1 && disponibles <= 10">ultimos {{disponibles}} turnos disponibles</span>
-        <span *ngIf="disponibles == 1">ÚLTIMO turno disponible</span>
-        <div *ngIf="disponibles == 0 ">
-          <div class="tipo-turno ">No quedan turnos disponibles, por favor cargue un nuevo turnero
-            <b *ngIf="turnero.tipo==='prioritario' ">prioritario</b>
-            <b *ngIf="turnero.tipo==='no-prioritario' ">no prioritario</b> .
-          </div>
+      <div class="cabezal fondo text-center">
 
-          <div class="text-center ">
-            <a [routerLink]="[ '/config/turnos'] " class="btn btn-primary ">
-                            Cargar turnos
-                        </a>
+        <h3 *ngIf="disponibles <= 10">Atención:</h3>
+        <span *ngIf="disponibles > 1 && disponibles <= 10">últimos {{disponibles}} turnos disponibles</span>
+        <span *ngIf="disponibles === 1">ÚLTIMO turno disponible</span>
+        <div *ngIf="disponibles === 0">
+          <h4 class="tipo-turno">No quedan turnos disponibles, por favor cargue un nuevo turnero
+            <b *ngIf="turnero.tipo === 'prioritario'">prioritario</b>
+            <b *ngIf="turnero.tipo === 'no-prioritario'">no prioritario</b>
+          </h4>
+
+          <div class="text-center">
+            <a [routerLink]="['/config/turnos']" class="btn btn-primary">Cargar turnos</a>
           </div>
         </div>
       </div>
 
-      <div class="cuerpo ">
-        <div class="tipo-turno ">
-
-          <span *ngIf="turnero.tipo==='prioritario' ">prioritario</span>
-          <span *ngIf="turnero.tipo==='no-prioritario' ">no prioritario</span>
+      <div class="cuerpo">
+        <div class="tipo-turno">
+          <span *ngIf="turnero.tipo === 'prioritario'">prioritario</span>
+          <span *ngIf="turnero.tipo === 'no-prioritario'">no prioritario</span>
         </div>
 
         <!-- comentemolon -->
-        <!--<button type="button " class="btn " (click)="anterior() " *ngIf="disponibles ">
-                  <i class="flecha back material-icons md-48 ">play_circle_outline</i>
-                </button>-->
+        <!--<button type="button" class="btn" (click)="anterior()" *ngIf="disponibles">
+          <i class="flecha back material-icons md-48">play_circle_outline</i>
+        </button>-->
 
-        <div class="d-inline numero " *ngIf="turno && turno.numeros ">
+        <div class="d-inline numero" *ngIf="turno?.numeros">
           {{turno.numeros.letra}} {{turno.numeros.numero}}
         </div>
 
-        <button type="button " class="btn " (click)="siguiente() " *ngIf="disponibles ">
-          <i class="flecha next material-icons md-48 ">play_circle_outline</i>
-        </button>
+        <div class="container">
+          <button class="btn btn-primary" (click)="siguiente()" *ngIf="disponibles">
+            <i class="mdi mdi-arrow-right-bold-box-outline mdi-48px align-middle"></i>
+            <span *ngIf="turno?.numeros" class="align-middle">Llamar siguiente</span>
+            <span *ngIf="!turno?.numeros">Llamar primer turno</span>
+          </button>
+        </div>
 
         <br>
-        <button class="btn btn-llamar " (click)="rellamar(turno) " *ngIf="turno && turno.numeros ">
-            <i class=" material-icons md-48 ">bell_ring</i>
-            Rellamar ({{turno.numeros.llamado}})
-        </button>
+        <div class="container">
+          <button class="btn btn-primary" (click)="rellamar(turno)" *ngIf="turno?.numeros">
+            <i class="mdi mdi-bell-ring mdi-48px align-middle"></i>
+            <span class="align-middle">Rellamar actual ({{turno.numeros.llamado}})</span>
+          </button>
+        </div>
 
-        <!--<div class="cuerpo " *ngIf="!disponibles ">
-                    
-                </div>-->
       </div>
 
 

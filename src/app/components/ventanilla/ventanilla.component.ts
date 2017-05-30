@@ -10,6 +10,7 @@ declare var EventSource: any;
   templateUrl: './ventanilla.component.html'
 })
 export class VentanillaComponent implements OnInit {
+  sinVentanillas: boolean;
 
   private numero;
   // private ventanilla: IVentanillas;
@@ -48,10 +49,13 @@ export class VentanillaComponent implements OnInit {
 
         localStorage.setItem('ventanillaActual', this.ventanilla.numero);
 
+        this.sinVentanillas = false;
+
         this.inicializarTurneros();
 
       } else {
-        alert('ventanilla no encontrada');
+        // alert('ventanilla no encontrada');
+        this.sinVentanillas = true;
       }
 
     });

@@ -118,6 +118,16 @@ div.violeta div.texto {
 /* Estilos dashboard turnero*/
 
 
+/* Menú */
+
+.titulo-ventanilla {
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  font-size: 2rem;
+}
+
+
 /* layout */
 
 .content {
@@ -245,7 +255,8 @@ div.violeta div.texto {
 
 .texto-cabezal {
   color: black;
-  font-size: 5rem;
+  /*font-size: 5rem;*/
+  font-size: 4.25rem;
   font-weight: 600;
   text-transform: uppercase;
   text-align: center;
@@ -255,10 +266,12 @@ div.violeta div.texto {
 span.numero-cabezal {
   background-color: black;
   color: white;
-  float: right;
-  font-size: 5rem;
-  position: relative;
+  /*font-size: 5rem;*/
+  font-size: 4.25rem;
   width: 100px;
+  position: absolute;
+  width: 100px;
+  right: 0;
 }
 
 .cuerpo {
@@ -417,7 +430,7 @@ h2.zocaloNumero {
   font-size: 0.85rem;
   font-weight: 200;
   text-transform: uppercase;
-  padding: 20px;
+  /*padding: 20px;*/
 }
 
 @media screen and (max-width: 1024px) {
