@@ -1,6 +1,7 @@
 export interface IVentanillas {
     id: String;
-    nombre: String;
+    numero: String;
     prioritaria: Boolean;
     disponible: Boolean;
+    pausa: Boolean;
 }

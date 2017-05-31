@@ -12,7 +12,6 @@ export class SeleccionarVentanillaComponent implements OnInit {
 
     public ventanillas;
 
-
     constructor(private VentanillasService: VentanillasService,
         private router: Router, private route: ActivatedRoute) { }
 
@@ -37,8 +36,8 @@ export class SeleccionarVentanillaComponent implements OnInit {
             value: false
         };
 
-        this.VentanillasService.patch(ventanilla._id, patch).subscribe(ventanilla => {
-            this.router.navigate(['ventanilla/', ventanilla.nombre]);
+        this.VentanillasService.patch(ventanilla._id, patch).subscribe(v => {
+            this.router.navigate(['ventanilla/', v.numero]);
         });
     }
 

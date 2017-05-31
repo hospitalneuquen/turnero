@@ -3,7 +3,7 @@
     <div class="row" *ngIf="ventanillas?.length">
       <ng-container *ngFor="let ventanilla of ventanillas">
         <ng-container *ngIf="ventanilla?.turno?._id">
-          <div class="col" [ngClass]="ventanilla.turno.color">
+          <div class="col" [ngClass]="ventanilla?.turno?.color">
             <div class="box fondo nuevo-turno" [ngClass]="{'blink-5': ventanillaBlinkId?.split('|')[0] === ventanilla._id}">
 
               <div class="cabezal">

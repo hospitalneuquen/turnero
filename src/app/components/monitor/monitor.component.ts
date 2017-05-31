@@ -16,7 +16,8 @@ export class MonitorComponent implements OnInit {
     private mensajesServidor: any = {};
     private eventSource: any;
     private mensajePrevio: String = '';
-    private EVENT_URL = 'http://localhost:1337/api/update';
+    // private EVENT_URL = 'http://localhost:1337/api/update';
+    private EVENT_URL = 'http://turnero.hospitalneuquen.org.ar:1337/api/update';
     private ventanillaBlinkId: String = '|';
 
     constructor(
