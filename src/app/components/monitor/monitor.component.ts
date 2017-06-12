@@ -16,9 +16,11 @@ export class MonitorComponent implements OnInit {
     private mensajesServidor: any = {};
     private eventSource: any;
     private mensajePrevio: String = '';
-    // private EVENT_URL = 'http://localhost:1337/api/update';
-    private EVENT_URL = 'http://turnero.hospitalneuquen.org.ar:1337/api/update';
+    private EVENT_URL = 'http://localhost:1337/api/update';
+    // private EVENT_URL = 'http://turnero.hospitalneuquen.org.ar:1337/api/update';
     private ventanillaBlinkId: String = '|';
+
+    public audio = false;
 
     constructor(
         private VentanillasService: VentanillasService,
@@ -33,18 +35,19 @@ export class MonitorComponent implements OnInit {
     actualizarMonitor() {
         // buscamos ventanillas disponibles
         this.VentanillasService.get({ disponible: true }).subscribe(ventanillas => {
-            this.ventanillas = ventanillas;
+            const ventanillasAux: any = ventanillas;
 
             // buscamos los turneros que están en uso
             this.TurnosService.get({ ultimoEstado: 'uso' }).subscribe(turnos => {
 
                 // buscamos el último número que haya llamado una ventanilla para un turnero
-                this.ventanillas.forEach(ventanilla => {
+                ventanillasAux.forEach(ventanilla => {
                     if (typeof ventanilla.turno === 'undefined') {
                         ventanilla.turno = {};
                     }
 
                     turnos.forEach(turno => {
+                        // Trae un array de 1 sólo elemento
                         this.TurnosService.getActual(turno._id, ventanilla._id).subscribe(actual => {
 
                             if (actual && actual[0]) {
@@ -59,9 +62,9 @@ export class MonitorComponent implements OnInit {
                                     }
                                 }
                             }
-
                         });
                     });
+                    this.ventanillas = ventanillas;
                 });
             });
         });
@@ -78,14 +81,12 @@ export class MonitorComponent implements OnInit {
             // Se actualiza el mensaje de servidor
             this.mensajesServidor = JSON.parse(evt.data);
 
-            // console.log('mensajesServidor.result', this.mensajesServidor.result.split('|')[0]);
-            // console.log('ventanillaBlinkId', this.ventanillaBlinkId);
-
             // Detector de cambios: El último mensaje de la API es diferente al previo?
             if (this.ventanillaBlinkId && this.mensajesServidor.result !== this.ventanillaBlinkId) {
                 this.ventanillaBlinkId = '';
                 // this.ventanillaBlinkId = this.mensajesServidor.result;
                 this.actualizarMonitor();
+                this.dingDong();
             } else {
                 this.ventanillaBlinkId = this.mensajesServidor.result;
             }
@@ -94,6 +95,13 @@ export class MonitorComponent implements OnInit {
             this.changeDetector.detectChanges();
 
         };
+    }
+
+    dingDong() {
+        this.audio = true;
+        setTimeout(() => {
+            this.audio = false;
+        }, 2000);
     }
 
 }
