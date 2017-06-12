@@ -23,26 +23,19 @@
     <!--
         Too bad the menu has to be inside of the button
         but hey, it's pure CSS magic.
-        -->
+    -->
+
     <div id="menu">
-      <ul>
-        <li>
-          <!--<a [routerLink]="['/ventanilla/', ventanillaActual]" *ngIf="ventanillaActual">-->
-          <a href="javascript:void(0);" (click)="menu('/ventanilla')"> > Mi ventanilla</a>
-        </li>
-        <li>
-          <i>Configuraciones</i>
-        </li>
-        <li>
-          <a href="javascript:void(0);" (click)="menu('/config/ventanillas')"> > Ventanillas</a>
-        </li>
-        <li>
-          <a href="javascript:void(0);" (click)="menu('/config/turnos')"> > Turnos</a>
-        </li>
+      <a class="btn btn-primary" href="javascript:void(0);" (click)="menu('/ventanilla')">Ir a mi ventanilla</a>
+      <hr>
+      <ul class="list-group">
+        <i class="list-group-item list-group-item-info">Configuraciones</i>
+        <a class="list-group-item" href="javascript:void(0);" (click)="menu('/config/ventanillas')">Administrar Ventanillas</a>
+        <a class="list-group-item" href="javascript:void(0);" (click)="menu('/config/turnos')">Cargar Turnos</a>
       </ul>
     </div>
   </div>
-  <div class="row">
+  <div *ngIf="miVentanilla" class="row">
     <div class="col titulo-ventanilla">
       Mi ventanilla
     </div>

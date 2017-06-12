@@ -51,7 +51,7 @@
     <div class="col">
       <form #f="ngForm" novalidate (ngSubmit)="save(f.value, f.valid)">
 
-        <h2 class="border-bottom">Configuración</h2>
+        <h2 class="border-bottom">Configuración de turnos</h2>
 
         <div class="row">
           <div class="col-6">
@@ -132,15 +132,24 @@
         </div>
 
         <br>
-
-
         <div class="row">
           <div class="col">
             <button type="submit" class="btn btn-primary float-sm-right">Guardar</button>
           </div>
         </div>
+        <hr>
 
       </form>
+
+      <div class="row">
+        <div class="col">
+          <h5 class="border-bottom"><strong>Limpiar turnero</strong></h5>
+          <button class="btn btn-danger" (click)="eliminarTurnos()">
+              Eliminar todos los turnos
+            </button>
+        </div>
+      </div>
+
     </div>
   </div>
 </div>

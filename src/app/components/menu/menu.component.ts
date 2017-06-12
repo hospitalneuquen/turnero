@@ -11,19 +11,20 @@ export class MenuComponent implements OnInit {
   // check variable que almacena el estado del checkbox que abre el menu
   // almacenamos para luego cambiar la propiedad de checked cuando cambio de menu
   public checked: any;
-
   public ventanillaActual: String = '';
+  public miVentanilla = false;
 
-   activeRoute: string;
+  activeRoute: string;
 
   constructor(private router: Router, private route: ActivatedRoute,
-    location: Location) { 
+    location: Location) {
 
     router.events.subscribe((val) => {
-        if (location.path() !== ''){
-          this.activeRoute = location.path();
-        }
-      });
+      if (location.path() !== '') {
+        this.activeRoute = location.path();
+        this.miVentanilla = (this.activeRoute.search('/ventanilla/') > -1);
+      }
+    });
 
   }
 

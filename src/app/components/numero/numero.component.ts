@@ -9,14 +9,13 @@ import { ITurnos } from './../../interfaces/ITurnos';
     styleUrls: ['./numero.component.css']
 })
 export class NumeroComponent implements OnInit {
-    // @Input() turno: ITurnos;
+
     @Input() turnero: any;
     @Input() turno: any; // turno actual
     @Input() ventanilla: any;
 
     disponibles: Number;
     existeSiguiente: Boolean = true;
-    // @Output() evtOutput: EventEmitter<any> = new EventEmitter<any>();
 
     constructor(private TurnosService: TurnosService) { }
 
@@ -27,8 +26,6 @@ export class NumeroComponent implements OnInit {
     count() {
         this.TurnosService.getCount(this.turnero._id).subscribe(turnos => {
             this.disponibles = turnos.count;
-
-            // return this.disponibles;
         });
     }
 
