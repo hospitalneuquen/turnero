@@ -1,31 +1,40 @@
 <section id="ventanilla">
-  <ng-container *ngIf="ventanilla && !ventanilla.pausa">
-
-    <div class="row no-gutters">
-      <div class="col-12">
+    <div class="container-fluid" *ngIf="ventanilla && !ventanilla.pausa">
         <div class="row no-gutters">
-          <app-numero [turnero]="prioritario" [turno]="turnoActualPrioritario" [ventanilla]="ventanilla" *ngIf="prioritario && prioritario._id"
-            class="col-6 "></app-numero>
-          <app-numero [turnero]="noPrioritario" [turno]="turnoActualNoPrioritario" [ventanilla]="ventanilla" *ngIf="noPrioritario && noPrioritario._id"
-            class="col-6 "></app-numero>
+            <app-turno [turnero]="prioritario" [turno]="turnoActualPrioritario" [ventanilla]="ventanilla" *ngIf="prioritario?._id" class="col-6 "></app-turno>
+            <div class="row" *ngIf="!prioritario?._id">
+                <div class="col">
+                    <h4>[No hay turnos Prioritarios en esta ventanilla]</h4>
+                </div>
+            </div>
+            <app-turno [turnero]="noPrioritario" [turno]="turnoActualNoPrioritario" [ventanilla]="ventanilla" *ngIf="noPrioritario?._id"
+                class="col-6 "></app-turno>
+            <div class="row" *ngIf="!noPrioritario?._id">
+                <div class="col">
+                    <h5>[No hay turnos No Prioritarios para esta ventanilla]</h5>
+                </div>
+            </div>
         </div>
-      </div>
+        <div class="row" *ngIf="ventanilla && (!turnoActualPrioritario && !turnoActualNoPrioritario)">
+            <div class="col">
+                <a [routerLink]="['/config/turnos']" class="btn btn-primary">Cargar turnos</a>
+            </div>
+        </div>
+
     </div>
 
-  </ng-container>
-
-  <ng-container *ngIf="sinVentanillas">
-    <h3>No se encontró la ventanilla</h3>
-  </ng-container>
+    <ng-container *ngIf="sinVentanillas">
+        <h3>No se encontró la ventanilla</h3>
+    </ng-container>
 
 </section>
 
-<ng-container *ngIf="ventanilla">
-  <div class="zocalo " *ngIf="ventanilla.pausa">
-    <button type="button" class="btn btn-success" (click)="reanudar()" *ngIf="ventanilla.pausa">Reanudar</button>
-  </div>
+<ng-container *ngIf="ventanilla && (turnoActualPrioritario || turnoActualNoPrioritario)">
+    <div class="zocalo" *ngIf="ventanilla.pausa">
+        <button type="button" class="btn btn-success" (click)="reanudar()" *ngIf="ventanilla.pausa">Reanudar</button>
+    </div>
 
-  <div class="zocalo " *ngIf="!ventanilla.pausa">
-    <button type="button" class="btn btn-pausar" (click)="pausar()" *ngIf="!ventanilla.pausa">Pausar ventanilla</button>
-  </div>
+    <div class="zocalo" *ngIf="!ventanilla.pausa">
+        <button type="button" class="btn btn-pausar" (click)="pausar()" *ngIf="!ventanilla.pausa">Pausar ventanilla</button>
+    </div>
 </ng-container>

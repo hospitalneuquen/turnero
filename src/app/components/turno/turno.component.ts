@@ -4,11 +4,11 @@ import { TurnosService } from './../../services/turnos.service';
 import { ITurnos } from './../../interfaces/ITurnos';
 
 @Component({
-    selector: 'app-numero',
-    templateUrl: './numero.component.html',
-    styleUrls: ['./numero.component.css']
+    selector: 'app-turno',
+    templateUrl: './turno.component.html',
+    styleUrls: ['./turno.component.css']
 })
-export class NumeroComponent implements OnInit {
+export class TurnoComponent implements OnInit {
 
     @Input() turnero: any;
     @Input() turno: any; // turno actual
@@ -29,22 +29,31 @@ export class NumeroComponent implements OnInit {
         });
     }
 
-    rellamar(turno) {
-        const dto = {
-            accion: 'rellamar',
-            idNumero: turno.numeros._id,
-            valores: {
-                ventanilla: this.ventanilla._id,
-                inc: 1
-            }
-        };
-
-        this.TurnosService.patch(this.turnero._id, dto).subscribe(turno => {
-            this.TurnosService.getActual(this.turnero._id, this.ventanilla._id).subscribe(actual => {
-                this.turno = actual[0];
+    rellamar(turno, tipo) {
+        let dto = {};
+        if (tipo === 'actual') {
+            dto = {
+                accion: 'rellamar',
+                idNumero: turno.numeros._id,
+                valores: {
+                    ventanilla: this.ventanilla._id,
+                    inc: 1
+                }
+            };
+            this.TurnosService.patch(this.turnero._id, dto).subscribe(turnoPatch => {
+                this.TurnosService.getActual(this.turnero._id, this.ventanilla._id).subscribe(actual => {
+                    this.turno = actual[0];
+                });
+                this.turno = turnoPatch;
             });
-            this.turno = turno;
-        });
+        } else if (tipo === 'anterior') {
+            this.TurnosService.getPrev(this.turnero._id, this.ventanilla._id).subscribe(anterior => {
+                console.log(anterior);
+            });
+
+        }
+
+
     }
 
     siguiente() {

@@ -1,3 +1,4 @@
+import { environment } from './../../../environments/environment';
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 
 import { VentanillasService } from './../../services/ventanillas.service';
@@ -16,9 +17,8 @@ export class MonitorComponent implements OnInit {
     private mensajesServidor: any = {};
     private eventSource: any;
     private mensajePrevio: String = '';
-    private EVENT_URL = 'http://localhost:1337/api/update';
-    // private EVENT_URL = 'http://turnero.hospitalneuquen.org.ar:1337/api/update';
-    private ventanillaBlinkId: String = '|';
+    private EVENT_URL = environment.API + '/update';
+    private ventanillaBlinkId: String = '';
 
     public audio = false;
 

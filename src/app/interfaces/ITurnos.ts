@@ -8,6 +8,7 @@ export interface ITurnos {
     numeroInicio: Number;
     numeroFin: Number;
     numeros: [{
+        id: String,
         letra: String;
         numero: Number;
         llamado: Number;

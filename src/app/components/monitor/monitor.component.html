@@ -1,27 +1,27 @@
 <div class="content">
     <div class="container-fluid">
-        <div class="row" *ngIf="ventanillas?.length">
+        <div class="numeros-container" *ngIf="ventanillas?.length">
             <ng-container *ngFor="let ventanilla of ventanillas">
                 <ng-container *ngIf="ventanilla?.turno?._id">
-                    <div class="col" [ngClass]="ventanilla?.turno?.color">
+                    <div class="numero-container" [ngClass]="ventanilla?.turno?.color">
                         <div class="box fondo nuevo-turno" [ngClass]="{'blink-5': ventanillaBlinkId?.split('|')[0] === ventanilla._id}">
 
                             <div class="cabezal">
                                 <div class="texto-cabezal">ventanilla
                                     <span class="numero-cabezal">{{ventanilla.numero}}</span>
                                 </div>
-
                                 <div class="cuerpo">
                                     <div class="tipo-turno">
                                         <b *ngIf="ventanilla.turno.tipo === 'prioritario'">prioridad</b>
                                         <b *ngIf="ventanilla.turno.tipo === 'no-prioritario'">común/especial</b>
                                     </div>
                                     <div class="numero">
-                                        {{ventanilla.turno.numeros.letra}} {{ventanilla.turno.numeros.numero}}
+                                        {{ventanilla.turno.numeros.letra}}
+                                        <span *ngIf="ventanillaBlinkId.split('|').length === 3 && ventanillaBlinkId?.split('|')[0] === ventanilla._id">{{ventanillaBlinkId.split('|')[1]}}</span>
+                                        <span *ngIf="ventanillaBlinkId?.split('|')[0] !== ventanilla._id || ventanillaBlinkId.split('|').length < 3">{{ventanilla.turno.numeros.numero}}</span>
                                     </div>
-                                    <div class="llamado success">Llamado {{ventanilla.turno.numeros.llamado}}</div>
+                                    <div class="llamado success"><i class="mdi mdi-bell-ring mdi-36px"></i> Llamado {{ventanilla.turno.numeros.llamado}}</div>
                                 </div>
-
                             </div>
 
                         </div>
@@ -29,7 +29,7 @@
                 </ng-container>
             </ng-container>
         </div>
-        <div class="row" *ngIf="!ventanillas?.length || !ventanilla?.turno[0]">
+        <div class="row" *ngIf="!ventanillas">
             <div class="col">
                 <h3>Por favor espere un momento...</h3>
             </div>

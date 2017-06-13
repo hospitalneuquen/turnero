@@ -39,7 +39,7 @@ export class TurnosService {
         const options = this.getDefaultOptions(params);
 
         return this.http.get(environment.API + '/turnos', options).map(this.extractData);
-        // return this.http.get('http://localhsot:1337/api/turnos').map(this.extractData);
+        // return this.http.get('http://localhost:1337/api/turnos').map(this.extractData);
     }
 
     getActual(id: any, idVentanilla: any, params: any = null) {
@@ -48,6 +48,16 @@ export class TurnosService {
         return this.http.get(environment.API + '/turnos/' + id + '/ventanilla/' + idVentanilla, options).map(this.extractData);
     }
 
+    /**
+    * Metodo getPrev. Trae lista de objetos ventanillas.
+    * @param {string} id Id del turnero activo
+    * @param {any} params Opciones de busqueda
+    */
+    getPrev(id: any, idVentanilla: any, params: any = null): Observable<ITurnos> {
+        const options = this.getDefaultOptions(params);
+
+        return this.http.get(environment.API + '/turnos/' + id + '/ventanilla/' + idVentanilla + '/prev', options).map(this.extractData);
+    }
     /**
     * Metodo getNext. Trae lista de objetos ventanillas.
     * @param {string} id Id del turnero activo
@@ -98,12 +108,18 @@ export class TurnosService {
      * @param {ITurnos} problema Recibe ITurnos
      */
     // patchEstadoNumero(id: String, idNumero: String, doc: any, params: any = null): Observable<any> {
-        // const url = '/turnos/' + id + '/numero/' + idNumero + '/estado';
+    // const url = '/turnos/' + id + '/numero/' + idNumero + '/estado';
     patch(id: String, doc: any, params: any = null): Observable<any> {
-        const url = '/turnos/' + id ;
+        const url = '/turnos/' + id;
 
         const options = this.getDefaultOptions(params);
 
         return this.http.patch(environment.API + url, JSON.stringify(doc), options).map(this.extractData);
+    }
+
+    delete(id: String, params: any = null): Observable<any> {
+        const url = '/turnos/';
+        const options = this.getDefaultOptions(params);
+        return this.http.delete(environment.API + url + '/' + id, options).map(this.extractData);
     }
 }
