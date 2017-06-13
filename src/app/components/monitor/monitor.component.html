@@ -31,12 +31,17 @@
         </div>
         <div class="row" *ngIf="!ventanillas">
             <div class="col">
-                <h3>Por favor espere un momento...</h3>
+                <h3>Volvemos en unos instantes... <i class="mdi mdi-36px mdi-tag-faces"></i></h3>
             </div>
         </div>
+        <!--<div class="row" *ngIf="!ventanillas[0]?.turno">
+            <div class="col">
+                <h3>No hay turnos configurados... por favor espere.</h3>
+            </div>
+        </div>-->
     </div>
 </div>
-<audio *ngIf="audio" autoplay>
+<audio *ngIf="audio && ventanillas" autoplay>
     <source src="./assets/audio/ding-dong.mp3">
     <source src="./assets/audio/ding-dong.ogg">
     <source src="./assets/audio/ding-dong.m4a">

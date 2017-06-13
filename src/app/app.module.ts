@@ -32,7 +32,7 @@ import { TurnosComponent } from './components/config/turnos/turnos.component';
 
 // Define the routes
 const ROUTES = [
-    { path: '', redirectTo: 'ventanilla', pathMatch: 'full' },
+    // { path: '', redirectTo: 'ventanilla', pathMatch: 'full' },
     { path: 'monitor', component: MonitorComponent },
     { path: 'ventanilla', component: SeleccionarVentanillaComponent },
     { path: 'ventanilla/:numero', component: VentanillaComponent },

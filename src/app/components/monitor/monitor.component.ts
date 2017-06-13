@@ -81,7 +81,7 @@ export class MonitorComponent implements OnInit {
             // Se actualiza el mensaje de servidor
             this.mensajesServidor = JSON.parse(evt.data);
 
-            // Detector de cambios: El último mensaje de la API es diferente al previo?
+            // Detector de cambios: Si el último mensaje de la API es diferente al previo, actualizar!
             if (this.ventanillaBlink && this.mensajesServidor.result.timestamp !== this.ventanillaBlink.timestamp) {
                 this.ventanillaBlink = null;
                 this.actualizarMonitor();
@@ -101,7 +101,7 @@ export class MonitorComponent implements OnInit {
         this.audio = true;
         setTimeout(() => {
             this.audio = false;
-        }, 2000);
+        }, 2200);
     }
 
 }
