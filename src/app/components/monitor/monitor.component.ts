@@ -18,7 +18,7 @@ export class MonitorComponent implements OnInit {
     private eventSource: any;
     private mensajePrevio: String = '';
     private EVENT_URL = environment.API + '/update';
-    private ventanillaBlinkId: String = '';
+    private ventanillaBlink: any = {};
 
     public audio = false;
 
@@ -40,7 +40,7 @@ export class MonitorComponent implements OnInit {
             // buscamos los turneros que están en uso
             this.TurnosService.get({ ultimoEstado: 'uso' }).subscribe(turnos => {
 
-                // buscamos el último número que haya llamado una ventanilla para un turnero
+                // Buscamos el último número que haya llamado una ventanilla para un turnero
                 ventanillasAux.forEach(ventanilla => {
                     if (typeof ventanilla.turno === 'undefined') {
                         ventanilla.turno = {};
@@ -82,16 +82,16 @@ export class MonitorComponent implements OnInit {
             this.mensajesServidor = JSON.parse(evt.data);
 
             // Detector de cambios: El último mensaje de la API es diferente al previo?
-            if (this.ventanillaBlinkId && this.mensajesServidor.result !== this.ventanillaBlinkId) {
-                this.ventanillaBlinkId = '';
-                // this.ventanillaBlinkId = this.mensajesServidor.result;
+            if (this.ventanillaBlink && this.mensajesServidor.result.timestamp !== this.ventanillaBlink.timestamp) {
+                this.ventanillaBlink = null;
                 this.actualizarMonitor();
                 this.dingDong();
             } else {
-                this.ventanillaBlinkId = this.mensajesServidor.result;
+                this.ventanillaBlink = this.mensajesServidor.result;
+                // console.log('this.ventanillaBlink', this.ventanillaBlink);
             }
 
-            // Manually detect changes
+            // Detectar cambios
             this.changeDetector.detectChanges();
 
         };
