@@ -2,25 +2,32 @@
     <div class="container-fluid">
         <div class="numeros-container" *ngIf="ventanillas?.length">
             <ng-container *ngFor="let ventanilla of ventanillas">
-                <ng-container *ngIf="ventanilla?.turno?._id">
+                <ng-container *ngIf="ventanilla">
                     <div class="numero-container" [ngClass]="ventanilla?.turno?.color">
                         <div class="box fondo nuevo-turno" [ngClass]="{'blink-5': ventanillaBlink?.ventanilla === ventanilla._id}">
 
                             <div class="cabezal">
                                 <div class="texto-cabezal">ventanilla
-                                    <span class="numero-cabezal">{{ventanilla.numero}}</span>
+                                    <span class="numero-cabezal">{{ventanilla.numeroVentanilla}}</span>
                                 </div>
                                 <div class="cuerpo">
                                     <div class="tipo-turno">
-                                        <b *ngIf="ventanilla.turno.tipo === 'prioritario'">prioridad</b>
-                                        <b *ngIf="ventanilla.turno.tipo === 'no-prioritario'">común/especial</b>
+                                        <b *ngIf="ventanilla.atendiendo === 'prioritario'">prioridad</b>
+                                        <b *ngIf="ventanilla.atendiendo === 'no-prioritario'">común</b>
                                     </div>
                                     <div class="numero">
-                                        {{ventanilla.turno.numeros.letra}}
-                                        <span *ngIf="ventanillaBlink?.numeroAnterior && ventanillaBlink?.ventanilla === ventanilla._id">{{ventanillaBlink.numeroAnterior}}</span>
-                                        <span *ngIf="!ventanillaBlink?.numeroAnterior || ventanillaBlink.numeroAnterior >= ventanilla.turno.numeros.numero">{{ventanilla.turno.numeros.numero}}</span>
+                                        <span *ngIf="ventanilla.atendiendo === 'prioritario'">
+                                            {{ventanilla?.ultimoPrioridad}}
+                                        </span>
+                                        <span *ngIf="ventanilla.atendiendo === 'no-prioritario'">
+                                            {{ventanilla?.ultimoComun}}
+                                        </span>
+                                        <span *ngIf="ventanillaBlink?.ventanilla === ventanilla._id">{{ventanilla.atendiendo === 'prioritario'
+                                            ? (ventanilla?.ultimoPrioridad ? ventanilla?.ultimoPrioridad : 0)
+                                            : (ventanilla?.ultimoComun ? ventanilla.turno.ultimoComun : 0)}}</span>
+                                        <!-- <span *ngIf="!ventanillaBlink?.numeroAnterior || ventanillaBlink.numeroAnterior >= ventanilla.turno.numero">{{ventanilla.turno.numero}}</span> -->
                                     </div>
-                                    <div class="llamado success"><i class="mdi mdi-bell-ring mdi-36px"></i> Llamado {{ventanilla.turno.numeros.llamado}}</div>
+                                    <div class="llamado success"><i class="mdi mdi-bell-ring mdi-36px"></i> Llamado {{ventanilla.llamado || 1}} </div>
                                 </div>
                             </div>
 

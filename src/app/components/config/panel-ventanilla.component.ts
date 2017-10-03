@@ -46,8 +46,8 @@ export class PanelVentanillaComponent implements OnInit {
         if (!this.ventanillaActual.pausa) {
             this.ventanillaActual.pausa = false;
         }
-        if (!this.ventanillaActual.prioritaria) {
-            this.ventanillaActual.prioritaria = false;
+        if (!this.ventanillaActual.prioritario) {
+            this.ventanillaActual.prioritario = false;
         }
         if (!this.ventanillaActual.numero) {
             this.ventanillaActual.numero = this.ventanillasCount + 1;
@@ -56,6 +56,8 @@ export class PanelVentanillaComponent implements OnInit {
     }
 
     guardarVentanilla() {
+
+        this.ventanillaActual.atendiendo = (this.ventanillaActual.atendiendo ? 'prioritario' : 'no-prioritario');
 
         if (!this.ventanillaActual._id) {
             this.serviceVentanillas.post(this.ventanillaActual).subscribe(resultado => {

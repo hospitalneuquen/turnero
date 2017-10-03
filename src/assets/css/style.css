@@ -283,6 +283,7 @@ div.violeta div.texto {
 }
 
 .numero-container {
+    min-width: 265px;
     padding: 0 5px 0 10px;
 }
 

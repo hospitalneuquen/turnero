@@ -41,12 +41,12 @@ export class VentanillaComponent implements OnInit {
     }
 
     inicializarVentanilla() {
-        this.VentanillasService.get({ numero: this.numero }).subscribe(ventanilla => {
+        this.VentanillasService.get({ numeroVentanilla: this.numero }).subscribe(ventanilla => {
 
             if (ventanilla[0]) {
                 this.ventanilla = ventanilla[0];
 
-                localStorage.setItem('ventanillaActual', this.ventanilla.numero);
+                localStorage.setItem('ventanillaActual', this.ventanilla.numeroVentanilla);
 
                 this.sinVentanillas = false;
 
@@ -63,33 +63,15 @@ export class VentanillaComponent implements OnInit {
     inicializarTurneros() {
 
         // obtenemos prioritario
-        this.TurnosService.get({ 'tipo': 'prioritario', 'ultimoEstado': 'uso' }).subscribe(turnos => {
-
-            // TODO: Revisar de enviar limit : 1
-            if (turnos[turnos.length - 1]) {
-                this.prioritario = turnos[turnos.length - 1];
-
-                this.TurnosService.getActual(this.prioritario._id, this.ventanilla._id).subscribe(actual => {
-                    this.turnoActualPrioritario = actual[0];
-
-                    console.log('this.turnoActualPrioritario: ', this.turnoActualPrioritario);
-                });
-
-            } else {
-
-            }
+        this.TurnosService.get({ tipo: 'prioritario' }).subscribe(turnero => {
+            this.prioritario = turnero[0];
+            this.turnoActualPrioritario = turnero[0];
         });
 
         // obtenemos no prioritario
-        this.TurnosService.get({ 'tipo': 'no-prioritario', 'ultimoEstado': 'uso' }).subscribe(turnos => {
-            if (turnos[turnos.length - 1]) {
-                this.noPrioritario = turnos[turnos.length - 1];
-
-                this.TurnosService.getActual(this.noPrioritario._id, this.ventanilla._id).subscribe(actual => {
-                    this.turnoActualNoPrioritario = actual[0];
-                });
-
-            }
+        this.TurnosService.get({ tipo: 'no-prioritario' }).subscribe(turnero => {
+            this.noPrioritario = turnero[0];
+            this.turnoActualNoPrioritario = turnero[0];
         });
     }
 

@@ -38,14 +38,15 @@ export class TurnosService {
     get(params: any): Observable<ITurnos[]> {
         const options = this.getDefaultOptions(params);
 
-        return this.http.get(environment.API + '/turnos', options).map(this.extractData);
+        return this.http.get(environment.API + '/turnero', options).map(this.extractData);
+
         // return this.http.get('http://localhost:1337/api/turnos').map(this.extractData);
     }
 
-    getActual(id: any, idVentanilla: any, params: any = null) {
+    getActual(id: any, params: any = null) {
         const options = this.getDefaultOptions(params);
 
-        return this.http.get(environment.API + '/turnos/' + id + '/ventanilla/' + idVentanilla, options).map(this.extractData);
+        return this.http.get(environment.API + '/turnero/' + id, options).map(this.extractData);
     }
 
     /**
@@ -56,7 +57,7 @@ export class TurnosService {
     getPrev(id: any, idVentanilla: any, params: any = null): Observable<ITurnos> {
         const options = this.getDefaultOptions(params);
 
-        return this.http.get(environment.API + '/turnos/' + id + '/ventanilla/' + idVentanilla + '/prev', options).map(this.extractData);
+        return this.http.get(environment.API + '/turnero/' + id + '/ventanilla/' + idVentanilla + '/prev', options).map(this.extractData);
     }
     /**
     * Metodo getNext. Trae lista de objetos ventanillas.
@@ -66,7 +67,7 @@ export class TurnosService {
     getNext(id: any, params: any = null): Observable<ITurnos> {
         const options = this.getDefaultOptions(params);
 
-        return this.http.get(environment.API + '/turnos/' + id + '/next', options).map(this.extractData);
+        return this.http.get(environment.API + '/turnero/' + id + '/next', options).map(this.extractData);
     }
     /**
     * Metodo getCount. Trae cantidad de turnos disponibles en el turnero
@@ -76,7 +77,7 @@ export class TurnosService {
     getCount(id: any, params: any = null): Observable<any> {
         const options = this.getDefaultOptions(params);
 
-        return this.http.get(environment.API + '/turnos/' + id + '/count', options).map(this.extractData);
+        return this.http.get(environment.API + '/turnero/' + id + '/count', options).map(this.extractData);
     }
 
     /**
@@ -84,7 +85,7 @@ export class TurnosService {
      * @param {ITurnos} problema Recibe ITurnos
      */
     post(doc: any, params: any = null): Observable<any> {
-        const url = '/turnos/';
+        const url = '/turnero';
 
         const options = this.getDefaultOptions(params);
 
@@ -96,7 +97,7 @@ export class TurnosService {
      * @param {ITurnos} problema Recibe ITurnos
      */
     put(id: String, doc: any, params: any = null): Observable<any> {
-        const url = '/turnos/' + id;
+        const url = '/turnero/' + id;
 
         const options = this.getDefaultOptions(params);
 
@@ -110,7 +111,7 @@ export class TurnosService {
     // patchEstadoNumero(id: String, idNumero: String, doc: any, params: any = null): Observable<any> {
     // const url = '/turnos/' + id + '/numero/' + idNumero + '/estado';
     patch(id: String, doc: any, params: any = null): Observable<any> {
-        const url = '/turnos/' + id;
+        const url = '/turnero/' + id;
 
         const options = this.getDefaultOptions(params);
 
@@ -118,7 +119,7 @@ export class TurnosService {
     }
 
     delete(id: String, params: any = null): Observable<any> {
-        const url = '/turnos/';
+        const url = '/turnero/';
         const options = this.getDefaultOptions(params);
         return this.http.delete(environment.API + url + '/' + id, options).map(this.extractData);
     }

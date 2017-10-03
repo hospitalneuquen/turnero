@@ -1,3 +1,4 @@
+import { VentanillaComponent } from './../ventanilla/ventanilla.component';
 import { environment } from './../../../environments/environment';
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 
@@ -33,41 +34,19 @@ export class MonitorComponent implements OnInit {
     }
 
     actualizarMonitor() {
-        // buscamos ventanillas disponibles
+        // Buscamos las ventanillas disponibles
         this.VentanillasService.get({ disponible: true }).subscribe(ventanillas => {
             const ventanillasAux: any = ventanillas;
+            this.ventanillas = ventanillas;
+            console.log(this.ventanillas);
 
-            // buscamos los turneros que están en uso
-            this.TurnosService.get({ ultimoEstado: 'uso' }).subscribe(turnos => {
-
-                // Buscamos el último número que haya llamado una ventanilla para un turnero
-                ventanillasAux.forEach(ventanilla => {
-                    if (typeof ventanilla.turno === 'undefined') {
-                        ventanilla.turno = {};
-                    }
-
-                    turnos.forEach(turno => {
-                        // Trae un array de 1 sólo elemento
-                        this.TurnosService.getActual(turno._id, ventanilla._id).subscribe(actual => {
-
-                            if (actual && actual[0]) {
-                                if (typeof ventanilla.turno._id === 'undefined') {
-                                    ventanilla.turno = actual[0];
-                                } else {
-                                    const dateCargado = new Date(ventanilla.turno.numeros.estado.fecha);
-                                    const dateActual = new Date(actual[0].numeros.estado.fecha);
-
-                                    if (dateActual > dateCargado) {
-                                        ventanilla.turno = actual[0];
-                                    }
-                                }
-                            }
-                        });
-                    });
-                    this.ventanillas = ventanillas;
+            this.ventanillas.forEach((ventanilla, i) => {
+                this.TurnosService.get({ tipo: ventanilla.atendiendo }).subscribe(turnero => {
+                    this.ventanillas[i].turno = turnero;
                 });
             });
         });
+
     }
 
     escucharEventosServidor() {
