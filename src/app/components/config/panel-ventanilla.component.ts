@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, ViewContainerRef } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
@@ -35,7 +35,8 @@ export class PanelVentanillaComponent implements OnInit {
     @Input() ventanillas: any;
 
 
-    constructor(public serviceVentanillas: VentanillasService, public router: Router) {
+    constructor(public serviceVentanillas: VentanillasService, 
+        public router: Router) {
     }
 
     ngOnInit() {
@@ -59,7 +60,8 @@ export class PanelVentanillaComponent implements OnInit {
 
         if (form.valid) {
             const existe = this.ventanillas.find(v => this.ventanillaActual.numeroVentanilla === v.numeroVentanilla);
-            if (typeof existe !== 'undefined') {
+
+            if (!this.ventanillaActual._id && typeof existe !== 'undefined') {
                 alert('La ventanilla ingresada ya existe');
                 return false;
             }
@@ -77,7 +79,7 @@ export class PanelVentanillaComponent implements OnInit {
                 this.serviceVentanillas.put(this.ventanillaActual._id, this.ventanillaActual).subscribe(resultado => {
                     this.ventanillaActual = resultado;
 
-                    alert('La Ventanilla se actualizó correctamente');
+                    alert('La Ventanilla se guardó correctamente');
                     this.onEditEmit.emit(true);
                 });
 

@@ -28,16 +28,14 @@ export class VentanillaComponent implements OnInit {
 
         this.route.params.subscribe(params => {
             // obtenemos el parametro del nombre de la ventanilla enviado
-            this.numero = params['numero'];
+            this.numero = (params['numero']) ? params['numero'] : localStorage.getItem('ventanillaActual');
 
-            // TODO: si no tenemos numero redireccionamos a la seleccion de ventanilla
+            if (!this.numero) {
+                this.router.navigate(['ventanilla']);
+            }
+
             this.inicializarVentanilla();
         });
-
-        // TODO: si no se paso el id nombre de la ventanilla, entonces lo 
-        // levantamos de la session e inicializamos la ventanilla
-        // var ventanillaActual = JSON.parse(localStorage.getItem('ventanillaActual'));
-        // console.log(ventanillaActual);
     }
 
     inicializarVentanilla() {
@@ -45,6 +43,7 @@ export class VentanillaComponent implements OnInit {
 
             if (ventanilla[0]) {
                 this.ventanilla = ventanilla[0];
+
 
                 localStorage.setItem('ventanillaActual', this.ventanilla.numeroVentanilla);
 
@@ -64,13 +63,15 @@ export class VentanillaComponent implements OnInit {
 
         // obtenemos prioritario
         this.TurnosService.get({ tipo: 'prioritario' }).subscribe(turnero => {
-            this.prioritario = turnero[0];
+            //this.prioritario = turnero[0];
             this.turnoActualPrioritario = turnero[0];
+            console.log(this.turnoActualPrioritario);
+            console.log(this.ventanilla);
         });
 
         // obtenemos no prioritario
         this.TurnosService.get({ tipo: 'no-prioritario' }).subscribe(turnero => {
-            this.noPrioritario = turnero[0];
+            //this.noPrioritario = turnero[0];
             this.turnoActualNoPrioritario = turnero[0];
         });
     }

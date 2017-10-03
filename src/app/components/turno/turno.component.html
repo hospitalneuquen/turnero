@@ -1,18 +1,28 @@
-<ng-container *ngIf="turnero">
-    <div [ngClass]="turnero.color">
+<ng-container *ngIf="turno && ventanilla">
+    <div class="row">
+        <pre class="col-6">
+        {{ventanilla | json}}
+        </pre>
+        <pre class="col-6">
+        {{turno | json}}
+        </pre>
+    </div>
+
+    <div [ngClass]="turno.color">
 
         <div class="box-turno borde inactivo">
 
             <div class="cabezal fondo text-center">
-                <h4>Ventanilla {{ventanilla.numero}}</h4>
+                <h4>Ventanilla {{ventanilla.numeroVentanilla}}</h4>
 
-                <h3 *ngIf="turno.numero === (turno.numeroFin - 10)">Atención:</h3>
-                <span *ngIf="turno.numero > 1 && turno.numero === (turno.numeroFin - 10)">últimos {{turno.numeroFin - 10}} turnos disponibles</span>
-                <span *ngIf="turno.numero === (turno.numeroFin - 1)">ÚLTIMO turno disponible</span>
-                <div *ngIf="turno.numero === turno.numeroFin">
-                    <h4 class="tipo-turno">No quedan turnos disponibles, por favor cargue un nuevo turnero
-                        <b *ngIf="turnero.tipo === 'prioritario'">prioritario</b>
-                        <b *ngIf="turnero.tipo === 'no-prioritario'">no prioritario</b>
+                <h3 *ngIf="turno.ultimoNumero === (turno.ultimoNumeroFin - 10)">Atención:</h3>
+                <span *ngIf="turno.ultimoNumero > 1 && turno.ultimoNumero === (turno.ultimoNumeroFin - 10)">últimos {{turno.ultimoNumeroFin - 10}} turnos disponibles</span>
+                <span *ngIf="turno.ultimoNumero === (turno.ultimoNumeroFin - 1)">ÚLTIMO turno disponible</span>
+
+                <div *ngIf="turno.ultimoNumero === turno.ultimoNumeroFin">
+                    <h4 class="tipo-turno">No quedan turnos disponibles, por favor cargue un nuevo turno
+                        <b *ngIf="turno.tipo === 'prioritario'">prioritario</b>
+                        <b *ngIf="turno.tipo === 'no-prioritario'">no prioritario</b>
                     </h4>
 
                     <div class="text-center">
