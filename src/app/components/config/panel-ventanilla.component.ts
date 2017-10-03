@@ -1,5 +1,6 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 import { VentanillasService } from './../../services/ventanillas.service';
 import { TurnosService } from './../../services/turnos.service';
@@ -12,9 +13,13 @@ import { IVentanillas } from './../../interfaces/IVentanillas';
 
 export class PanelVentanillaComponent implements OnInit {
 
-    showEditarVentanilla: Boolean = false;
-
     private _editarVentanilla: any;
+
+    public showEditarVentanillaPanel: Boolean = true;
+    public ventanillaActual: any = {};
+    public alertas: any[] = [];
+    public showEditarVentanilla: Boolean = false;
+
     @Input('editarVentanilla')
     set editarVentanilla(value: any) {
         this._editarVentanilla = value;
@@ -27,13 +32,8 @@ export class PanelVentanillaComponent implements OnInit {
     @Output() onEditEmit = new EventEmitter<Boolean>();
     @Output() onCloseEmit = new EventEmitter<Boolean>();
 
-    @Input() ventanillasCount: any;
+    @Input() ventanillas: any;
 
-    showEditarVentanillaPanel: Boolean = true;
-
-    public ventanillaActual: any = {};
-
-    public alertas: any[] = [];
 
     constructor(public serviceVentanillas: VentanillasService, public router: Router) {
     }
@@ -49,33 +49,40 @@ export class PanelVentanillaComponent implements OnInit {
         if (!this.ventanillaActual.prioritario) {
             this.ventanillaActual.prioritario = false;
         }
-        if (!this.ventanillaActual.numero) {
-            this.ventanillaActual.numero = this.ventanillasCount + 1;
+        if (!this.ventanillaActual.numeroVentanilla) {
+            this.ventanillaActual.numeroVentanilla = this.ventanillas.length + 1;
         }
 
     }
 
-    guardarVentanilla() {
+    guardarVentanilla(form: any) {
 
-        this.ventanillaActual.atendiendo = (this.ventanillaActual.atendiendo ? 'prioritario' : 'no-prioritario');
+        if (form.valid) {
+            const existe = this.ventanillas.find(v => this.ventanillaActual.numeroVentanilla === v.numeroVentanilla);
+            if (typeof existe !== 'undefined') {
+                alert('La ventanilla ingresada ya existe');
+                return false;
+            }
 
-        if (!this.ventanillaActual._id) {
-            this.serviceVentanillas.post(this.ventanillaActual).subscribe(resultado => {
-                this.ventanillaActual = resultado;
+            this.ventanillaActual.atendiendo = (this.ventanillaActual.atendiendo ? 'prioritario' : 'no-prioritario');
 
-                alert('La Ventanilla se guardó correctamente');
-                this.onEditEmit.emit(true);
-            });
-        } else {
-            this.serviceVentanillas.put(this.ventanillaActual._id, this.ventanillaActual).subscribe(resultado => {
-                this.ventanillaActual = resultado;
+            if (!this.ventanillaActual._id) {
+                this.serviceVentanillas.post(this.ventanillaActual).subscribe(resultado => {
+                    this.ventanillaActual = resultado;
 
-                alert('La Ventanilla se actualizó correctamente');
-                this.onEditEmit.emit(true);
-            });
+                    alert('La Ventanilla se guardó correctamente');
+                    this.onEditEmit.emit(true);
+                });
+            } else {
+                this.serviceVentanillas.put(this.ventanillaActual._id, this.ventanillaActual).subscribe(resultado => {
+                    this.ventanillaActual = resultado;
 
+                    alert('La Ventanilla se actualizó correctamente');
+                    this.onEditEmit.emit(true);
+                });
+
+            }
         }
-
 
     }
 

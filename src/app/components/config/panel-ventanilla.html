@@ -6,39 +6,38 @@
                 <h5 *ngIf="ventanillaActual">Nueva ventanilla</h5>
             </div>
             <div class="col-12">
-                <form class="form">
+                <form class="form" #form="ngForm" (ngSubmit)="guardarVentanilla(form)">
                     <div class="row">
                         <div class="col-4">
                             <label for="numero">Número
-                <input [(ngModel)]="ventanillaActual.numeroVentanilla" name="numeroVentanilla" type="number" class="form-control">
-              </label>
+                                <input [(ngModel)]="ventanillaActual.numeroVentanilla" name="numeroVentanilla" type="number" class="form-control" required>
+                            </label>
                         </div>
                     </div>
+
                     <div class="row">
                         <div class="col">
                             <label for="atendiendo">Prioritaria
-          <input [(ngModel)]="ventanillaActual.atendiendo" name="atendiendo" type="checkbox" class="form-control">
-          </label>
+                                <input [(ngModel)]="ventanillaActual.atendiendo" name="atendiendo" type="checkbox" class="form-control">
+                            </label>
                         </div>
-                    </div>
-                    <div class="row">
+
                         <div class="col">
                             <label for="disponible">Disponible
-          <input [(ngModel)]="ventanillaActual.disponible" name="disponible" type="checkbox" class="form-control">
-          </label>
+                                <input [(ngModel)]="ventanillaActual.disponible" name="disponible" type="checkbox" class="form-control">
+                            </label>
                         </div>
-                    </div>
-                    <div class="row">
+
                         <div class="col">
                             <label for="disponible">Pausada
-          <input [(ngModel)]="ventanillaActual.pausa" name="pausa" type="checkbox" class="form-control">
-          </label>
+                                    <input [(ngModel)]="ventanillaActual.pausa" name="pausa" type="checkbox" class="form-control">
+                            </label>
                         </div>
                     </div>
                     <hr>
                     <div class="row">
                         <div class="col">
-                            <button class="btn btn-primary" (click)="guardarVentanilla()">Guardar</button>
+                            <button class="btn btn-primary" type="submit">Guardar</button>
                         </div>
                         <div class="col">
                             <button class="btn btn-default" (click)="cancelar()">Cancelar</button>
