@@ -1,0 +1,10 @@
+.pausada,
+.pausada .numero-container,
+.pausada .cuerpo {
+    background-color: #ccc;
+}
+
+.pausada .cuerpo>.tipo-turno {
+    color: black;
+    font-weight: bold;
+}

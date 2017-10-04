@@ -65,8 +65,6 @@ export class VentanillaComponent implements OnInit {
         this.TurnosService.get({ tipo: 'prioritario' }).subscribe(turnero => {
             //this.prioritario = turnero[0];
             this.turnoActualPrioritario = turnero[0];
-            console.log(this.turnoActualPrioritario);
-            console.log(this.ventanilla);
         });
 
         // obtenemos no prioritario
@@ -94,7 +92,9 @@ export class VentanillaComponent implements OnInit {
             key: key,
             value: value
         };
+
         this.VentanillasService.patch(this.ventanilla._id, patch).subscribe(v => {
+            this.ventanilla = v;
             this.inicializarVentanilla();
         });
     }

@@ -20,13 +20,9 @@ export class TurnoComponent implements OnInit {
     constructor(private TurnosService: TurnosService, private VentanillasService: VentanillasService) { }
 
     ngOnInit() {
-        console.log(this.turno);
-        console.log(this.ventanilla);
     }
 
     count() {
-        console.log('this.turno', this.turno);
-
         this.TurnosService.getCount(this.turno._id).subscribe(turnos => {
             this.disponibles = turnos.count || 0;
         });
@@ -38,22 +34,21 @@ export class TurnoComponent implements OnInit {
         if (tipo === 'actual') {
             dto = {
                 accion: 'rellamar',
-                tipo: this.turno.tipo
+                tipo: this.turno.tipo,
+                idTurno: this.turno._id
             };
 
-
             this.VentanillasService.patch(this.ventanilla._id, dto).subscribe(ventanillaPatch => {
-                this.TurnosService.getActual(this.turno._id, { tipo: this.turno.tipo }).subscribe(actual => {
-                    this.turno = actual[0];
-                    console.log(this.turno);
-
-                });
                 this.ventanilla = ventanillaPatch;
+
+                this.TurnosService.getActual(this.turno._id).subscribe(actual => {
+                    this.turno = actual[0];
+                });
             });
 
         } else if (tipo === 'anterior') {
             this.TurnosService.getPrev(this.turno._id, this.ventanilla._id).subscribe(anterior => {
-                console.log(anterior);
+
             });
 
         }
@@ -61,15 +56,16 @@ export class TurnoComponent implements OnInit {
     }
 
     siguiente() {
-        console.log('this.turno.tipo', this.turno.tipo);
-
         const dto = {
             accion: 'siguiente',
-            tipo: this.turno.tipo
+            tipo: this.turno.tipo,
+            idTurno: this.turno._id
         };
-        this.VentanillasService.patch(this.ventanilla._id, dto).subscribe(ventanillaPatch => {
-            this.TurnosService.getActual(this.turno._id, { tipo: this.turno.tipo }).subscribe(turno => {
 
+        this.VentanillasService.patch(this.ventanilla._id, dto).subscribe(ventanillaPatch => {
+            this.ventanilla = ventanillaPatch;
+
+            this.TurnosService.getActual(this.turno._id).subscribe(turno => {
                 this.turno = turno[0];
             });
         });
