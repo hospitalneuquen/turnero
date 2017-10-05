@@ -40,8 +40,8 @@ export class MonitorComponent implements OnInit {
             this.ventanillas = ventanillas;
 
             this.ventanillas.forEach((ventanilla, i) => {
-                this.TurnosService.get({ tipo: ventanilla.atendiendo }).subscribe(turnero => {
-                    this.ventanillas[i].turno = turnero;
+                this.TurnosService.get({ tipo: ventanilla.atendiendo, estado: 'activo' }).subscribe(turnero => {
+                    this.ventanillas[i].turno = turnero[0];
                 });
             });
         });

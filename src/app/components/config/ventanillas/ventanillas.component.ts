@@ -2,9 +2,9 @@ import { Observable, Subject } from 'rxjs/Rx';
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 
-import { VentanillasService } from './../../services/ventanillas.service';
-import { TurnosService } from './../../services/turnos.service';
-import { IVentanillas } from './../../interfaces/IVentanillas';
+import { VentanillasService } from './../../../services/ventanillas.service';
+import { TurnosService } from './../../../services/turnos.service';
+import { IVentanillas } from './../../../interfaces/IVentanillas';
 declare var EventSource: any;
 @Component({
     selector: 'app-ventanillas',
@@ -23,7 +23,6 @@ export class ListaVentanillasComponent implements OnInit {
         private router: Router, private route: ActivatedRoute) { }
 
     ngOnInit() {
-
         this.inicializarVentanillas();
     }
 
@@ -84,6 +83,7 @@ export class ListaVentanillasComponent implements OnInit {
             key: key,
             value: value
         };
+
         this.VentanillasService.patch(ventanilla._id, patch).subscribe(v => {
             this.inicializarVentanillas();
         });

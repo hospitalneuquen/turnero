@@ -121,6 +121,6 @@ export class TurnosService {
     delete(id: String, params: any = null): Observable<any> {
         const url = '/turnero/';
         const options = this.getDefaultOptions(params);
-        return this.http.delete(environment.API + url + '/' + id, options).map(this.extractData);
+        return this.http.delete(environment.API + url + id, options).map(this.extractData);
     }
 }

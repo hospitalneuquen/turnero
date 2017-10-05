@@ -2,9 +2,9 @@ import { Component, Input, Output, EventEmitter, OnInit, ViewContainerRef } from
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
-import { VentanillasService } from './../../services/ventanillas.service';
-import { TurnosService } from './../../services/turnos.service';
-import { IVentanillas } from './../../interfaces/IVentanillas';
+import { VentanillasService } from './../../../services/ventanillas.service';
+import { TurnosService } from './../../../services/turnos.service';
+import { IVentanillas } from './../../../interfaces/IVentanillas';
 
 @Component({
     selector: 'app-panel-ventanilla',

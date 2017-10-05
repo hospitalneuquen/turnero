@@ -72,4 +72,21 @@ export class TurnoComponent implements OnInit {
 
         // this.evtOutput.emit(this.turno);
     }
+
+    /* finalizamos turnero y damos comienzo a uno nuevo */
+    proximoTurno() {
+        const dto = {
+            accion: 'cambiar_turno',
+            tipo: this.turno.tipo,
+            idTurno: this.turno._id
+        };
+
+        this.VentanillasService.patch(this.ventanilla._id, dto).subscribe(ventanillaPatch => {
+            this.ventanilla = ventanillaPatch;
+
+            this.TurnosService.get({ tipo: this.turno.tipo, estado: 'activo' }).subscribe(turnero => {
+                this.turno = turnero[0];
+            });
+        });
+    }
 }

@@ -3,10 +3,9 @@
         <div class="numeros-container" *ngIf="ventanillas?.length">
             <ng-container *ngFor="let ventanilla of ventanillas">
                 <ng-container *ngIf="ventanilla">
+
                     <div class="numero-container" [ngClass]="ventanilla?.turno?.color">
-                        <pre class="col-6">
-                            {{ventanillaBlink | json}}
-                        </pre>
+
                         <div class="box fondo nuevo-turno" [ngClass]="{'blink-5': ventanillaBlink?.idVentanilla === ventanilla._id, 'pausada': ventanilla.pausa}">
 
                             <div class="cabezal">
