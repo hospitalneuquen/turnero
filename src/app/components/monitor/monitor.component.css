@@ -4,9 +4,14 @@
     background-color: #ccc;
 }
 
+.pausada .cuerpo>.numero,
 .pausada .cuerpo>.tipo-turno {
     color: black;
     font-weight: bold;
+    font-size: 2em;
+    line-height: 2em;
+    padding-top: 1em;
+    text-shadow: 2px 2px 0px white;
 }
 
 

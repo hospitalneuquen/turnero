@@ -67,7 +67,9 @@ export class MonitorComponent implements OnInit {
                 this.dingDong();
             } else {
                 this.ventanillaBlink = this.mensajesServidor.result;
+                console.log(this.ventanillaBlink);
             }
+
 
             // Detectar cambios
             this.changeDetector.detectChanges();

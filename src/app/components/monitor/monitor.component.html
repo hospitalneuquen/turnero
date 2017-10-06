@@ -6,7 +6,8 @@
 
                     <div class="numero-container" [ngClass]="ventanilla?.turno?.color">
 
-                        <div class="box fondo nuevo-turno" [ngClass]="{'blink-5': ventanillaBlink?.idVentanilla === ventanilla._id, 'pausada': ventanilla.pausa}">
+                        <div class="box fondo nuevo-turno" [ngClass]="{'blink-5': ventanillaBlink?.idVentanilla === ventanilla._id, 
+                            'pausada': ventanilla.pausa}">
 
                             <div class="cabezal">
                                 <div class="texto-cabezal">ventanilla
@@ -17,7 +18,8 @@
                                         <div class="tipo-turno">
                                         </div>
                                         <div class="numero">
-                                            PAUSADA
+                                            NO
+                                            <br /> DISPONIBLE
                                         </div>
                                     </ng-container>
 
@@ -66,10 +68,9 @@
     </div>
 </div>
 
-<!--
+
 <audio *ngIf="audio && ventanillas" autoplay>
     <source src="./assets/audio/ding-dong.mp3">
     <source src="./assets/audio/ding-dong.ogg">
     <source src="./assets/audio/ding-dong.m4a">
 </audio>
--->
