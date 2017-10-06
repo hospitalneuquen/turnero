@@ -10,6 +10,10 @@
     text-transform: capitalize;
 }
 
+.upper {
+    text-transform: uppercase;
+}
+
 
 /* Rules for sizing the icon. */
 
@@ -224,6 +228,10 @@ div.violeta div.texto {
     text-align: center;
 }
 
+.box {
+    opacity: 1;
+}
+
 .blink {
     animation: blink-animation 1s steps(5, start) infinite;
     -webkit-animation: blink-animation 1s steps(5, start) infinite;
@@ -236,13 +244,13 @@ div.violeta div.texto {
 
 @keyframes blink-animation {
     to {
-        visibility: hidden;
+        opacity: .2;
     }
 }
 
 @-webkit-keyframes blink-animation {
     to {
-        visibility: hidden;
+        opacity: .2;
     }
 }
 
@@ -331,8 +339,8 @@ span.numero-cabezal {
 
 .cuerpo>.numero {
     color: black;
-    font-size: 12rem;
-    line-height: 12rem;
+    font-size: 7rem;
+    line-height: 7rem;
     font-weight: bold;
     margin: 0 20px 0 20px;
     vertical-align: center;
@@ -359,6 +367,7 @@ span.numero-cabezal {
     padding: 15px;
     vertical-align: middle;
     white-space: nowrap;
+    text-shadow: 1px 1px 0px #6a9436;
 }
 
 .cuerpo>.llamado.success {

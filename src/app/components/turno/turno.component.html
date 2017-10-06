@@ -6,8 +6,24 @@
 
             <div class="cabezal fondo text-center">
                 <!--<h4>Ventanilla {{ventanilla.numeroVentanilla}}</h4>-->
-                <h4 *ngIf="turno.tipo === 'prioritario'">prioritario</h4>
-                <h4 *ngIf="turno.tipo === 'no-prioritario'">no prioritario</h4>
+                <h4 class="upper" *ngIf="turno.tipo === 'prioritario'">prioritario</h4>
+                <h4 class="upper" *ngIf="turno.tipo === 'no-prioritario'">no prioritario</h4>
+
+            </div>
+
+            <div class="cuerpo container-fluid">
+                <div class="tipo-turno">
+                    <span *ngIf="turno.atendiendo === 'prioritario'">prioritario</span>
+                    <span *ngIf="turno.atendiendo === 'no-prioritario'">no prioritario</span>
+                </div>
+
+                <div class="d-inline numero" *ngIf="turno.tipo === 'prioritario' && ventanilla?.ultimoPrioridad">
+                    {{turno.letraInicio ? turno.letraInicio : ''}} {{ventanilla.ultimoPrioridad}}
+                </div>
+                <div class="d-inline numero" *ngIf="turno.tipo === 'no-prioritario' && ventanilla?.ultimoComun">
+                    {{turno.letraInicio ? turno.letraInicio : ''}} {{ventanilla.ultimoComun}}
+                </div>
+
 
                 <h3 *ngIf="turno.ultimoNumero === (turno.numeroFin - 10)">Atención:</h3>
                 <span *ngIf="turno.ultimoNumero > 1 && turno.ultimoNumero === (turno.numeroFin - 10)">últimos {{turno.ultimoNumero - 10}} turnos disponibles</span>
@@ -25,89 +41,57 @@
                 </div>
             </div>
 
-            <div class="cuerpo container-fluid">
-                <div class="tipo-turno">
-                    <span *ngIf="turno.atendiendo === 'prioritario'">prioritario</span>
-                    <span *ngIf="turno.atendiendo === 'no-prioritario'">no prioritario</span>
-                </div>
-
-                <div class="d-inline numero" *ngIf="turno.tipo === 'prioritario' && ventanilla?.ultimoPrioridad">
-                    {{turno.letra ? turno.letra : ''}} {{ventanilla.ultimoPrioridad}}
-                </div>
-                <div class="d-inline numero" *ngIf="turno.tipo === 'no-prioritario' && ventanilla?.ultimoComun">
-                    {{turno.letra ? turno.letra : ''}} {{ventanilla.ultimoComun}}
-                </div>
-            </div>
-
             <div class="container-fluid">
                 <div class="row">
+
                     <!-- Rellamar turnos -->
+                    <div class="col text-center">
+                        <ng-container *ngIf="turno.tipo === 'no-prioritario' && turno?.ultimoNumero > 0">
+                            <button class="btn btn-primary" (click)="rellamar(turno, 'actual')">
+                                <i class="mdi mdi-bell-ring mdi-48px align-middle"></i>
+                                <br />
+                                <span class="align-middle">Rellamar actual ({{ventanilla.llamado}})</span>
+                            </button>
+                        </ng-container>
 
-                    <!--<div *ngIf="turno?.ultimoPrioridad" class="col-4 text-center">
-                        <i class="mdi mdi-arrow-left-bold-box-outline mdi-48px align-middle"></i>
-                        <button class="btn btn-primary" (click)="rellamar(turno, 'anterior')">
-                            <span class="align-middle">Rellamar anterior</span>
-                        </button>
-                    </div>-->
-
-                    <div *ngIf="turno.tipo === 'no-prioritario' && turno?.ultimoNumero > 0" class="col-4 text-center">
-                        <i class="mdi mdi-bell-ring mdi-48px align-middle"></i>
-                        <button class="btn btn-primary" (click)="rellamar(turno, 'actual')">
-                            <span class="align-middle">Rellamar actual ({{ventanilla.llamado}})</span>
-                        </button>
-                    </div>
-
-                    <div *ngIf="turno.tipo === 'prioritario' && turno?.ultimoNumero > 0" class="col-4 text-center">
-                        <i class="mdi mdi-bell-ring mdi-48px align-middle"></i>
-                        <button class="btn btn-primary" (click)="rellamar(turno, 'actual')">
-                            <span class="align-middle">Rellamar actual ({{ventanilla.llamado}})</span>
-                        </button>
+                        <ng-container *ngIf="turno.tipo === 'prioritario' && turno?.ultimoNumero > 0">
+                            <button class="btn btn-primary" (click)="rellamar(turno, 'actual')">
+                                <i class="mdi mdi-bell-ring mdi-48px align-middle badge-numero-llamado">
+                                    <span class="numero-llamado">{{ventanilla.llamado}}</span>
+                                </i>
+                                <br />
+                                <span class="align-middle">Rellamar actual</span>
+                            </button>
+                        </ng-container>
                     </div>
                     <!-- // FIN Rellamar turnos -->
 
-                    <!-- iniciar turnos o llamar al siguiente -->
-                    <!--
-                    <div *ngIf="turno.tipo === 'prioritario' && turno?.numeroFin > ventanilla.ultimoPrioridad" class="col-4 text-center">
-                        <i class="mdi mdi-arrow-right-bold-box-outline mdi-48px align-middle"></i>
-                        <button class="btn btn-primary" (click)="siguiente()">
-                            <span *ngIf="turno.tipo === 'prioritario' && ventanilla?.ultimoPrioridad > 0" class="align-middle">Llamar siguiente</span>
+                    <div class="col text-center">
+                        <ng-container *ngIf="(turno.tipo === 'prioritario' && turno?.numeroFin > turno?.ultimoNumero)
+                            || (turno.tipo === 'no-prioritario' && turno?.numeroFin > turno?.ultimoNumero)">
 
-                            <span *ngIf="turno.tipo === 'prioritario' && ventanilla?.ultimoPrioridad === 0">Llamar primer turno</span>
-                        </button>
+                            <button class="btn btn-primary" (click)="siguiente()">
+                                <i class="mdi mdi-arrow-right-bold-box-outline mdi-48px align-middle"></i>
+                                <br />
+                                <span class="align-middle">Llamar siguiente</span>
+                            </button>
+                        </ng-container>
+
+                        <!-- // FIN iniciar turnos o llamar al siguiente -->
+
+                        <!-- Turno finalizado, marcar como finalizado y traer el proximo -->
+                        <ng-container *ngIf="(turno?.ultimoNumero > 0 && turno?.numeroFin < turno.ultimoNumero) || (turno?.numeroFin === turno.ultimoNumero)">
+
+                            <button class="btn btn-primary" (click)="proximoTurno()">
+                                <i class="mdi mdi-arrow-right-bold-box-outline mdi-48px align-middle"></i>
+                                <br />
+                                <!--<span *ngIf="turno.tipo === 'no-prioritario' && ventanilla?.ultimoComun === turno.ultimoNumero" class="align-middle">Próximo turno</span>
+                                <span *ngIf="turno.tipo === 'prioritario' && ventanilla?.ultimoPrioridad === turno.ultimoNumero" class="align-middle">Próximo turno</span>-->
+                                <span class="align-middle">Llamar siguiente</span>
+                            </button>
+                        </ng-container>
+                        <!-- // FIN Turno finalizado, marcar como finalizado y traer el proximo -->
                     </div>
-
-                    <div *ngIf="turno.tipo === 'no-prioritario' && turno?.numeroFin > ventanilla.ultimoComun" class="col-4 text-center">
-                        <i class="mdi mdi-arrow-right-bold-box-outline mdi-48px align-middle"></i>
-                        <button class="btn btn-primary" (click)="siguiente()">
-                            <span *ngIf="turno.tipo === 'no-prioritario' && ventanilla?.ultimoComun > 0" class="align-middle">Llamar siguiente</span>
-
-                            <span *ngIf="turno.tipo === 'no-prioritario' && ventanilla?.ultimoComun === 0">Llamar primer turno</span>
-                        </button>
-                    </div>
-                    -->
-
-                    <div *ngIf="(turno.tipo === 'prioritario' && turno?.numeroFin > turno?.ultimoNumero)
-                        || (turno.tipo === 'no-prioritario' && turno?.numeroFin > turno?.ultimoNumero)" class="col-4 text-center">
-
-                        <i class="mdi mdi-arrow-right-bold-box-outline mdi-48px align-middle"></i>
-                        <button class="btn btn-primary" (click)="siguiente()">
-                            <span class="align-middle">Llamar siguiente</span>
-                        </button>
-                    </div>
-
-                    <!-- // FIN iniciar turnos o llamar al siguiente -->
-
-                    <!-- Turno finalizado, marcar como finalizado y traer el proximo -->
-                    <div class="col-4 text-center" *ngIf="(turno?.ultimoNumero > 0 && turno?.numeroFin < turno.ultimoNumero) || (turno?.numeroFin === turno.ultimoNumero)">
-
-                        <i class="mdi mdi-arrow-right-bold-box-outline mdi-48px align-middle"></i>
-                        <button class="btn btn-primary" (click)="proximoTurno()">
-                            <!--<span *ngIf="turno.tipo === 'no-prioritario' && ventanilla?.ultimoComun === turno.ultimoNumero" class="align-middle">Próximo turno</span>
-                            <span *ngIf="turno.tipo === 'prioritario' && ventanilla?.ultimoPrioridad === turno.ultimoNumero" class="align-middle">Próximo turno</span>-->
-                            <span class="align-middle">Llamar siguiente</span>
-                        </button>
-                    </div>
-                    <!-- // FIN Turno finalizado, marcar como finalizado y traer el proximo -->
                 </div>
             </div>
         </div>
