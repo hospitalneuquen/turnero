@@ -159,9 +159,14 @@ div.violeta div.texto {
 .friso {
     background-color: black;
     color: white;
-    height: 100px;
-    padding: 20px;
+    height: 80px;
+    padding: 10px;
     width: 100%;
+}
+
+.friso h1 {
+    margin: 0;
+    font-size: 3.2em;
 }
 
 .friso-lateral {

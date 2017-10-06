@@ -5,13 +5,13 @@
             <div class="col-6">
                 <app-turno [turno]="turnoActualPrioritario" [ventanilla]="ventanilla" *ngIf="turnoActualPrioritario" class="col-6 "></app-turno>
 
-                <h5 *ngIf="!turnoActualPrioritario?._id">No hay turnos <b>Prioritarios</b> en esta ventanilla</h5>
+                <h5 *ngIf="!turnoActualPrioritario && !turnoActualPrioritario?._id">No hay turnos <b>Prioritarios</b> en esta ventanilla</h5>
             </div>
 
             <div class="col-6">
                 <app-turno [turno]="turnoActualNoPrioritario" [ventanilla]="ventanilla" *ngIf="turnoActualNoPrioritario" class="col-6 "></app-turno>
 
-                <h5 *ngIf="!turnoActualNoPrioritario?._id" class="float-right">No hay turnos <b>No Prioritarios</b> para esta ventanilla</h5>
+                <h5 *ngIf="!turnoActualNoPrioritario && !turnoActualNoPrioritario?._id" class="float-right">No hay turnos <b>No Prioritarios</b> para esta ventanilla</h5>
             </div>
         </div>
 

@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <div class="numeros-container" *ngIf="ventanillas?.length">
             <ng-container *ngFor="let ventanilla of ventanillas">
-                <ng-container *ngIf="ventanilla">
+                <ng-container *ngIf="ventanilla && ventanilla?.turno">
 
                     <div class="numero-container" [ngClass]="ventanilla?.turno?.color">
 
