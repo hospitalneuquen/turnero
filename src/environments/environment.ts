@@ -8,7 +8,7 @@ const proxyURL = 'http://localhost:1337/api';
 
 export const environment = {
     production: false,
-    API: 'http://localhost:1337/api'
-    // API: 'http://172.16.3.15:1337/api'
+    //API: 'http://localhost:1337/api'
+     API: 'http://172.16.3.14:1337/api'
     // API: 'http://turnero.hospitalneuquen.org.ar:1337/api'
 };

@@ -38,7 +38,6 @@ export class MonitorComponent implements OnInit {
         this.VentanillasService.get({ disponible: true }).subscribe(ventanillas => {
             const ventanillasAux: any = ventanillas;
             this.ventanillas = ventanillas;
-
             this.ventanillas.forEach((ventanilla, i) => {
                 this.TurnosService.get({ tipo: ventanilla.atendiendo, estado: 'activo' }).subscribe(turnero => {
                     this.ventanillas[i].turno = turnero[0];
@@ -58,7 +57,6 @@ export class MonitorComponent implements OnInit {
 
             // Se actualiza el mensaje de servidor
             this.mensajesServidor = JSON.parse(evt.data);
-            console.log(this.mensajesServidor);
 
             // Detector de cambios: Si el último mensaje de la API es diferente al previo, actualizar!
             if (this.ventanillaBlink && this.mensajesServidor.result.type === 'default'
@@ -69,7 +67,6 @@ export class MonitorComponent implements OnInit {
                 this.dingDong();
             } else {
                 this.ventanillaBlink = this.mensajesServidor.result;
-                // console.log('this.ventanillaBlink', this.ventanillaBlink);
             }
 
             // Detectar cambios

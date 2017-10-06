@@ -23,17 +23,20 @@
 
                                     <ng-container *ngIf="!ventanilla.pausa">
                                         <div class="tipo-turno ">
-                                            <b *ngIf="ventanilla.atendiendo==='prioritario' ">prioridad</b>
-                                            <b *ngIf="ventanilla.atendiendo==='no-prioritario' ">común</b>
+                                            <b *ngIf="ventanilla.atendiendo === 'prioritario' ">prioridad</b>
+                                            <b *ngIf="ventanilla.atendiendo === 'no-prioritario' ">común</b>
                                         </div>
                                         <div class="numero ">
-                                            <span *ngIf="ventanilla.atendiendo==='prioritario' ">
+                                            <span *ngIf="ventanilla.atendiendo === 'prioritario' ">
                                                 {{ventanilla?.ultimoPrioridad}}
                                             </span>
-                                            <span *ngIf="ventanilla.atendiendo==='no-prioritario' ">
+
+                                            <span *ngIf="ventanilla.atendiendo === 'no-prioritario' ">
                                                 {{ventanilla?.ultimoComun}}
                                             </span>
-                                            <span *ngIf="ventanillaBlink?.ventanilla === ventanilla._id ">{{ventanilla.atendiendo === 'prioritario'
+
+                                            <span *ngIf="ventanillaBlink?.ventanilla === ventanilla._id ">
+                                                {{ventanilla.atendiendo === 'prioritario'
                                                 ? (ventanilla?.ultimoPrioridad ? ventanilla?.ultimoPrioridad : 0)
                                                 : (ventanilla?.ultimoComun ? ventanilla.turno.ultimoComun : 0)}}</span>
                                             <!-- <span *ngIf="!ventanillaBlink?.numeroAnterior || ventanillaBlink.numeroAnterior>= ventanilla.turno.numero">{{ventanilla.turno.numero}}</span> -->
@@ -60,10 +63,9 @@
         </div>-->
     </div>
 </div>
-<!--
+
 <audio *ngIf="audio && ventanillas" autoplay>
     <source src="./assets/audio/ding-dong.mp3">
     <source src="./assets/audio/ding-dong.ogg">
     <source src="./assets/audio/ding-dong.m4a">
 </audio>
--->

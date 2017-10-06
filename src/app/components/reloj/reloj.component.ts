@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 
+import { ExtraService } from './../../services/extra-service';
+
 @Component({
   selector: 'app-reloj',
   templateUrl: './reloj.component.html',
@@ -10,12 +12,19 @@ export class RelojComponent implements OnInit {
 
   public clock;
 
-  constructor() { }
+  constructor(private extraService: ExtraService) { }
 
   ngOnInit() {
-    this.clock = Observable
-        .interval(1000)
-        .map(() => new Date());
+
+    this.extraService.getTime().subscribe(time => {
+      this.clock = time;
+    });
+
+    setInterval(() => {
+      this.extraService.getTime().subscribe(time => {
+        this.clock = time;
+      });
+    }, 60000);
   }
 
 }

@@ -16,6 +16,7 @@ export class TurnoComponent implements OnInit {
 
     disponibles: Number;
     existeSiguiente: Boolean = true;
+    ultimoTurnoLlamado: any;
 
     constructor(private TurnosService: TurnosService, private VentanillasService: VentanillasService) { }
 

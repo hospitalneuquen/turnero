@@ -2,18 +2,16 @@
 
     <div class="container-fluid" *ngIf="ventanilla && !ventanilla.pausa">
         <div class="row">
-            <app-turno [turno]="turnoActualPrioritario" [ventanilla]="ventanilla" *ngIf="turnoActualPrioritario" class="col-6 "></app-turno>
+            <div class="col-6">
+                <app-turno [turno]="turnoActualPrioritario" [ventanilla]="ventanilla" *ngIf="turnoActualPrioritario" class="col-6 "></app-turno>
 
-            <div class="col-6" *ngIf="!turnoActualPrioritario?._id">
-                <h5>No hay turnos <b>Prioritarios</b> en esta ventanilla</h5>
+                <h5 *ngIf="!turnoActualPrioritario?._id">No hay turnos <b>Prioritarios</b> en esta ventanilla</h5>
             </div>
 
-            <app-turno [turno]="turnoActualNoPrioritario" [ventanilla]="ventanilla" *ngIf="turnoActualNoPrioritario" class="col-6 "></app-turno>
+            <div class="col-6">
+                <app-turno [turno]="turnoActualNoPrioritario" [ventanilla]="ventanilla" *ngIf="turnoActualNoPrioritario" class="col-6 "></app-turno>
 
-            <hr>
-
-            <div class="col-6" *ngIf="!turnoActualNoPrioritario?._id">
-                <h5 class="float-right">No hay turnos <b>No Prioritarios</b> para esta ventanilla</h5>
+                <h5 *ngIf="!turnoActualNoPrioritario?._id" class="float-right">No hay turnos <b>No Prioritarios</b> para esta ventanilla</h5>
             </div>
         </div>
 
@@ -25,7 +23,9 @@
 
     </div>
 
-    <ng-container *ngIf="ventanilla && (turnoActualPrioritario || turnoActualNoPrioritario)">
+    <!--&& (turnoActualPrioritario || turnoActualNoPrioritario)-->
+
+    <ng-container *ngIf="ventanilla">
         <div class="text-center" *ngIf="ventanilla.pausa">
             <button type="button" class="btn btn-success" (click)="reanudar()" *ngIf="ventanilla.pausa">Reanudar</button>
         </div>

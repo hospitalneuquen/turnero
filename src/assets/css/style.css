@@ -6,6 +6,10 @@
 
 /*  Estilos globales */
 
+.capitalize {
+    text-transform: capitalize;
+}
+
 
 /* Rules for sizing the icon. */
 

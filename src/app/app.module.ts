@@ -1,3 +1,4 @@
+import { ExtraService } from './services/extra-service';
 // Angular
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -63,6 +64,7 @@ const ROUTES = [
     providers: [
         TurnosService,
         VentanillasService,
+        ExtraService
         // Plex,
         // Server
     ],
