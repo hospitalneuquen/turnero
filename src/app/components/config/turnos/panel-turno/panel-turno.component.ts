@@ -43,7 +43,11 @@ export class PanelTurnoComponent implements OnInit {
         this.onEditEmit.emit(turnos);
       }, err => {
         if (err) {
-          alert('No se ha podido guardar el turno');
+          //const error: any = JSON.parse(err._body);
+
+          //console.log(error);
+          console.log(err);
+          //alert('No se ha podido guardar el turno. ' + error.message);
         }
       });
 

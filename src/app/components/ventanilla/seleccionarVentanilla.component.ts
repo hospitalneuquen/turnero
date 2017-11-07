@@ -31,14 +31,19 @@ export class SeleccionarVentanillaComponent implements OnInit {
     }
 
     seleccionar(ventanilla) {
+
         const patch = {
             key: 'disponible',
             value: false
         };
 
         this.VentanillasService.patch(ventanilla._id, patch).subscribe(v => {
-            this.router.navigate(['ventanilla/', v.numero]);
+
+            localStorage.setItem('ventanillaActual', ventanilla.numeroVentanilla);
+
+            this.router.navigate(['ventanilla/', v.numeroVentanilla]);
         });
+
     }
 
 }

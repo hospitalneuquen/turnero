@@ -24,6 +24,7 @@
                     {{turno.letraInicio ? turno.letraInicio : ''}} {{ventanilla.ultimoComun}}
                 </div>
 
+                <br />
 
                 <h3 *ngIf="turno.ultimoNumero === (turno.numeroFin - 10)">Atención:</h3>
                 <span *ngIf="turno.ultimoNumero > 1 && turno.ultimoNumero === (turno.numeroFin - 10)">últimos {{turno.ultimoNumero - 10}} turnos disponibles</span>
