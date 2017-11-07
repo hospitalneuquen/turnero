@@ -1,9 +1,16 @@
 <div class="content">
     <div class="container-fluid">
+
+        <div class="row">
+            <div class="col">
+                {{ventanillaBlink | json}}
+            </div>
+        </div>
+
         <div class="numeros-container" *ngIf="ventanillas?.length">
             <ng-container *ngFor="let ventanilla of ventanillas">
-                <ng-container *ngIf="ventanilla">
 
+                <ng-container *ngIf="ventanilla">
                     <div class="numero-container" [ngClass]="ventanilla?.turno?.color">
 
                         <div class="box fondo nuevo-turno" [ngClass]="{'blink-5': ventanillaBlink?.idVentanilla === ventanilla._id, 
@@ -24,8 +31,8 @@
                                     </ng-container>
 
                                     <ng-container *ngIf="!ventanilla.pausa && (
-                                        (ventanilla.atendiendo === 'prioritario' && ventanilla.turno.tipo == 'prioritario' && ventanilla.ultimoPrioridad >= ventanilla.turno.ultimoNumero) || 
-                                        (ventanilla.atendiendo === 'no-prioritario' && ventanilla.turno.tipo == 'no-prioritario' && ventanilla.ultimoComun >= ventanilla.turno.ultimoNumero)
+                                        (ventanilla.atendiendo === 'prioritario' && ventanilla?.turno && ventanilla?.turno.tipo == 'prioritario' && ventanilla.ultimoPrioridad >= ventanilla.turno.ultimoNumero) || 
+                                        (ventanilla.atendiendo === 'no-prioritario' && ventanilla?.turno && ventanilla?.turno.tipo == 'no-prioritario' && ventanilla.ultimoComun >= ventanilla.turno.ultimoNumero)
                                     )">
                                         <div class="tipo-turno ">
                                             <b *ngIf="ventanilla.atendiendo === 'prioritario' ">prioridad</b>

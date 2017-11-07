@@ -14,6 +14,9 @@
 
         <div class="row">
             <div class="col">
+
+                <div *ngIf="alert?.message" class="alert alert-{{alert.class}}" role="alert" [innerHTML]="alert.message"></div>
+
                 <app-panel-turno *ngIf="showEditarTurno" [turno]="turnoSeleccionado" (onCloseEmit)="onCloseEmit($event)" (onEditEmit)="onEditEmit($event)"></app-panel-turno>
             </div>
         </div>
@@ -32,6 +35,7 @@
                                 <td><strong>Letra</strong></td>
                                 <td><strong>Numeración</strong></td>
                                 <td><strong>Actual</strong></td>
+                                <td><strong>Estado</strong></td>
                                 <td><strong>Eliminar</strong></td>
                             </tr>
                         </thead>
@@ -59,6 +63,20 @@
 
                                     <td class="text-center" (click)="editarTurno(turno)">
                                         {{ turno.ultimoNumero }}
+                                    </td>
+
+                                    <td class="text-center" (click)="editarTurno(turno)">
+                                        <ng-container *ngIf="turno.estado === 'finalizado'">
+                                            Finalizado
+                                        </ng-container>
+
+                                        <ng-container *ngIf="turno.estado === 'activo' && turno.ultimoNumero <= turno.numeroFin && turno.ultimoNumero > turno.numeroInicio">
+                                            En curso
+                                        </ng-container>
+
+                                        <ng-container *ngIf="turno.estado === 'activo' && turno.ultimoNumero < turno.numeroInicio">
+                                            Sin usar
+                                        </ng-container>
                                     </td>
 
                                     <td class="text-center">
