@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, Output, EventEmitter } from '@angular/core';
 
 import { ITurnos } from './../../../../interfaces/ITurnos';
 import { TurnosService } from './../../../../services/turnos.service';
@@ -8,7 +8,7 @@ import { TurnosService } from './../../../../services/turnos.service';
   templateUrl: './panel-turno.component.html',
   styleUrls: ['./panel-turno.component.css']
 })
-export class PanelTurnoComponent implements OnInit {
+export class PanelTurnoComponent implements OnInit, OnDestroy {
 
   public turnos: any = {};
   public colors: any[] = ['amarillo', 'celeste', 'rosado', 'verde', 'violeta'];
@@ -24,9 +24,7 @@ export class PanelTurnoComponent implements OnInit {
   constructor(private turnosService: TurnosService) { }
 
   ngOnInit() {
-    if (this.turno) {
-      this.turnos = this.turno;
-    }
+    this.turnos = (this.turno) ? this.turno : {};
   }
 
   save(isValid: boolean) {
@@ -46,8 +44,8 @@ export class PanelTurnoComponent implements OnInit {
           //const error: any = JSON.parse(err._body);
 
           //console.log(error);
-          console.log(err);
-          //alert('No se ha podido guardar el turno. ' + error.message);
+          //console.log(err);
+          alert('No se ha podido guardar el turno.');
         }
       });
 
@@ -56,5 +54,9 @@ export class PanelTurnoComponent implements OnInit {
 
   cancelar() {
     this.onCloseEmit.emit(true);
+  }
+
+  ngOnDestroy() {
+    this.turno = null;
   }
 }

@@ -28,6 +28,7 @@ export class ListaTurnosComponent implements OnInit {
 
   agregarTurno() {
     this.showEditarTurno = true;
+    this.turnoSeleccionado = null;
   }
 
   editarTurno(turno) {
