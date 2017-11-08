@@ -62,7 +62,9 @@
                                     </td>
 
                                     <td class="text-center" (click)="editarTurno(turno)">
-                                        {{ turno.ultimoNumero }}
+                                        <ng-container *ngIf="turno.estado === 'activo' && turno.ultimoNumero >= turno.numeroInicio">
+                                            {{ turno.ultimoNumero }}
+                                        </ng-container>
                                     </td>
 
                                     <td class="text-center" (click)="editarTurno(turno)">
@@ -70,7 +72,7 @@
                                             Finalizado
                                         </ng-container>
 
-                                        <ng-container *ngIf="turno.estado === 'activo' && turno.ultimoNumero <= turno.numeroFin && turno.ultimoNumero > turno.numeroInicio">
+                                        <ng-container *ngIf="turno.estado === 'activo' && turno.ultimoNumero <= turno.numeroFin && turno.ultimoNumero >= turno.numeroInicio">
                                             En curso
                                         </ng-container>
 

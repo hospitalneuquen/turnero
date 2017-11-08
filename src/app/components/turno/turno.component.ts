@@ -51,9 +51,7 @@ export class TurnoComponent implements OnInit {
             this.TurnosService.getPrev(this.turno._id, this.ventanilla._id).subscribe(anterior => {
 
             });
-
         }
-
     }
 
     siguiente() {
@@ -63,12 +61,15 @@ export class TurnoComponent implements OnInit {
             idTurno: this.turno._id
         };
 
-        this.VentanillasService.patch(this.ventanilla._id, dto).subscribe(ventanillaPatch => {
-            this.ventanilla = ventanillaPatch;
+        this.VentanillasService.patch(this.ventanilla._id, dto).subscribe( (ventanillaPatch: any) => {
+            console.log(ventanillaPatch);
+            this.ventanilla = ventanillaPatch.ventanilla;
 
-            this.TurnosService.getActual(this.turno._id).subscribe(turno => {
-                this.turno = turno[0];
-            });
+            this.turno = ventanillaPatch.turno;
+
+            // this.TurnosService.getActual(this.turno._id).subscribe(turno => {
+            //     this.turno = turno[0];
+            // });
         });
 
         // this.evtOutput.emit(this.turno);
@@ -82,12 +83,14 @@ export class TurnoComponent implements OnInit {
             idTurno: this.turno._id
         };
 
-        this.VentanillasService.patch(this.ventanilla._id, dto).subscribe(ventanillaPatch => {
-            this.ventanilla = ventanillaPatch;
+        this.VentanillasService.patch(this.ventanilla._id, dto).subscribe( (ventanillaPatch: any) => {
+            this.ventanilla = ventanillaPatch.ventanilla;
 
-            this.TurnosService.get({ tipo: this.turno.tipo, estado: 'activo' }).subscribe(turnero => {
-                this.turno = turnero[0];
-            });
+            this.turno = ventanillaPatch.turno;
+
+            // this.TurnosService.get({ tipo: this.turno.tipo, estado: 'activo' }).subscribe(turnero => {
+            //     this.turno = turnero[0];
+            // });
         });
     }
 }

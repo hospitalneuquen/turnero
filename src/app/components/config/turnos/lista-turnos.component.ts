@@ -34,8 +34,10 @@ export class ListaTurnosComponent implements OnInit {
   }
 
   editarTurno(turno) {
-    this.turnoSeleccionado = turno;
-    this.showEditarTurno = true;
+    if (turno.estado !== 'finalizado') {
+      this.turnoSeleccionado = turno;
+      this.showEditarTurno = true;
+    }
   }
 
   delete(turno: any) {

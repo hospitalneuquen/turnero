@@ -36,17 +36,16 @@ export class MonitorComponent implements OnInit {
     actualizarMonitor() {
         // Buscamos las ventanillas disponibles
         this.VentanillasService.get({ disponible: true }).subscribe(ventanillas => {
-            debugger;
             const ventanillasAux: any = ventanillas;
             this.ventanillas = ventanillas;
             this.ventanillas.forEach((ventanilla, i) => {
-                debugger;
                 this.TurnosService.get({ tipo: ventanilla.atendiendo }).subscribe(turnero => {
-                    debugger;
                 // this.TurnosService.get({ tipo: ventanilla.atendiendo, estado: 'activo' }).subscribe(turnero => {
                     this.ventanillas[i].turno = turnero[0];
                 });
             });
+
+            console.log(ventanillas);
         });
 
     }
@@ -60,17 +59,28 @@ export class MonitorComponent implements OnInit {
         this.eventSource.onmessage = (evt) => {
             // Se actualiza el mensaje de servidor
             this.mensajesServidor = JSON.parse(evt.data);
-            console.table(this.mensajesServidor.result);
+            // console.table(this.mensajesServidor.result);
 
             // Detector de cambios: Si el último mensaje de la API es diferente al previo, actualizar!
             if (this.ventanillaBlink && this.mensajesServidor.result.type === 'default'
                 && this.mensajesServidor.result.timestamp !== this.ventanillaBlink.timestamp) {
-
+                    // debugger;
                 this.ventanillaBlink = null;
-                this.actualizarMonitor();
+                //this.actualizarMonitor();
+
+                const index = this.ventanillas.findIndex( v => v._id === this.mensajesServidor.result.ventanilla._id);
+
+                this.ventanillas[index] = this.mensajesServidor.result.ventanilla;
+
                 this.dingDong();
             } else {
                 this.ventanillaBlink = this.mensajesServidor.result;
+
+                if (this.mensajesServidor.result.type === 'pausar') {
+                    const index = this.ventanillas.findIndex( v => v._id === this.mensajesServidor.result.ventanilla._id);
+
+                    this.ventanillas[index] = this.mensajesServidor.result.ventanilla;
+                }
                 console.log(this.ventanillaBlink);
             }
 

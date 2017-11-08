@@ -5,6 +5,7 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { VentanillasService } from './../../../services/ventanillas.service';
 import { TurnosService } from './../../../services/turnos.service';
 import { IVentanillas } from './../../../interfaces/IVentanillas';
+import { IAlert } from './../../../interfaces/IAlert';
 declare var EventSource: any;
 @Component({
     selector: 'app-ventanillas',
@@ -16,6 +17,8 @@ export class ListaVentanillasComponent implements OnInit {
     private ventanillaSeleccionada: any = [];
     private ventanillas: any;
     private showEditarVentanillaPanel = false;
+
+    public alert: IAlert;
 
     private servidorCaido = false;
 
@@ -85,6 +88,11 @@ export class ListaVentanillasComponent implements OnInit {
         };
 
         this.VentanillasService.patch(ventanilla._id, patch).subscribe(v => {
+            this.alert = {
+                message: '<strong>Ventanilla guardada</strong>',
+                class: 'success'
+            };
+
             this.inicializarVentanillas();
         });
     }
@@ -92,6 +100,11 @@ export class ListaVentanillasComponent implements OnInit {
     eliminarVentanilla(ventanilla: any) {
         if (confirm('¿Eliminar Ventanilla?')) {
             this.VentanillasService.delete(ventanilla._id).subscribe(v => {
+                this.alert = {
+                    message: '<strong>Ventanilla elimianda</strong>',
+                    class: 'success'
+                };
+
                 this.inicializarVentanillas();
             });
         }
