@@ -72,8 +72,8 @@
                     <!-- // FIN Rellamar turnos -->
 
                     <div class="col text-center">
-                        <ng-container *ngIf="(turno.tipo === 'prioritario' && turno?.numeroFin > turno?.ultimoNumero)
-                            || (turno.tipo === 'no-prioritario' && turno?.numeroFin > turno?.ultimoNumero)">
+                        <!-- <ng-container *ngIf="(turno?.numeroFin > turno?.ultimoNumero)"> -->
+                        <ng-container>
 
                             <button class="btn btn-primary" (click)="siguiente()">
                                 <i class="mdi mdi-arrow-right-bold-box-outline mdi-48px align-middle"></i>
@@ -84,17 +84,6 @@
 
                         <!-- // FIN iniciar turnos o llamar al siguiente -->
 
-                        <!-- Turno finalizado, marcar como finalizado y traer el proximo -->
-
-                        <ng-container *ngIf="(turno?.ultimoNumero >= 0 && turno?.numeroFin < turno.ultimoNumero) || (turno?.numeroFin === turno.ultimoNumero)">
-                            <button class="btn btn-primary" (click)="proximoTurno()">
-                                <i class="mdi mdi-arrow-right-bold-box-outline mdi-48px align-middle"></i>
-                                <br />
-                                <!--<span *ngIf="turno.tipo === 'no-prioritario' && ventanilla?.ultimoComun === turno.ultimoNumero" class="align-middle">Próximo turno</span>
-                                <span *ngIf="turno.tipo === 'prioritario' && ventanilla?.ultimoPrioridad === turno.ultimoNumero" class="align-middle">Próximo turno</span>-->
-                                <span class="align-middle">Llamar siguiente PROXIMO</span>
-                            </button>
-                        </ng-container>
                         <!-- // FIN Turno finalizado, marcar como finalizado y traer el proximo -->
                     </div>
                 </div>

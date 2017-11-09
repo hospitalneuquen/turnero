@@ -10,7 +10,7 @@
         <div class="numeros-container" *ngIf="ventanillas?.length">
             <ng-container *ngFor="let ventanilla of ventanillas">
 
-                <ng-container *ngIf="ventanilla">
+                <ng-container *ngIf="ventanilla && ventanilla.disponible">
                     <div class="numero-container" [ngClass]="ventanilla?.ultimo?.color">
 
                         <div class="box fondo nuevo-turno" [ngClass]="{'blink-5': ventanillaBlink?.idVentanilla === ventanilla._id && ventanillaBlink?.type !== 'pausar', 
@@ -88,10 +88,9 @@
 
     </div>
 </div>
-
 <!-- 
 <audio *ngIf="audio && ventanillas" autoplay>
-    <source src="./assets/audio/ding-dong.mp3">
-    <source src="./assets/audio/ding-dong.ogg">
-    <source src="./assets/audio/ding-dong.m4a">
+    <source src="./assets/audio/ding-dong.mp3" type="audio/mpeg">
+    <source src="./assets/audio/ding-dong.ogg" type="audio/ogg">
+    <source src="./assets/audio/ding-dong.wav" type="audio/wav">
 </audio> -->
