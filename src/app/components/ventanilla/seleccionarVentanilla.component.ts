@@ -6,7 +6,8 @@ import { IVentanillas } from './../../interfaces/IVentanillas';
 
 @Component({
     selector: 'app-seleccionar-ventanilla',
-    templateUrl: './seleccionarVentanilla.component.html'
+    templateUrl: './seleccionarVentanilla.component.html',
+    styleUrls: ['./seleccionarVentanilla.component.css']
 })
 export class SeleccionarVentanillaComponent implements OnInit {
 

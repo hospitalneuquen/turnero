@@ -8,7 +8,7 @@
 
                     <select class="form-control" [(ngModel)]="turnos.tipo" name="tipo" #tipo="ngModel" required>
                             <option value="prioritario">Prioritario</option>
-                            <option value="no-prioritario">No Prioritario</option>
+                            <option value="noPrioritario">No Prioritario</option>
                         </select>
                     <span [hidden]="tipo.valid || (tipo.pristine && !f.submitted)" class="badge badge-danger">Debe ingresar un valor</span>
                 </div>

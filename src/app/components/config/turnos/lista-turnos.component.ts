@@ -41,17 +41,21 @@ export class ListaTurnosComponent implements OnInit {
   }
 
   delete(turno: any) {
-      if (confirm('¿Eliminar turno?')) {
-          this.turnosService.delete(turno._id).subscribe(v => {
-              this.alert = {
-                message: '<strong>Turno elimiando</strong>',
-                class: 'success'
-              };
+    if (confirm('¿Eliminar turno?')) {
+      this.turnosService.delete(turno._id).subscribe(v => {
+        this.alert = {
+          message: '<strong>Turno elimiando</strong>',
+          class: 'success'
+        };
 
-              this.inicializarTurnos();
-          });
-      }
+        setTimeout(() => {
+          this.alert = null;
+        }, 5000);
+
+        this.inicializarTurnos();
+      });
     }
+  }
 
   onCloseEmit() {
     this.showEditarTurno = false;
@@ -65,5 +69,8 @@ export class ListaTurnosComponent implements OnInit {
       class: 'success'
     };
 
+    setTimeout(() => {
+      this.alert = null;
+    }, 5000);
   }
 }

@@ -7,37 +7,41 @@
             <div class="cabezal fondo text-center">
                 <!--<h4>Ventanilla {{ventanilla.numeroVentanilla}}</h4>-->
                 <h4 class="upper" *ngIf="turno.tipo === 'prioritario'">prioritario</h4>
-                <h4 class="upper" *ngIf="turno.tipo === 'no-prioritario'">no prioritario</h4>
-
+                <h4 class="upper" *ngIf="turno.tipo === 'noPrioritario'">no prioritario</h4>
             </div>
 
             <div class="cuerpo container-fluid">
-                <div class="tipo-turno">
-                    <span *ngIf="turno.atendiendo === 'prioritario'">prioritario</span>
-                    <span *ngIf="turno.atendiendo === 'no-prioritario'">no prioritario</span>
-                </div>
-
-                <!-- <div class="d-inline numero" *ngIf="turno.tipo === 'prioritario' && ventanilla?.ultimo.numero >= 0">
-                    {{turno.letraInicio ? turno.letraInicio : ''}} {{ventanilla.ultimo.numero}}
-                </div>
-                <div class="d-inline numero" *ngIf="turno.tipo === 'no-prioritario' && ventanilla?.ultimo.numero >= 0">
-                    {{turno.letraInicio ? turno.letraInicio : ''}} {{ventanilla.ultimo.numero}}
+                <!-- <div class="tipo-turno">
+                    <span *ngIf="turno.tipo === 'prioritario'">prioritario</span>
+                    <span *ngIf="turno.tipo === 'noPrioritario'">no prioritario</span>
                 </div> -->
 
-                <div class="d-inline numero" *ngIf="ventanilla?.ultimo.numero >= 0">
-                    {{ventanilla.ultimo.letra ? ventanilla.ultimo.letra : ''}} {{ventanilla.ultimo.numero}}
+                <div class="d-inline numero" *ngIf="turno.tipo === 'prioritario' && ventanilla.atendiendo === 'prioritario' && ventanilla?.ultimo[turno.tipo].numero >= 0">
+                    {{ventanilla.ultimo[turno.tipo].letra ? ventanilla.ultimo[turno.tipo].letra : ''}} {{ventanilla.ultimo[turno.tipo].numero}}
                 </div>
+
+                <div class="d-inline numero" *ngIf="turno.tipo === 'noPrioritario' && ventanilla.atendiendo === 'noPrioritario' && ventanilla?.ultimo[turno.tipo].numero >= 0">
+                    {{ventanilla.ultimo[turno.tipo].letra ? ventanilla.ultimo[turno.tipo].letra : ''}} {{ventanilla.ultimo[turno.tipo].numero}}
+                </div>
+
+                <!-- <div class="d-inline numero" *ngIf="ventanilla?.ultimo.numero >= 0">
+                    {{ventanilla.ultimo.letra ? ventanilla.ultimo.letra : ''}} {{ventanilla.ultimo.numero}}
+                </div> -->
 
                 <br />
 
+                <!-- 
                 <h3 *ngIf="turno.ultimoNumero === (turno.numeroFin - 10)">Atención:</h3>
                 <span *ngIf="turno.ultimoNumero > 1 && turno.ultimoNumero === (turno.numeroFin - 10)">últimos {{turno.ultimoNumero - 10}} turnos disponibles</span>
+                -->
+
+
                 <!-- <span *ngIf="turno.ultimoNumero === (turno.numeroFin)">ÚLTIMO turno disponible</span> -->
 
                 <!-- <div *ngIf="turno.ultimoNumero === turno.numeroFin">
                     <h4 class="tipo-turno">No quedan turnos disponibles, por favor cargue un nuevo turno
                         <b *ngIf="turno.tipo === 'prioritario'">prioritario</b>
-                        <b *ngIf="turno.tipo === 'no-prioritario'">no prioritario</b>
+                        <b *ngIf="turno.tipo === 'noPrioritario'">no prioritario</b>
                     </h4>
 
                     <div class="text-center">
@@ -51,7 +55,7 @@
 
                     <!-- Rellamar turnos -->
                     <div class="col text-center">
-                        <ng-container *ngIf="turno.tipo === 'no-prioritario' && turno?.ultimoNumero >= 0">
+                        <ng-container *ngIf="turno.tipo === 'noPrioritario' && turno?.ultimoNumero >= 0">
                             <button class="btn btn-primary" (click)="rellamar(turno, 'actual')">
                                 <i class="mdi mdi-bell-ring mdi-48px align-middle"></i>
                                 <br />

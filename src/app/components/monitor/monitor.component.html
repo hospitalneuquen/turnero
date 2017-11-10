@@ -9,9 +9,11 @@
 
         <div class="numeros-container" *ngIf="ventanillas?.length">
             <ng-container *ngFor="let ventanilla of ventanillas">
-
-                <ng-container *ngIf="ventanilla && ventanilla.disponible">
-                    <div class="numero-container" [ngClass]="ventanilla?.ultimo?.color">
+                <!-- <pre>
+                    {{ventanilla | json}}
+                </pre> -->
+                <ng-container *ngIf="ventanilla && ventanilla.disponible && ventanilla?.turno">
+                    <div class="numero-container" [ngClass]="ventanilla?.ultimo[ventanilla?.turno?.tipo]?.color">
 
                         <div class="box fondo nuevo-turno" [ngClass]="{'blink-5': ventanillaBlink?.idVentanilla === ventanilla._id && ventanillaBlink?.type !== 'pausar', 
                             'pausada': ventanilla.pausa || (ventanilla.pausa &&  ventanillaBlink?.idVentanilla === ventanilla._id && ventanillaBlink?.type === 'pausar')}">
@@ -33,12 +35,12 @@
 
                                     <!-- <ng-container *ngIf="!ventanilla.pausa && (
                                         (ventanilla.atendiendo === 'prioritario' && ventanilla?.turno && ventanilla?.turno.tipo == 'prioritario' && ventanilla.ultimo.numero >= ventanilla.turno.ultimoNumero) || 
-                                        (ventanilla.atendiendo === 'no-prioritario' && ventanilla?.turno && ventanilla?.turno.tipo == 'no-prioritario' && ventanilla.ultimo.numero >= ventanilla.turno.ultimoNumero)
+                                        (ventanilla.atendiendo === 'noPrioritario' && ventanilla?.turno && ventanilla?.turno.tipo == 'noPrioritario' && ventanilla.ultimo.numero >= ventanilla.turno.ultimoNumero)
                                     )"> -->
                                     <ng-container *ngIf="!ventanilla.pausa">
                                         <div class="tipo-turno ">
                                             <b *ngIf="ventanilla.atendiendo === 'prioritario' ">prioridad</b>
-                                            <b *ngIf="ventanilla.atendiendo === 'no-prioritario' ">común</b>
+                                            <b *ngIf="ventanilla.atendiendo === 'noPrioritario' ">común</b>
                                         </div>
 
                                         <!-- <div class="row">
@@ -58,7 +60,7 @@
                                             <span *ngIf="ventanillaBlink?.ventanilla._id === ventanilla._id ">
                                             </span> -->
 
-                                            {{ventanilla.ultimo.letra}} {{ventanilla.ultimo.numero}}
+                                            {{ventanilla.ultimo[ventanilla.turno.tipo].letra}} {{ventanilla.ultimo[ventanilla.turno.tipo].numero}}
 
                                             <!-- <span *ngIf="!ventanillaBlink?.numeroAnterior || ventanillaBlink.numeroAnterior>= ventanilla.turno.numero">{{ventanilla.turno.numero}}</span> -->
                                         </div>
@@ -88,8 +90,8 @@
 
     </div>
 </div>
-<!-- 
-<audio *ngIf="audio && ventanillas" autoplay>
+
+<!-- <audio *ngIf="audio && ventanillas" autoplay>
     <source src="./assets/audio/ding-dong.mp3" type="audio/mpeg">
     <source src="./assets/audio/ding-dong.ogg" type="audio/ogg">
     <source src="./assets/audio/ding-dong.wav" type="audio/wav">

@@ -66,7 +66,7 @@ export class PanelVentanillaComponent implements OnInit {
                 return false;
             }
 
-            this.ventanillaActual.atendiendo = (this.ventanillaActual.atendiendo ? 'prioritario' : 'no-prioritario');
+            this.ventanillaActual.atendiendo = (this.ventanillaActual.atendiendo ? 'prioritario' : 'noPrioritario');
 
             if (!this.ventanillaActual._id) {
                 this.serviceVentanillas.post(this.ventanillaActual).subscribe(resultado => {

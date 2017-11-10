@@ -71,7 +71,9 @@ export class MonitorComponent implements OnInit {
                 const index = this.ventanillas.findIndex( v => v._id === this.mensajesServidor.result.ventanilla._id);
 
                 this.ventanillas[index] = this.mensajesServidor.result.ventanilla;
-
+                this.ventanillas[index]['turno'] = this.mensajesServidor.result.turno;
+                console.log(this.mensajesServidor.result);
+                console.log(this.ventanillas[index]);
                 this.dingDong();
             } else {
                 this.ventanillaBlink = this.mensajesServidor.result;
@@ -81,7 +83,7 @@ export class MonitorComponent implements OnInit {
 
                     this.ventanillas[index] = this.mensajesServidor.result.ventanilla;
                 }
-                console.log(this.ventanillaBlink);
+                // console.log(this.ventanillaBlink);
             }
 
 

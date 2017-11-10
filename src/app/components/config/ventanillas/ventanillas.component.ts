@@ -93,6 +93,10 @@ export class ListaVentanillasComponent implements OnInit {
                 class: 'success'
             };
 
+            setTimeout(() => {
+                this.alert = null;
+            }, 5000);
+
             this.inicializarVentanillas();
         });
     }
@@ -104,6 +108,10 @@ export class ListaVentanillasComponent implements OnInit {
                     message: '<strong>Ventanilla elimianda</strong>',
                     class: 'success'
                 };
+
+                setTimeout(() => {
+                    this.alert = null;
+                }, 5000);
 
                 this.inicializarVentanillas();
             });
