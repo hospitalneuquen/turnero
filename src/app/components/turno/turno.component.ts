@@ -18,18 +18,21 @@ export class TurnoComponent implements OnInit {
     existeSiguiente: Boolean = true;
     ultimoTurnoLlamado: any;
 
+    llamar = true;
+    rellamar = true;
+
     constructor(private TurnosService: TurnosService, private VentanillasService: VentanillasService) { }
 
     ngOnInit() {
     }
 
-    count() {
-        this.TurnosService.getCount(this.turno._id).subscribe(turnos => {
-            this.disponibles = turnos.count || 0;
-        });
-    }
+    // count() {
+    //     this.TurnosService.getCount(this.turno._id).subscribe(turnos => {
+    //         this.disponibles = turnos.count || 0;
+    //     });
+    // }
 
-    rellamar(turno, tipo) {
+    reLlamar(turno, tipo) {
         let dto = {};
 
         if (tipo === 'actual') {
@@ -42,8 +45,13 @@ export class TurnoComponent implements OnInit {
             this.VentanillasService.patch(this.ventanilla._id, dto).subscribe((ventanillaPatch: any) => {
                 this.ventanilla = ventanillaPatch;
 
+                this.rellamar = false;
                 this.TurnosService.getActual(turno._id).subscribe(actual => {
                     this.turno = actual[0];
+
+                    setTimeout(() => {
+                        this.rellamar = true;
+                    }, 2200);
                 });
             });
 
@@ -61,9 +69,13 @@ export class TurnoComponent implements OnInit {
             idTurno: turno._id
         };
 
+        this.llamar = false;
         this.VentanillasService.patch(this.ventanilla._id, dto).subscribe( (ventanillaPatch: any) => {
-            console.log(ventanillaPatch);
             this.ventanilla = ventanillaPatch.ventanilla;
+
+            setTimeout(() => {
+                this.llamar = true;
+            }, 2200);
 
             // this.turno = ventanillaPatch.turno;
 
@@ -73,5 +85,13 @@ export class TurnoComponent implements OnInit {
         });
 
         // this.evtOutput.emit(this.turno);
+    }
+
+    puedeLlamar() {
+        return this.llamar;
+    }
+
+    puedReLlamar() {
+        return this.rellamar;
     }
 }

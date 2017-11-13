@@ -144,9 +144,13 @@ div.violeta div.texto {
 }
 
 .inactivo {
+    /*
     -webkit-filter: grayscale(100%);
+    */
     /* Safari 6.0 - 9.0 */
+    /*
     filter: grayscale(100%);
+    */
 }
 
 .no-gutters {
@@ -208,15 +212,23 @@ div.violeta div.texto {
 }
 
 .box-turno:hover {
+    /*
     -webkit-filter: grayscale(15%);
+    */
     /* Safari 6.0 - 9.0 */
+    /*
     filter: grayscale(15%);
+    */
 }
 
 .box-turno:focus {
+    /*
     -webkit-filter: grayscale(0%);
+    */
     /* Safari 6.0 - 9.0 */
+    /*
     filter: grayscale(0%);
+    */
 }
 
 .box-ventanilla {

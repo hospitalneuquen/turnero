@@ -12,7 +12,7 @@
                 <!-- <pre>
                     {{ventanilla | json}}
                 </pre> -->
-                <ng-container *ngIf="ventanilla && ventanilla.disponible && ventanilla?.turno">
+                <ng-container *ngIf="ventanilla && ventanilla.disponible && ventanilla?.ultimo && ventanilla?.turno">
                     <div class="numero-container" [ngClass]="ventanilla?.ultimo[ventanilla?.turno?.tipo]?.color">
 
                         <div class="box fondo nuevo-turno" [ngClass]="{'blink-5': ventanillaBlink?.idVentanilla === ventanilla._id && ventanillaBlink?.type !== 'pausar', 
@@ -43,12 +43,6 @@
                                             <b *ngIf="ventanilla.atendiendo === 'noPrioritario' ">común</b>
                                         </div>
 
-                                        <!-- <div class="row">
-                                            <div class="col">
-                                                {{ventanilla | json}}
-                                            </div>
-                                        </div> -->
-
                                         <div class="numero ">
                                             <!-- 
                                             {{ventanilla.turno.letraInicio ? ventanilla.turno.letraInicio : ''}}
@@ -59,13 +53,16 @@
 
                                             <span *ngIf="ventanillaBlink?.ventanilla._id === ventanilla._id ">
                                             </span> -->
-
-                                            {{ventanilla.ultimo[ventanilla.turno.tipo].letra}} {{ventanilla.ultimo[ventanilla.turno.tipo].numero}}
+                                            <ng-container *ngIf="ventanilla && ventanilla.turno && ventanilla.ultimo[ventanilla.turno.tipo]">
+                                                {{ventanilla.ultimo[ventanilla?.turno?.tipo].letra}} {{ventanilla.ultimo[ventanilla?.turno?.tipo].numero}}
+                                            </ng-container>
 
                                             <!-- <span *ngIf="!ventanillaBlink?.numeroAnterior || ventanillaBlink.numeroAnterior>= ventanilla.turno.numero">{{ventanilla.turno.numero}}</span> -->
                                         </div>
 
-                                        <div class="llamado success"><i class="mdi mdi-bell-ring mdi-36px"></i> Llamado {{ventanilla.ultimo[ventanilla.turno.tipo].llamado || 1}} </div>
+                                        <div class="llamado success" *ngIf="ventanilla && ventanilla.turno && ventanilla.ultimo[ventanilla.turno.tipo]">
+                                            <i class="mdi mdi-bell-ring mdi-36px"></i> Llamado {{ventanilla.ultimo[ventanilla?.turno?.tipo].llamado || 1}}
+                                        </div>
                                     </ng-container>
                                 </div>
                             </div>
@@ -76,7 +73,7 @@
             </ng-container>
         </div>
 
-        <div class="row" *ngIf="!ventanillas">
+        <div class="row" *ngIf="!ventanillas || ventanillas.length === 0">
             <div class="col">
                 <h3>Volvemos en unos instantes... <i class="mdi mdi-36px mdi-tag-faces"></i></h3>
             </div>

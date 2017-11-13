@@ -31,7 +31,7 @@ import { PanelTurnoComponent } from './components/config/turnos/panel-turno/pane
 
 // Define the routes
 const ROUTES = [
-    // { path: '', redirectTo: 'ventanilla', pathMatch: 'full' },
+    { path: '', redirectTo: 'ventanilla', pathMatch: 'full' },
     { path: 'monitor', component: MonitorComponent },
     { path: 'ventanilla', component: SeleccionarVentanillaComponent },
     { path: 'ventanilla/:numero', component: VentanillaComponent },
