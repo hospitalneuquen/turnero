@@ -70,6 +70,7 @@ export class VentanillaComponent implements OnInit {
         // obtenemos no prioritario
         this.TurnosService.get({ tipo: 'noPrioritario', estado: 'activo' }).subscribe(turnero => {
             this.turnoActualNoPrioritario = turnero[0];
+            console.log(this.turnoActualNoPrioritario);
         });
     }
 

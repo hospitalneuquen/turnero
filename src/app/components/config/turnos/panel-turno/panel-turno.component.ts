@@ -13,7 +13,6 @@ export class PanelTurnoComponent implements OnInit, OnDestroy {
   public turnos: any = {};
   public colors: any[] = ['amarillo', 'celeste', 'rosado', 'verde', 'violeta'];
 
-
   @Input() turno: any;
 
   // @Output() evtOutput: EventEmitter<any> = new EventEmitter<any>();
@@ -25,26 +24,23 @@ export class PanelTurnoComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.turnos = (this.turno) ? this.turno : {};
+
   }
 
   save(isValid: boolean) {
     if (isValid) {
       let method: any;
 
-      if (!this.turnos._id) {
-        method = this.turnosService.post(this.turnos);
-      } else {
+      if (this.turnos._id) {
         method = this.turnosService.put(this.turnos._id, this.turnos);
+      } else {
+        method = this.turnosService.post(this.turnos);
       }
 
       method.subscribe(turnos => {
         this.onEditEmit.emit(turnos);
       }, err => {
         if (err) {
-          //const error: any = JSON.parse(err._body);
-
-          //console.log(error);
-          //console.log(err);
           alert('No se ha podido guardar el turno.');
         }
       });

@@ -64,16 +64,13 @@ export class MonitorComponent implements OnInit {
             // Detector de cambios: Si el último mensaje de la API es diferente al previo, actualizar!
             if (this.ventanillaBlink && this.mensajesServidor.result.type === 'default'
                 && this.mensajesServidor.result.timestamp !== this.ventanillaBlink.timestamp) {
-                    // debugger;
                 this.ventanillaBlink = null;
-                //this.actualizarMonitor();
 
                 const index = this.ventanillas.findIndex( v => v._id === this.mensajesServidor.result.ventanilla._id);
 
                 this.ventanillas[index] = this.mensajesServidor.result.ventanilla;
                 this.ventanillas[index]['turno'] = this.mensajesServidor.result.turno;
-                console.log(this.mensajesServidor.result);
-                console.log(this.ventanillas[index]);
+
                 this.dingDong();
             } else {
                 this.ventanillaBlink = this.mensajesServidor.result;
@@ -83,7 +80,6 @@ export class MonitorComponent implements OnInit {
 
                     this.ventanillas[index] = this.mensajesServidor.result.ventanilla;
                 }
-                // console.log(this.ventanillaBlink);
             }
 
 

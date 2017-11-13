@@ -35,16 +35,14 @@ export class TurnoComponent implements OnInit {
         if (tipo === 'actual') {
             dto = {
                 accion: 'rellamar',
-                tipo: this.turno.tipo,
-                idTurno: this.turno._id
+                tipo: turno.tipo,
+                idTurno: turno._id
             };
 
             this.VentanillasService.patch(this.ventanilla._id, dto).subscribe((ventanillaPatch: any) => {
                 this.ventanilla = ventanillaPatch;
 
-                //this.turno = ventanillaPatch.turno;
-
-                this.TurnosService.getActual(this.turno._id).subscribe(actual => {
+                this.TurnosService.getActual(turno._id).subscribe(actual => {
                     this.turno = actual[0];
                 });
             });
@@ -56,18 +54,18 @@ export class TurnoComponent implements OnInit {
         }
     }
 
-    siguiente() {
+    siguiente(turno) {
         const dto = {
             accion: 'siguiente',
-            tipo: this.turno.tipo,
-            idTurno: this.turno._id
+            tipo: turno.tipo,
+            idTurno: turno._id
         };
 
         this.VentanillasService.patch(this.ventanilla._id, dto).subscribe( (ventanillaPatch: any) => {
             console.log(ventanillaPatch);
             this.ventanilla = ventanillaPatch.ventanilla;
 
-            this.turno = ventanillaPatch.turno;
+            // this.turno = ventanillaPatch.turno;
 
             // this.TurnosService.getActual(this.turno._id).subscribe(turno => {
             //     this.turno = turno[0];
@@ -76,25 +74,4 @@ export class TurnoComponent implements OnInit {
 
         // this.evtOutput.emit(this.turno);
     }
-
-    /* finalizamos turnero y damos comienzo a uno nuevo */
-    /*
-    proximoTurno() {
-        const dto = {
-            accion: 'cambiar_turno',
-            tipo: this.turno.tipo,
-            idTurno: this.turno._id
-        };
-
-        this.VentanillasService.patch(this.ventanilla._id, dto).subscribe( (ventanillaPatch: any) => {
-            this.ventanilla = ventanillaPatch.ventanilla;
-
-            this.turno = ventanillaPatch.turno;
-
-            // this.TurnosService.get({ tipo: this.turno.tipo, estado: 'activo' }).subscribe(turnero => {
-            //     this.turno = turnero[0];
-            // });
-        });
-    }
-    */
 }

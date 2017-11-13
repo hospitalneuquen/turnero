@@ -65,7 +65,7 @@
                                             <!-- <span *ngIf="!ventanillaBlink?.numeroAnterior || ventanillaBlink.numeroAnterior>= ventanilla.turno.numero">{{ventanilla.turno.numero}}</span> -->
                                         </div>
 
-                                        <div class="llamado success"><i class="mdi mdi-bell-ring mdi-36px"></i> Llamado {{ventanilla.llamado || 1}} </div>
+                                        <div class="llamado success"><i class="mdi mdi-bell-ring mdi-36px"></i> Llamado {{ventanilla.ultimo[ventanilla.turno.tipo].llamado || 1}} </div>
                                     </ng-container>
                                 </div>
                             </div>

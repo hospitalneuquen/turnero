@@ -10,7 +10,7 @@ import { TurnosService } from './../../../services/turnos.service';
   styleUrls: ['./lista-turnos.component.css']
 })
 export class ListaTurnosComponent implements OnInit {
-  public showEditarTurno: boolean = false;
+  public showEditarTurno: Boolean = false;
   public turnoSeleccionado: any;
   public turnos: any[] = [];
   public alert: IAlert;
@@ -34,6 +34,7 @@ export class ListaTurnosComponent implements OnInit {
   }
 
   editarTurno(turno) {
+    console.log(turno);
     if (turno.estado !== 'finalizado') {
       this.turnoSeleccionado = turno;
       this.showEditarTurno = true;
