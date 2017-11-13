@@ -29,19 +29,19 @@ export class MonitorComponent implements OnInit {
         private changeDetector: ChangeDetectorRef) { }
 
     ngOnInit() {
-        this.escucharEventosServidor();
         this.actualizarMonitor();
+        this.escucharEventosServidor();
     }
 
     actualizarMonitor() {
         // Buscamos las ventanillas disponibles
         this.VentanillasService.get({ disponible: true }).subscribe(ventanillas => {
-            const ventanillasAux: any = ventanillas;
+            // const ventanillasAux: any = ventanillas;
             this.ventanillas = ventanillas;
             this.ventanillas.forEach((ventanilla, i) => {
                 this.TurnosService.get({ tipo: ventanilla.atendiendo }).subscribe(turnero => {
                 // this.TurnosService.get({ tipo: ventanilla.atendiendo, estado: 'activo' }).subscribe(turnero => {
-                    this.ventanillas[i].turno = turnero[0];
+                    //this.ventanillas[i].turno = turnero[0];
                 });
             });
 
