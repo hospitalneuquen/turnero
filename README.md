@@ -1,8 +1,12 @@
 # Turnero
 
+## Configuración
+
 Instalar dependencias
 
 `npm install`
+
+Duplicar archivo src/environment/environment.ts.default, renombrar a src/environment/environment.ts y escribir la ruta hacia la API.
 
 ## Development server
 
