@@ -1,5 +1,7 @@
 <div class="row">
     <div class="col">
+        <div *ngIf="alert?.message && !showEditarTurno" class="alert alert-{{alert.class}}" role="alert" [innerHTML]="alert.message"></div>
+
         <form #f="ngForm" novalidate (ngSubmit)="save(f.valid)">
 
             <div class="row">

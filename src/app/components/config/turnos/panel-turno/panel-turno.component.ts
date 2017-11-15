@@ -1,6 +1,8 @@
 import { Component, OnInit, OnDestroy, Input, Output, EventEmitter } from '@angular/core';
 
 import { ITurnos } from './../../../../interfaces/ITurnos';
+import { IAlert } from './../../../../interfaces/IAlert';
+
 import { TurnosService } from './../../../../services/turnos.service';
 
 @Component({
@@ -12,6 +14,8 @@ export class PanelTurnoComponent implements OnInit, OnDestroy {
 
   public turnos: any = {};
   public colors: any[] = ['amarillo', 'celeste', 'rosado', 'verde', 'violeta'];
+
+  public alert: IAlert;
 
   @Input() turno: any;
 
@@ -41,7 +45,16 @@ export class PanelTurnoComponent implements OnInit, OnDestroy {
         this.onEditEmit.emit(turnos);
       }, err => {
         if (err) {
-          alert('No se ha podido guardar el turno.');
+          const error = JSON.parse(err._body);
+
+          this.alert = {
+            message: '<strong>' + error.message + '</strong>',
+            class: 'danger'
+          };
+
+          setTimeout(() => {
+            this.alert = null;
+          }, 10000);
         }
       });
 

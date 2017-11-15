@@ -44,8 +44,6 @@ export class MonitorComponent implements OnInit {
                     //this.ventanillas[i].turno = turnero[0];
                 });
             });
-
-            console.log(ventanillas);
         });
 
     }

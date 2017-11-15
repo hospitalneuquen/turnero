@@ -5,6 +5,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { VentanillasService } from './../../../services/ventanillas.service';
 import { TurnosService } from './../../../services/turnos.service';
 import { IVentanillas } from './../../../interfaces/IVentanillas';
+import { IAlert } from './../../../interfaces/IAlert';
 
 @Component({
     selector: 'app-panel-ventanilla',
@@ -19,6 +20,8 @@ export class PanelVentanillaComponent implements OnInit {
     public ventanillaActual: any = {};
     public alertas: any[] = [];
     public showEditarVentanilla: Boolean = false;
+
+    public alert: IAlert;
 
     @Input('editarVentanilla')
     set editarVentanilla(value: any) {
@@ -35,7 +38,7 @@ export class PanelVentanillaComponent implements OnInit {
     @Input() ventanillas: any;
 
 
-    constructor(public serviceVentanillas: VentanillasService, 
+    constructor(public serviceVentanillas: VentanillasService,
         public router: Router) {
     }
 
@@ -57,35 +60,58 @@ export class PanelVentanillaComponent implements OnInit {
     }
 
     guardarVentanilla(form: any) {
-
+        debugger;
         if (form.valid) {
             const existe = this.ventanillas.find(v => this.ventanillaActual.numeroVentanilla === v.numeroVentanilla);
 
             if (!this.ventanillaActual._id && typeof existe !== 'undefined') {
-                alert('La ventanilla ingresada ya existe');
+                this.alert = {
+                    message: '<strong>La ventanilla ingresada ya existe</strong>',
+                    class: 'danger'
+                };
+
+                setTimeout(() => {
+                    this.alert = null;
+                }, 5000);
+
                 return false;
             }
 
+
             this.ventanillaActual.atendiendo = (this.ventanillaActual.atendiendo ? 'prioritario' : 'noPrioritario');
 
-            if (!this.ventanillaActual._id) {
-                this.serviceVentanillas.post(this.ventanillaActual).subscribe(resultado => {
-                    this.ventanillaActual = resultado;
+            let method = (!this.ventanillaActual._id) ? this.serviceVentanillas.post(this.ventanillaActual) : this.serviceVentanillas.put(this.ventanillaActual._id, this.ventanillaActual);
 
-                    alert('La Ventanilla se guardó correctamente');
-                    this.onEditEmit.emit(true);
-                });
-            } else {
-                this.serviceVentanillas.put(this.ventanillaActual._id, this.ventanillaActual).subscribe(resultado => {
-                    this.ventanillaActual = resultado;
+            method.subscribe(resultado => {
+                debugger;
+                this.ventanillaActual = resultado;
 
-                    alert('La Ventanilla se guardó correctamente');
-                    this.onEditEmit.emit(true);
-                });
+                this.alert = {
+                    message: '<strong>La Ventanilla se guardó correctamente</strong>',
+                    class: 'danger'
+                };
 
-            }
+                setTimeout(() => {
+                    this.alert = null;
+                }, 5000);
+
+                this.onEditEmit.emit(true);
+
+            }, err => {
+                if (err) {
+                    const error = JSON.parse(err._body);
+
+                    this.alert = {
+                        message: '<strong>' + error.message + '</strong>',
+                        class: 'danger'
+                    };
+
+                    setTimeout(() => {
+                        this.alert = null;
+                    }, 10000);
+                }
+            });
         }
-
     }
 
 
@@ -93,5 +119,4 @@ export class PanelVentanillaComponent implements OnInit {
         this.showEditarVentanillaPanel = false;
         this.onCloseEmit.emit(true);
     }
-
 }

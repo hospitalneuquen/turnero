@@ -60,8 +60,6 @@
                     <div class="col text-center">
                         <!-- <ng-container *ngIf="(turno?.numeroFin > turno?.ultimoNumero)"> -->
                         <ng-container>
-
-                            {{puedeLLamar | json}}
                             <button class="btn btn-primary" (click)="puedeLlamar() && siguiente(turno)" [disabled]="!llamar || !rellamar">
                                 <i class="mdi mdi-arrow-right-bold-box-outline mdi-48px align-middle"></i>
                                 <br />

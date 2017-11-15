@@ -2,22 +2,6 @@
 
     <div class="container-fluid" *ngIf="ventanilla && !ventanilla.pausa">
         <div class="row">
-            <!-- 
-            <pre>
-                ventanilla<br />
-                {{ventanilla | json}}
-            </pre>
-
-            <pre>
-                turnoActualPrioritario<br />
-                {{turnoActualPrioritario | json}}
-            </pre>
-
-            <pre>
-                turnoActualNoPrioritario<br />
-                {{turnoActualNoPrioritario | json}}
-            </pre> -->
-
             <div class="col-6">
                 <app-turno [turno]="turnoActualPrioritario" [ventanilla]="ventanilla" *ngIf="turnoActualPrioritario" class="col-6 "></app-turno>
 
