@@ -93,6 +93,19 @@ export class TurnosService {
     }
 
     /**
+     * Nuevo rollo. Crea un nuevo rollo segun la prioridad y color elegida.
+     * Crea desde la letra A a la E, cada una con números desde el 00 al 99.
+     * @param {ITurnos} problema Recibe ITurnos
+     */
+    nuevoRollo(doc: any, params: any = null): Observable<any> {
+        const url = '/turnero/rollo';
+
+        const options = this.getDefaultOptions(params);
+
+        return this.http.post(environment.API + url, JSON.stringify(doc), options).map(this.extractData);
+    }
+
+    /**
      * Metodo put. Actualiza un objeto ITurnos.
      * @param {ITurnos} problema Recibe ITurnos
      */
