@@ -27,6 +27,7 @@ import { ListaVentanillasComponent } from './components/config/ventanillas/venta
 import { PanelVentanillaComponent } from './components/config/ventanillas/panel-ventanilla.component';
 import { ListaTurnosComponent } from './components/config/turnos/lista-turnos.component';
 import { PanelTurnoComponent } from './components/config/turnos/panel-turno/panel-turno.component';
+import { RolloComponent } from './components/config/turnos/rollo/rollo.component';
 
 
 // Define the routes
@@ -36,7 +37,8 @@ const ROUTES = [
     { path: 'ventanilla', component: SeleccionarVentanillaComponent },
     { path: 'ventanilla/:numero', component: VentanillaComponent },
     { path: 'config/ventanillas', component: ListaVentanillasComponent },
-    { path: 'config/turnos', component: ListaTurnosComponent }
+    { path: 'config/turnos', component: ListaTurnosComponent },
+    { path: 'config/turnos/rollo', component: RolloComponent }
 ];
 
 @NgModule({
@@ -51,7 +53,8 @@ const ROUTES = [
         MenuComponent,
         ListaVentanillasComponent,
         PanelVentanillaComponent,
-        PanelTurnoComponent
+        PanelTurnoComponent,
+        RolloComponent
     ],
     imports: [
         // PlexModule,

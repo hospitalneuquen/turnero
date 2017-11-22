@@ -431,6 +431,45 @@ h2.zocaloNumero {
     margin-bottom: 30px;
 }
 
+.color>input[type="radio"] {
+    display: none;
+}
+
+.color>input[type="radio"]+label {
+    color: #292321;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+}
+
+.color>input[type="radio"]+label span {
+    display: inline-block;
+    width: 19px;
+    height: 19px;
+    margin: -1px 4px 0 0;
+    vertical-align: middle;
+    cursor: pointer;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    height: 60px;
+    width: 60px;
+}
+
+.color>input[type="radio"]+label span {}
+
+.color>input[type="radio"]:checked+label span {
+    outline: solid 2px #00A8E0;
+}
+
+.cuadradito:checked {}
+
+.color>input[type="radio"]+label span,
+.color>input[type="radio"]:checked+label span {
+    -webkit-transition: background-color 0.4s linear;
+    -o-transition: background-color 0.4s linear;
+    -moz-transition: background-color 0.4s linear;
+    transition: background-color 0.4s linear;
+}
+
 .cuadradito {
     border: solid 1px grey;
     margin: 0 20px 5px 0;

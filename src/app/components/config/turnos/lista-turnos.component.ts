@@ -1,4 +1,5 @@
 import { Component, Output, OnInit, EventEmitter } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { ITurnos } from './../../../interfaces/ITurnos';
 import { IAlert } from './../../../interfaces/IAlert';
@@ -15,7 +16,7 @@ export class ListaTurnosComponent implements OnInit {
   public turnos: any[] = [];
   public alert: IAlert;
 
-  constructor(private turnosService: TurnosService) { }
+  constructor(private turnosService: TurnosService, private router: Router) { }
 
   ngOnInit() {
     this.inicializarTurnos();
@@ -34,7 +35,6 @@ export class ListaTurnosComponent implements OnInit {
   }
 
   editarTurno(turno) {
-    console.log(turno);
     if (turno.estado !== 'finalizado') {
       this.turnoSeleccionado = turno;
       this.showEditarTurno = true;
@@ -42,7 +42,13 @@ export class ListaTurnosComponent implements OnInit {
   }
 
   delete(turno: any) {
-    if (confirm('¿Eliminar turno?')) {
+    let message = '¿Eliminar turno?';
+
+    if (turno.estado === 'activo' && turno.ultimoNumero <= turno.numeroFin) {
+      message += ' Tenga en cuenta que el turno a eliminar se está utilizando actualmente.';
+    }
+
+    if (confirm(message)) {
       this.turnosService.delete(turno._id).subscribe(v => {
         this.alert = {
           message: '<strong>Turno elimiando</strong>',
@@ -73,5 +79,10 @@ export class ListaTurnosComponent implements OnInit {
     setTimeout(() => {
       this.alert = null;
     }, 5000);
+  }
+
+
+  agregarRollo() {
+    this.router.navigate(['config/turnos/rollo']);
   }
 }

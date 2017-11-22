@@ -55,10 +55,10 @@ export class TurnoComponent implements OnInit {
                 });
             });
 
-        } else if (tipo === 'anterior') {
-            this.TurnosService.getPrev(this.turno._id, this.ventanilla._id).subscribe(anterior => {
+        // } else if (tipo === 'anterior') {
+        //     this.TurnosService.getPrev(this.turno._id, this.ventanilla._id).subscribe(anterior => {
 
-            });
+        //     });
         }
     }
 
@@ -82,6 +82,13 @@ export class TurnoComponent implements OnInit {
             // this.TurnosService.getActual(this.turno._id).subscribe(turno => {
             //     this.turno = turno[0];
             // });
+        }, (err) => {
+            alert("error");
+            console.log(err);
+
+            setTimeout(() => {
+                this.llamar = true;
+            }, 2200);
         });
 
         // this.evtOutput.emit(this.turno);
