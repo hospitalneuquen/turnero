@@ -103,7 +103,10 @@
                 </ng-container>
 
                 <ng-container *ngIf="!turnos.length">
-                    <h4 *ngIf="!turnos.length">No hay turnos configurados. <span class="text-danger" *ngIf="servidorCaido">(Servidor caído)</span></h4>
+                    <h4 *ngIf="!turnos.length">No hay turnos cargados. <span class="text-danger" *ngIf="servidorCaido">(Servidor caído)</span></h4>
+                    Psst! Podés agregar facilmente un rollo estandar con las letras de la A a la E y numeración del 0 al 99 con tan solo 4 clicks.
+
+                    <a routerLink="/config/turnos/rollo" routerLinkActive="active">Agregar rollo</a>
                 </ng-container>
 
             </div>

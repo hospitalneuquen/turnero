@@ -632,15 +632,15 @@ h2.zocaloNumero {
 /* Links*/
 
 a {
-    color: #111111;
+    /* color: #111111; */
+    color: #00A8E0;
 }
 
 a:hover,
 a:active,
 a:focus {
     outline: 5px;
-    text-decoration: none;
-    color: #00A8E0;
+    /* text-decoration: none; */
 }
 
 

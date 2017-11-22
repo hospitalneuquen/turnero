@@ -20,13 +20,26 @@ export class RolloComponent implements OnInit {
   ngOnInit() {
   }
 
-  save(isValid: boolean) {
+  save(form) {
 
-    if (isValid) {
+    if (form.valid) {
 
       this.turnosService.nuevoRollo(this.turnos).subscribe(turnos => {
         //this.onEditEmit.emit(turnos);
+        this.alert = {
+          message: 'Rollo agregado',
+          class: 'success'
+        };
+
+        this.turnos = {};
+        form.resetForm();
+
+        setTimeout(() => {
+          this.alert = null;
+        }, 10000);
+
       }, err => {
+        console.log(err);
         if (err) {
           const error = JSON.parse(err._body);
 
