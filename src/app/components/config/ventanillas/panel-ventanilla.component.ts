@@ -23,6 +23,15 @@ export class PanelVentanillaComponent implements OnInit {
 
     public alert: IAlert;
 
+    public enUso: any = [{
+        estado: 'En uso',
+        valor: true
+    },
+    {
+        estado: 'Libre',
+        valor: false
+    }];
+
     @Input('editarVentanilla')
     set editarVentanilla(value: any) {
         this._editarVentanilla = value;
@@ -60,7 +69,6 @@ export class PanelVentanillaComponent implements OnInit {
     }
 
     guardarVentanilla(form: any) {
-        debugger;
         if (form.valid) {
             const existe = this.ventanillas.find(v => this.ventanillaActual.numeroVentanilla === v.numeroVentanilla);
 

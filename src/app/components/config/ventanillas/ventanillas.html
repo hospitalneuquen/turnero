@@ -26,6 +26,7 @@
                                 <td><strong>Ventanilla</strong></td>
                                 <td><strong>Disponible</strong></td>
                                 <td><strong>Pausada</strong></td>
+                                <td><strong>Estado</strong></td>
                                 <td><strong>Eliminar</strong></td>
                             </tr>
                         </thead>
@@ -36,6 +37,10 @@
                                     <td (click)="seleccionarVentanilla(ventanilla)"><input type="checkbox" name="disponible" [(ngModel)]="ventanilla.disponible" (click)="actualizarVentanilla(ventanilla, 'disponible', !ventanilla.disponible)"></td>
                                     <!--<td (click)="seleccionarVentanilla(ventanilla)"><input type="checkbox" name="prioritaria" [(ngModel)]="ventanilla.prioritaria" (click)="actualizarVentanilla(ventanilla, 'prioritaria', !ventanilla.prioritaria)"></td>-->
                                     <td (click)="seleccionarVentanilla(ventanilla)"><input type="checkbox" name="pausa" [(ngModel)]="ventanilla.pausa" (click)="actualizarVentanilla(ventanilla, 'pausa', !ventanilla.pausa)"></td>
+                                    <td (click)="seleccionarVentanilla(ventanilla)">
+                                        <span *ngIf="ventanilla.enUso">En uso</span>
+                                        <span *ngIf="!ventanilla.enUso">Libre</span>
+                                    </td>
                                     <td><button class="hover btn btn-sm" (click)="eliminarVentanilla(ventanilla)"><i class="mdi mdi-delete"></i></button></td>
                                 </tr>
                             </tbody>

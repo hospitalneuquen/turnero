@@ -17,7 +17,7 @@
                             Ventanilla <b>{{ventanilla.numeroVentanilla}}</b>
                         </div>
 
-                        <button type="button" class="btn btn-primary form-control" (click)="seleccionar(ventanilla)" [disabled]="!ventanilla.disponible">Seleccionar</button>
+                        <button type="button" class="btn btn-primary form-control" (click)="seleccionar(ventanilla)" [disabled]="ventanilla.enUso">Seleccionar</button>
                     </div>
                 </div>
             </ng-container>

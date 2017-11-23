@@ -34,8 +34,8 @@ export class SeleccionarVentanillaComponent implements OnInit {
     seleccionar(ventanilla) {
 
         const patch = {
-            key: 'disponible',
-            value: false
+            key: 'enUso',
+            value: true
         };
 
         this.VentanillasService.patch(ventanilla._id, patch).subscribe(v => {
