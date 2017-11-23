@@ -8,8 +8,8 @@
                 <ng-container *ngIf="ventanilla && ventanilla.disponible && ventanilla?.ultimo && ventanilla?.ultimo[ventanilla?.atendiendo]">
                     <div class="numero-container" [ngClass]="ventanilla?.ultimo[ventanilla?.atendiendo]?.color">
 
-                        <div class="box fondo nuevo-turno" [ngClass]="{'blink-5': ventanillaBlink?.ventanilla._id === ventanilla._id && ventanillaBlink?.type !== 'pausar', 
-                            'pausada': ventanilla.pausa || (ventanilla.pausa &&  ventanillaBlink?.ventanilla._id === ventanilla._id && ventanillaBlink?.type === 'pausar')}">
+                        <div class="box fondo nuevo-turno" [ngClass]="{'blink-5': ventanillaBlink?.ventanilla?._id === ventanilla._id && ventanillaBlink?.type !== 'pausar', 
+                            'pausada': ventanilla.pausa || (ventanilla.pausa &&  ventanillaBlink?.ventanilla?._id === ventanilla._id && ventanillaBlink?.type === 'pausar')}">
 
 
                             <div class="cabezal">
