@@ -33,10 +33,12 @@
                     <div class="col-6">
                         <h5 class="border-bottom"><strong>Seleccione el color</strong></h5>
                         <div class="inline-block color">
-                            <ng-container *ngFor="let _color of colors">
+                            <ng-container *ngFor="let _color of colors; let i=index">
                                 <input name="color" id="color-{{_color}}" value="{{_color}}" type="radio" class="btn cuadradito violeta" [(ngModel)]="turnos.color" #color="ngModel" required />
                                 <label for="color-{{_color}}" class="cuadradito {{_color}}"><span></span></label>
                             </ng-container>
+
+                            <span [hidden]="f?.controls?.color?.valid || (f?.controls?.color?.pristine && !f.submitted)" class="badge badge-danger">Debe seleccionar un color</span>
                         </div>
 
                     </div>

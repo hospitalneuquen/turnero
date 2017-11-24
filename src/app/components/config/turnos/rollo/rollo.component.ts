@@ -21,7 +21,7 @@ export class RolloComponent implements OnInit {
   }
 
   save(form) {
-
+    console.log(form);
     if (form.valid) {
 
       this.turnosService.nuevoRollo(this.turnos).subscribe(turnos => {

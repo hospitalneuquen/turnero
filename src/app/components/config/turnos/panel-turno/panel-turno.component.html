@@ -25,6 +25,8 @@
                     </div>
 
                 </div>
+
+                <span [hidden]="f?.controls?.color?.valid || (f?.controls?.color?.pristine && !f.submitted)" class="badge badge-danger">Debe seleccionar un color</span>
             </div>
 
             <div class="row">
