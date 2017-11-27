@@ -43,11 +43,12 @@ export class TurnoComponent implements OnInit {
             };
 
             this.VentanillasService.patch(this.ventanilla._id, dto).subscribe((ventanillaPatch: any) => {
-                this.ventanilla = ventanillaPatch;
+this.ventanilla = ventanillaPatch;
 
                 this.rellamar = false;
                 this.TurnosService.getActual(turno._id).subscribe(actual => {
-                    this.turno = actual[0];
+                    this.turno = actual;
+                    // this.turno = actual[0];
 
                     setTimeout(() => {
                         this.rellamar = true;
@@ -83,9 +84,6 @@ export class TurnoComponent implements OnInit {
             //     this.turno = turno[0];
             // });
         }, (err) => {
-            alert("error");
-            console.log(err);
-
             setTimeout(() => {
                 this.llamar = true;
             }, 2200);
