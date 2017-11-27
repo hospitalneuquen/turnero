@@ -43,7 +43,7 @@ export class TurnoComponent implements OnInit {
             };
 
             this.VentanillasService.patch(this.ventanilla._id, dto).subscribe((ventanillaPatch: any) => {
-this.ventanilla = ventanillaPatch;
+                this.ventanilla = ventanillaPatch;
 
                 this.rellamar = false;
                 this.TurnosService.getActual(turno._id).subscribe(actual => {
